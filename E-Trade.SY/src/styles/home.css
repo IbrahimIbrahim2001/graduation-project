@@ -1,0 +1,96 @@
+.app-bar {
+  -webkit-backdrop-filter: blur(30px);
+  -moz-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.box {
+  background: rgba(255, 255, 255, 0);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  text-wrap: balance;
+}
+.box:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px -5px #ccc;
+}
+
+/* ShopItem */
+.item {
+  /* box-shadow: 0 8px 12px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18); */
+}
+
+.item.dark {
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  backdrop-filter: blur(25px) saturate(200%);
+  background-color: rgba(18, 18, 18, 1);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  box-shadow: 0 8px 12px 0 rgba(31, 38, 135, 0.37);
+  z-index: -1;
+}
+
+.item.light {
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  backdrop-filter: blur(25px) saturate(200%);
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+  box-shadow: 0 8px 12px 0 rgba(31, 38, 135, 0.37);
+  z-index: -1;
+}
+
+p.shop-item-name {
+  font-weight: 800;
+}
+
+p.shop-item-price span {
+  font-weight: 600;
+}
+
+p.shop-item-rating {
+  padding-left: 5px;
+}
+
+/* drawer */
+.drawer-link.active span {
+  font-weight: bolder;
+  padding-left: 10px;
+}
+.drawer-link > li:hover:not(.drawer-link.active > li:hover) {
+  background-color: #8473f0;
+  border-radius: 10px;
+}
+
+.drawer-link.active > li {
+  background-color: #2200ff;
+  border-radius: 10px;
+  color: white;
+}
+
+.drawer-link svg {
+  /* display: none; */
+  visibility: hidden;
+}
+
+.drawer-link.active svg {
+  /* display: block; */
+  visibility: visible;
+}
+
+/* MainNavbar.jsx */
+.navbar-link.active svg {
+  color: #2200ff;
+  font-weight: 800;
+}

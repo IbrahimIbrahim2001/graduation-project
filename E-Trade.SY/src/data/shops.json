@@ -1,0 +1,184 @@
+{
+  "shops": [
+    {
+      "id": 1,
+      "name": "Shop1",
+      "location": "123 Main St",
+      "pro": [
+        {
+          "name": "Item1",
+          "price": 10,
+          "rating": "2.8"
+        },
+        {
+          "name": "Item2",
+          "price": 20,
+          "rating": "2.8"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Shop2",
+      "location": "456 Elm St",
+      "pro": [
+        {
+          "name": "Item3",
+          "price": 30,
+          "rating": "2.8"
+        },
+        {
+          "name": "Item4",
+          "price": 40,
+          "rating": "2.8"
+        }
+      ]
+    },
+     {
+      "id": 3,
+      "name": "Shop3",
+      "location": "123 Main St",
+      "pro": [
+        {
+          "name": "Item5",
+          "price": 50,
+          "rating": "2.8"
+        },
+        {
+          "name": "Item6",
+          "price": 70,
+          "rating": "2.8"
+        },{
+          "name": "Item2",
+          "price": 20,
+          "rating": "2.8"
+        },{
+          "name": "Item2",
+          "price": 20,
+          "rating": "2.8"
+        },{
+          "name": "Item2",
+          "price": 20,
+          "rating": "2.8"
+        },
+        {
+          "name": "Item2",
+          "price": 20,
+          "rating": "2.8"
+        }
+      ]
+    },
+     {
+      "id": 4,
+      "name": "Shop4",
+      "location": "123 Main St",
+      "pro": [
+        {
+          "name": "Item8",
+          "price": 80,
+          "rating": "2.8"
+        },
+        {
+          "name": "Item9",
+          "price": 90,
+          "rating": "2.8"
+        }
+      ]
+    },
+     {
+      "id": 5,
+      "name": "Shop5",
+      "location": "123 Main St",
+      "pro": [
+         {
+          "name": "Item1 sun glasses",
+          "price": 10,
+          "img": "../assets/login.png",
+          "rating": "2.8"
+        },
+        {
+          "name": "Item2",
+          "price": 20,
+          "rating": "2.8"
+        },
+        {
+          "name": "Item3",
+          "price": 30,
+          "rating": "2.8"
+        },
+        {
+          "name": "Item4",
+          "price": 40,
+          "rating": "2.8"
+        },
+        {
+          "name": "Item5",
+          "price": 50,
+          "rating": "2.8"
+        },
+        {
+          "name": "Item6",
+          "price": 60,
+          "rating": "2.8"
+        },
+        {
+          "name": "Item8",
+          "price": 80,
+          "rating": "2.8"
+        },
+        {
+          "name": "Item9",
+          "price": 90,
+          "rating": "2.8"
+        },
+        {
+          "name": "Item10",
+          "price": 100,
+          "rating": "2.8"
+        },
+        {
+          "name": "Item11",
+          "price": 110,
+          "rating": "2.8"
+        }
+      ]
+    },
+     {
+      "id": 6,
+      "name": "Shop6",
+      "location": "123 Main St",
+      "pro": [
+        {
+          "name": "Item12",
+          "price": 120,
+          "rating": "2.8"
+        },
+        {
+          "name": "Item13",
+          "price": 130,
+          "rating": "2.8"
+        }
+      ]
+    },
+     {
+      "id": 7,
+      "name": "Shop7",
+      "location": "123 Main St",
+      "pro": [
+        {
+          "name": "Item14",
+          "price": 140,
+          "rating": "2.8"
+        },
+        {
+          "name": "Item5",
+          "price": 150,
+          "rating": "2.8"
+        }
+      ]
+    }
+  ]
+}
+
+
+
