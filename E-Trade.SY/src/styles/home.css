@@ -51,6 +51,16 @@
   z-index: -1;
 }
 
+p.shop-tile {
+  font-size: 25px;
+  font-weight: bolder;
+}
+
+p.shop-tile-xs {
+  font-size: 20px;
+  font-weight: bolder;
+}
+
 p.shop-item-name {
   font-weight: 800;
 }
@@ -61,6 +71,10 @@ p.shop-item-price span {
 
 p.shop-item-rating {
   padding-left: 5px;
+}
+
+p.shop-item-modal-rating span {
+  font-weight: 600;
 }
 
 /* drawer */

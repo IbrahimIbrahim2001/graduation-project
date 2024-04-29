@@ -15,7 +15,7 @@ export const LoginPage = () => {
     <Grid
       container
       justifyContent={"space-around"}
-      alignitems={"center"}
+      alignItems={"center"}
       minHeight={"100vh"}
     >
       <Grid

@@ -85,8 +85,8 @@ export const SignupContent = () => {
         >
           <FacebookIcon />
         </IconButton>
-        <Typography sx={{ marginBottom: 2 }}>
-          have an account?{" "}
+        <Typography sx={{ marginBottom: 2, fontWeight: 600 }}>
+          have an account or a store?{" "}
           <Link
             to="../login"
             style={{ color: "#7B66FF", textDecoration: "none" }}
@@ -94,6 +94,7 @@ export const SignupContent = () => {
             Sign in
           </Link>
         </Typography>
+
         <SignupForm />
       </Box>
     </Box>

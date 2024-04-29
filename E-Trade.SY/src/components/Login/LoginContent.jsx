@@ -84,14 +84,24 @@ export const LoginContent = () => {
         >
           <FacebookIcon />
         </IconButton>
-        <Typography sx={{ marginBottom: 2 }}>
-          New user?{" "}
+        <Typography sx={{ marginBottom: 2, fontWeight: 600 }}>
+          New customer?{" "}
           <Link
             to="../signup"
             style={{ color: "#7B66FF", textDecoration: "none" }}
           >
             {" "}
-            Create an account
+            Create an Account
+          </Link>
+        </Typography>
+        <Typography sx={{ marginBottom: 2, fontWeight: 600 }}>
+          New Seller?{" "}
+          <Link
+            to="../store-register"
+            style={{ color: "#7B66FF", textDecoration: "none" }}
+          >
+            {" "}
+            Create a Store
           </Link>
         </Typography>
         <LoginForm />

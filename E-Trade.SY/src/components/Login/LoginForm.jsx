@@ -40,6 +40,7 @@ export const LoginForm = () => {
     initialValues: {
       email: "",
       password: "",
+      role: "",
     },
     validate: (values) => {
       const errors = {};
@@ -62,9 +63,16 @@ export const LoginForm = () => {
           email: values.email,
           password: values.password,
         });
-        console.log(values);
-        console.log("Sign-in successful", data);
-        navigate("../shops/1");
+
+        console.log(data);
+
+        if (values.role === "seller") {
+          navigate("main/shops/shop/1");
+        } else if (values.role === "customer") {
+          navigate("my-shop");
+        } else {
+          console.error("Invalid role selected");
+        }
       } catch (error) {
         console.error("Sign-in failed", error);
       }
@@ -148,7 +156,7 @@ const StyledTextField = withStyles({
   root: {
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
-        borderRadius: "8px", // Adjust the value as needed
+        borderRadius: "8px",
       },
     },
   },

@@ -1,11 +1,16 @@
+//mui
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import { Toolbar } from "@mui/material";
 
+//hooks
 import useFetchShops from "../../hooks/useFetchShops";
-import Shop from "../Shops/Shop";
+
+//components
+import Shop from "../Shops/shop/Shop";
 import ShopsDrawerSkeleton from "./ShopsDrawerSkeleton";
+
 export default function ShopsDrawerOnSmallScreens({ open, toggleDrawer }) {
   const { isLoading, isError, data: shops } = useFetchShops();
   if (isLoading) return <ShopsDrawerSkeleton />;

@@ -8,29 +8,38 @@
         {
           "name": "Item1",
           "price": 10,
-          "rating": "2.8"
+          "avg": "2.8",
+          "quantity":5,
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item2",
           "price": 20,
-          "rating": "2.8"
+          "quantity":5,
+           "avg": "2.8",
+          "photo_data": "https://via.placeholder.com/150"
         }
       ]
     },
     {
       "id": 2,
       "name": "Shop2",
+          "quantity":5,
       "location": "456 Elm St",
       "pro": [
         {
           "name": "Item3",
           "price": 30,
-          "rating": "2.8"
+          "quantity":5,
+           "avg": "2.8",
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item4",
           "price": 40,
-          "rating": "2.8"
+          "quantity":5,
+          "avg": "2.8",
+          "photo_data": "https://via.placeholder.com/150"
         }
       ]
     },
@@ -42,29 +51,41 @@
         {
           "name": "Item5",
           "price": 50,
-          "rating": "2.8"
+          "quantity":5,
+           "avg": "2.8",
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item6",
           "price": 70,
-          "rating": "2.8"
+          "quantity":5,
+           "avg": "2.8",
+          "photo_data": "https://via.placeholder.com/150"
         },{
           "name": "Item2",
           "price": 20,
-          "rating": "2.8"
+          "quantity":5,
+           "avg": "2.8",
+          "photo_data": "https://via.placeholder.com/150"
         },{
           "name": "Item2",
           "price": 20,
-          "rating": "2.8"
+          "quantity":5,
+           "avg": "2.8",
+          "photo_data": "https://via.placeholder.com/150"
         },{
           "name": "Item2",
           "price": 20,
-          "rating": "2.8"
+          "quantity":5,
+           "avg": "2.8",
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item2",
           "price": 20,
-          "rating": "2.8"
+          "quantity":5,
+           "avg": "2.8",
+          "photo_data": "https://via.placeholder.com/150"
         }
       ]
     },
@@ -76,12 +97,16 @@
         {
           "name": "Item8",
           "price": 80,
-          "rating": "2.8"
+          "quantity":5,
+           "avg": "2.8",
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item9",
           "price": 90,
-          "rating": "2.8"
+          "quantity":5,
+           "avg": "2.8",
+          "photo_data": "https://via.placeholder.com/150"
         }
       ]
     },
@@ -92,54 +117,73 @@
       "pro": [
          {
           "name": "Item1 sun glasses",
+          "quantity":25,
           "price": 10,
-          "img": "../assets/login.png",
-          "rating": "2.8"
+           "avg": "2.8",
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item2",
+          "quantity":30,
           "price": 20,
-          "rating": "2.8"
+           "avg": "2.8",
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item3",
+          "quantity":39,
           "price": 30,
-          "rating": "2.8"
+           "avg": "2.8",
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item4",
+          "quantity":5,
           "price": 40,
-          "rating": "2.8"
+           "avg": "1.96",
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item5",
+          "quantity":5,
           "price": 50,
-          "rating": "2.8"
+           "avg": "3.2",
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item6",
+          "quantity":5,
           "price": 60,
-          "rating": "2.8"
+           "avg": "4.9",
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item8",
+          "quantity":5,
           "price": 80,
-          "rating": "2.8"
+           "avg": "2.25",
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item9",
+          "quantity":100,
           "price": 90,
-          "rating": "2.8"
+           "avg": "3.9",
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item10",
+          "quantity":5,
           "price": 100,
-          "rating": "2.8"
+           "avg": "4.2",
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item11",
+          "quantity":5,
           "price": 110,
-          "rating": "2.8"
+           "avg": "4.8",
+          "photo_data": "https://via.placeholder.com/150"
         }
       ]
     },
@@ -150,13 +194,17 @@
       "pro": [
         {
           "name": "Item12",
+          "quantity":5,
           "price": 120,
-          "rating": "2.8"
+           "avg": "3.9",
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item13",
+          "quantity":5,
           "price": 130,
-          "rating": "2.8"
+           "avg": "1.24",
+          "photo_data": "https://via.placeholder.com/150"
         }
       ]
     },
@@ -167,13 +215,17 @@
       "pro": [
         {
           "name": "Item14",
+          "quantity":5,
           "price": 140,
-          "rating": "2.8"
+           "avg": "2.2",
+          "photo_data": "https://via.placeholder.com/150"
         },
         {
           "name": "Item5",
+          "quantity":5,
           "price": 150,
-          "rating": "2.8"
+           "avg": "3.8",
+          "photo_data": "https://via.placeholder.com/150"
         }
       ]
     }

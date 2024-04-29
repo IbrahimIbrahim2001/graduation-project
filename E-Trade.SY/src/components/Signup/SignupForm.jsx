@@ -92,9 +92,6 @@ export const SignupForm = () => {
             backgroundColor: darkMode ? "#fff" : "#333",
             borderRadius: "8px",
             height: "50px",
-            // "&:hover": {
-            //   backgroundColor: darkMode ? "#fff" : "#333",
-            // },
           }}
         >
           <Typography variant="span">Signup</Typography>

@@ -7,15 +7,15 @@ const HomeResponsiveTypography = ({ text, spanText, etc }) => {
   const matchesMD = useMediaQuery("(min-width:960px) and (max-width:1280px)");
   const matchesLG = useMediaQuery("(min-width:1280px)");
 
-  let responsiveVariant; // default image
+  let responsiveVariant;
   if (matchesXS) {
-    responsiveVariant = "h5"; // image for extra small devices
+    responsiveVariant = "h5";
   } else if (matchesSM) {
-    responsiveVariant = "h5"; // image for small devices
+    responsiveVariant = "h5";
   } else if (matchesMD) {
-    responsiveVariant = "h4"; // image for medium devices
+    responsiveVariant = "h4";
   } else if (matchesLG) {
-    responsiveVariant = "h3"; // image for large devices
+    responsiveVariant = "h3";
   }
   return (
     <div style={{ whiteSpace: "pre-wrap" }}>
@@ -25,7 +25,7 @@ const HomeResponsiveTypography = ({ text, spanText, etc }) => {
         height={{ xs: 150, sm: "auto" }}
       >
         {text}{" "}
-        <Typography variant="span" color="#2200FF" backgroundColor={"yellow"}>
+        <Typography variant="span" color="#2200FF" backgroundColor={"#ffff74"}>
           {spanText}
         </Typography>{" "}
         {etc}

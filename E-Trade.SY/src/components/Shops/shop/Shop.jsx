@@ -5,7 +5,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 
 //context
-import { useThemeContext } from "../../context/ThemeModeProvider";
+import { useThemeContext } from "../../../context/ThemeModeProvider";
 
 //react router
 import { NavLink } from "react-router-dom";

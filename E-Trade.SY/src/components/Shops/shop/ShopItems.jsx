@@ -3,13 +3,13 @@ import { Box, Grid } from "@mui/material";
 import { Typography } from "@material-ui/core";
 
 //hooks
-import { useFetchShopItems } from "../../hooks/useFetchShopItems";
+import { useFetchShopItems } from "../../../hooks/useFetchShopItems";
 
 // ui components
 import ShopItemsSkeleton from "./ShopItemsSkeleton";
 
 //components
-import ShopItem from "./ShopItem";
+import ShopItem from "../shop/ShopItem";
 
 //router
 import { useParams } from "react-router-dom";

@@ -8,7 +8,7 @@ import Toolbar from "@mui/material/Toolbar";
 import useFetchShops from "../../hooks/useFetchShops";
 
 //component
-import Shop from "./Shop";
+import Shop from "./shop/Shop";
 import ShopsDrawerSkeleton from "./ShopsDrawerSkeleton";
 
 const drawerWidth = 260;

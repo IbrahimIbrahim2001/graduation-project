@@ -9,15 +9,17 @@ import {
 import Home from "./pages/Home";
 import { LoginPage } from "./pages/LoginPage";
 import { SignupPage } from "./pages/SignupPage";
-import SellerDashboard from "./pages/SellerDashboard";
 import Error from "./pages/Error";
 import CustomerProfile from "./pages/CustomerProfile";
+import StoreRegisterPage from "./pages/StoreRegisterPage";
 
 //components
-import { ShopItems } from "./components/Shops/ShopItems";
+import { ShopItems } from "./components/Shops/shop/ShopItems";
 import Cart from "./components/Cart/Cart";
+import { SellerProducts } from "./components/sellerShop/SellerProducts";
 
 //layouts
+import SellerShopLayout from "./layouts/SellerShopLayout";
 import ShopsLayout from "./layouts/ShopsLayout";
 import CustomerLayout from "./layouts/CustomerLayout";
 
@@ -33,6 +35,7 @@ const routes = createRoutesFromElements(
     <Route path="" index element={<Home />} />
     <Route path="login" element={<LoginPage />} />
     <Route path="signup" element={<SignupPage />} />
+    <Route path="store-register" element={<StoreRegisterPage />} />
     {isAuthenticated && userRole === "customer" && (
       <Route path="main" element={<CustomerLayout />}>
         <Route path="shops" element={<ShopsLayout />}>
@@ -43,7 +46,9 @@ const routes = createRoutesFromElements(
       </Route>
     )}
     {isAuthenticated && userRole === "seller" && (
-      <Route path="seller-dashboard" element={<SellerDashboard />} />
+      <Route path="my-shop" element={<SellerShopLayout />}>
+        <Route path="" element={<SellerProducts />} />
+      </Route>
     )}
     <Route path="*" element={<Error />} />
   </Route>

@@ -126,6 +126,18 @@ const HomeSection = ({ imgFirst, btnText }) => {
                 >
                   {btnText}
                 </Button>
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: darkMode ? "#7B66FF" : "#9c27b0",
+                    marginTop: "25px",
+                  }}
+                  onClick={() => {
+                    navigate("store-register");
+                  }}
+                >
+                  store register
+                </Button>
               </Box>
             </Grid>
           </>
@@ -151,6 +163,18 @@ const HomeSection = ({ imgFirst, btnText }) => {
                   onClick={() => navigate("main/shops/shop/1")}
                 >
                   {btnText}
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: darkMode ? "#7B66FF" : "#9c27b0",
+                    marginTop: "25px",
+                  }}
+                  onClick={() => {
+                    navigate("store-register");
+                  }}
+                >
+                  store register
                 </Button>
               </Box>
             </Grid>
