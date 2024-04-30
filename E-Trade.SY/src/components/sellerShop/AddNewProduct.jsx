@@ -103,9 +103,14 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
       closeAfterTransition
     >
       <Box sx={style}>
+        <Typography variant="h5" mb={2} color={"primary"}>
+          Add Product:
+        </Typography>
         <form method="post" onSubmit={handleSubmit}>
           <FormControl fullWidth>
-            <Typography mb={1}>Main Image:*</Typography>
+            <Typography mb={1} color={"primary"}>
+              Main Image:*
+            </Typography>
             <TextField
               type="file"
               required
@@ -113,7 +118,9 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
               sx={{ mb: 2 }}
             />
 
-            <Typography mb={1}>Optional Images:</Typography>
+            <Typography mb={1} color={"primary"}>
+              Optional Images:
+            </Typography>
             <TextField
               type="file"
               multiple
@@ -121,7 +128,9 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
               sx={{ mb: 2 }}
             />
 
-            <Typography mb={1}>Product Name:*</Typography>
+            <Typography mb={1} color={"primary"}>
+              Product Name:*
+            </Typography>
             <TextField
               type="text"
               required
@@ -129,7 +138,9 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
               onChange={(e) => handleChange("name", e.target.value)}
               sx={{ mb: 2 }}
             />
-            <Typography mb={1}>Quantity:*</Typography>
+            <Typography mb={1} color={"primary"}>
+              Quantity:*
+            </Typography>
             <TextField
               type="number"
               required
@@ -141,7 +152,9 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
               InputProps={{ inputProps: { min: 0 } }}
               sx={{ mb: 2 }}
             />
-            <Typography mb={1}>Price:*</Typography>
+            <Typography mb={1} color={"primary"}>
+              Price:*
+            </Typography>
             <TextField
               type="number"
               required
@@ -153,8 +166,13 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
               InputProps={{ inputProps: { min: 0 } }}
               sx={{ mb: 2 }}
             />
-            <LoadingButton loading={loading} type="submit" variant="contained">
-              <span>Add</span>
+            <LoadingButton
+              loading={loading}
+              type="submit"
+              variant="contained"
+              sx={{ fontWeight: "bold", color: "#fff" }}
+            >
+              Add
             </LoadingButton>
           </FormControl>
         </form>

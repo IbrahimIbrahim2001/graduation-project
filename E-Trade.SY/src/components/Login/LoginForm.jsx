@@ -21,8 +21,8 @@ import { useFormik } from "formik";
 
 //clerk
 
-//auth
-import { useSignIn } from "../../auth/useSignIn";
+//hooks
+import { useSignIn } from "../../hooks/useSignIn";
 
 export const LoginForm = () => {
   const { darkMode } = useThemeContext();
@@ -57,18 +57,19 @@ export const LoginForm = () => {
       }
       return errors;
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       try {
-        const data = signInMutation({
+        const data = await signInMutation({
           email: values.email,
           password: values.password,
         });
 
         console.log(data);
 
-        if (values.role === "seller") {
+        if (values.role === "customer") {
+          // dispatch(setUserData({ userId: data.userId, userName: data.userName }));
           navigate("main/shops/shop/1");
-        } else if (values.role === "customer") {
+        } else if (values.role === "seller") {
           navigate("my-shop");
         } else {
           console.error("Invalid role selected");

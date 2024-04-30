@@ -114,7 +114,7 @@ const HomeSection = ({ imgFirst, btnText }) => {
                   // spanText={"متجرنا الالكتروني"}
                   // etc={"حيث كل منتجاتك متوافرة "}
                 />
-                <Button
+                {/* <Button
                   variant="contained"
                   sx={{
                     backgroundColor: darkMode ? "#7B66FF" : "#9c27b0",
@@ -125,7 +125,7 @@ const HomeSection = ({ imgFirst, btnText }) => {
                   }}
                 >
                   {btnText}
-                </Button>
+                </Button> */}
                 <Button
                   variant="contained"
                   sx={{
@@ -154,7 +154,7 @@ const HomeSection = ({ imgFirst, btnText }) => {
                   // spanText={"متجرنا الالكتروني"}
                   // etc={"حيث كل منتجاتك متوافرة "}
                 />
-                <Button
+                {/* <Button
                   variant="contained"
                   sx={{
                     marginTop: "20px",
@@ -163,7 +163,7 @@ const HomeSection = ({ imgFirst, btnText }) => {
                   onClick={() => navigate("main/shops/shop/1")}
                 >
                   {btnText}
-                </Button>
+                </Button> */}
                 <Button
                   variant="contained"
                   sx={{

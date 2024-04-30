@@ -14,15 +14,37 @@ import {
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
+import MenuItem from "@mui/material/MenuItem";
 
 //context
 import { useThemeContext } from "../../context/ThemeModeProvider";
 
 //router
 
+//fromik
+import { useFormik } from "formik";
+
+//hooks
+import { useCreateStore } from "../../hooks/useCreateStore";
+
 //react
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
+const storeTypes = [
+  {
+    type: "Clothing",
+  },
+  {
+    type: "Grocerry",
+  },
+  {
+    type: "Electronics",
+  },
+  {
+    type: "Mobiles & Laptops",
+  },
+];
 
 export default function StoreRegisterForm() {
   const [showPassword, setShowPassword] = useState(true);
@@ -32,6 +54,78 @@ export default function StoreRegisterForm() {
     event.preventDefault();
     setShowPassword((show) => !show);
   };
+
+  const signUpMutation = useCreateStore();
+
+  const formik = useFormik({
+    initialValues: {
+      storeName: "",
+      storeType: "",
+      sellerEmail: "",
+      password: "",
+      sellerName: "",
+      sellerPhone: "",
+    },
+    validate: (values) => {
+      const errors = {};
+      if (!values.storeName) {
+        errors.storeName = "Store name is required";
+      } else if (values.storeName.length < 2 || values.storeName > 20) {
+        errors.storeName = "First name must be between {2-20} characters";
+      }
+      if (!values.storeType) {
+        errors.storeType = "Store type is required";
+      } else if (values.storeType.length < 2 || values.storeType.length > 20) {
+        errors.storeType = "Store type must be between {2-20} characters";
+      }
+      if (!values.sellerEmail) {
+        errors.sellerEmail = "Email is required";
+      } else if (
+        !/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(values.sellerEmail)
+      ) {
+        errors.sellerEmail = "Invalid email address";
+      }
+      if (!values.password) {
+        errors.password = "Password is required";
+      } else if (values.password.length < 8 || values.password.length > 20) {
+        errors.password = "Password must be between {8-20} characters";
+        // !/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}/.test(values.password)
+      }
+      if (!values.sellerName) {
+        errors.sellerName = "Seller name is required";
+      } else if (
+        values.sellerName.length < 2 ||
+        values.sellerName.length > 20
+      ) {
+        errors.sellerName = "seller name must be between {2-20} characters";
+      }
+
+      if (!values.sellerPhone) {
+        errors.sellerPhone = "seller phone is required";
+      } else if (!/^((963))\d{9}$/.test(values.sellerPhone)) {
+        errors.sellerPhone =
+          "seller phone must start with (963) and have a length of 11 characters";
+      }
+      return errors;
+    },
+    onSubmit: async (values) => {
+      try {
+        const data = await signUpMutation.mutate({
+          storeName: values.storeName,
+          storeType: values.storeType,
+          sellerEmail: values.sellerEmail,
+          password: values.password,
+          sellerName: values.sellerName,
+          sellerPhone: values.sellerPhone,
+        });
+        console.log(data);
+        console.log(values);
+      } catch (error) {
+        console.error("Store creation failed", error);
+      }
+    },
+  });
+
   return (
     <Box
       sx={{
@@ -45,45 +139,69 @@ export default function StoreRegisterForm() {
         marginBottom: 3,
       }}
     >
-      <form noValidate autoComplete="off" onSubmit={console.log("first")}>
+      <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
         <FormControl fullWidth>
           <Grid container spacing={2} sx={{ placeContent: "space-between" }}>
             <Grid item xs={12} sm={6}>
               <StyledTextField
-                id="store-name"
+                id="storeName"
                 label="store name"
                 variant="outlined"
                 required
                 fullWidth
+                {...formik.getFieldProps("storeName")}
+                error={formik.touched.storeName && !!formik.errors.storeName}
+                helperText={formik.touched.storeName && formik.errors.storeName}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <StyledTextField
-                id="store-name"
-                label="store name"
+                id="storeType"
+                label="store type"
+                select
                 variant="outlined"
                 required
                 fullWidth
-              />
+                {...formik.getFieldProps("storeType")}
+                error={formik.touched.storeType && !!formik.errors.storeType}
+                helperText={formik.touched.storeType && formik.errors.storeType}
+              >
+                {storeTypes.map((option) => (
+                  <MenuItem key={option.type} value={option.type}>
+                    {option.type}
+                  </MenuItem>
+                ))}
+              </StyledTextField>
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <StyledTextField
-                id="seller-email"
+                id="sellerEmail"
                 label="email"
                 variant="outlined"
                 required
                 fullWidth
+                {...formik.getFieldProps("sellerEmail")}
+                error={
+                  formik.touched.sellerEmail && !!formik.errors.sellerEmail
+                }
+                helperText={
+                  formik.touched.sellerEmail && formik.errors.sellerEmail
+                }
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <StyledTextField
+                id="password"
                 label="Password"
                 variant="outlined"
                 type={showPassword ? "text" : "password"}
                 autoComplete="off"
                 required
                 fullWidth
+                {...formik.getFieldProps("password")}
+                error={formik.touched.password && !!formik.errors.password}
+                helperText={formik.touched.password && formik.errors.password}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -101,20 +219,32 @@ export default function StoreRegisterForm() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <StyledTextField
-                id="seller-name"
+                id="sellerName"
                 label="full name"
                 variant="outlined"
                 required
                 fullWidth
+                {...formik.getFieldProps("sellerName")}
+                error={formik.touched.sellerName && !!formik.errors.sellerName}
+                helperText={
+                  formik.touched.sellerName && formik.errors.sellerName
+                }
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <StyledTextField
-                id="seller-phone"
+                id="sellerPhone"
                 label="phone number"
                 variant="outlined"
                 required
                 fullWidth
+                {...formik.getFieldProps("sellerPhone")}
+                error={
+                  formik.touched.sellerPhone && !!formik.errors.sellerPhone
+                }
+                helperText={
+                  formik.touched.sellerPhone && formik.errors.sellerPhone
+                }
               />
             </Grid>
             <Hidden smDown>
