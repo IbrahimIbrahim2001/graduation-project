@@ -35,7 +35,7 @@ export const ShopItems = () => {
           fontWeight: "bold",
         }}
       >
-        {shop?.data.name}:
+        {shop?.data.StoreName}:
       </Typography>
       <Grid
         container

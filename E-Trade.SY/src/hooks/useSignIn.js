@@ -1,35 +1,32 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from 'react-router-dom';
 
-async function signIn({ email, password }) {
+function signIn({ email, password }) {
     try {
-        const response = await axios.post('/api/auth/signin', {
+        const response = axios.post(`http://localhost:3000/users`, {
             email,
             password,
-            // role,
         });
-
-        if (response.status !== 200) {
-            throw new Error('Failed on sign-in request');
-        }
-
-        const token = response.data.token;
-
-        localStorage.setItem('token', token);
-
-        const decodedToken = jwtDecode(token);
-
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-        return decodedToken;
+        axios.defaults.withCredentials = true;
+        return response.data;
     } catch (error) {
         throw new Error(`Error during sign-in: ${error.message}`);
     }
 }
 
 export function useSignIn() {
-    const { mutate: signInMutation } = useMutation(signIn);
-
-    return signInMutation;
+    const navigate = useNavigate();
+    return useMutation({
+        mutationFn: signIn,
+        onSuccess: (data) => {
+            const token = data.token;
+            const userData = jwtDecode(token);
+            const username = userData.name;
+            const userId = userData.user_id;
+            navigate('../main/shops', { state: { username, userId } });
+        },
+        onError: (error) => console.log(error.message),
+    })
 }

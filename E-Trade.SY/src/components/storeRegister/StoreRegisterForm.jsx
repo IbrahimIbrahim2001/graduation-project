@@ -8,9 +8,9 @@ import {
   Button,
   FormControl,
   Grid,
+  Hidden,
   TextField,
   Typography,
-  Hidden,
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -55,7 +55,7 @@ export default function StoreRegisterForm() {
     setShowPassword((show) => !show);
   };
 
-  const signUpMutation = useCreateStore();
+  const { mutate } = useCreateStore();
 
   const formik = useFormik({
     initialValues: {
@@ -108,21 +108,21 @@ export default function StoreRegisterForm() {
       }
       return errors;
     },
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       try {
-        const data = await signUpMutation.mutate({
-          storeName: values.storeName,
-          storeType: values.storeType,
+        const data = {
+          StoreName: values.storeName,
+          storeKind: values.storeType,
           sellerEmail: values.sellerEmail,
           password: values.password,
           sellerName: values.sellerName,
           sellerPhone: values.sellerPhone,
-        });
-        console.log(data);
-        console.log(values);
+        };
+        mutate(data);
       } catch (error) {
         console.error("Store creation failed", error);
       }
+      console.log(values);
     },
   });
 
@@ -131,9 +131,10 @@ export default function StoreRegisterForm() {
       sx={{
         borderRadius: "16px",
         background: darkMode
-          ? "rgba( 0, 0, 0, 0.75)"
+          ? "rgba(17, 25, 40, 1)"
           : "rgba( 255, 255, 255, 0.9)",
-        boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+        boxShadow: darkMode ? "" : "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+        border: "1px solid rgba(255, 255, 255, 0.125)",
         paddingX: { xs: 2, sm: 5 },
         paddingY: { xs: 2, sm: 3 },
         marginBottom: 3,
@@ -236,6 +237,7 @@ export default function StoreRegisterForm() {
                 id="sellerPhone"
                 label="phone number"
                 variant="outlined"
+                type="tel"
                 required
                 fullWidth
                 {...formik.getFieldProps("sellerPhone")}

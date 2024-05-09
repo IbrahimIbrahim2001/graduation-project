@@ -22,7 +22,7 @@ export default function ShopsLayout() {
 
         <Box component="main" sx={{ flexGrow: 1, minHeight: "100vh" }}>
           <Toolbar />
-          <Outlet /> {/*ShopsItems*/}
+          <Outlet /> {/*ShopsItems ||shops */}
         </Box>
       </Box>
     </>

@@ -11,7 +11,10 @@ export default function ShopItemsSkeleton() {
         height={30}
         animation="wave"
         variant={"rounded"}
-        sx={{ marginX: 2, marginY: "10px" }}
+        sx={{
+          marginX: 2,
+          marginY: "10px",
+        }}
       />
       <Grid
         container

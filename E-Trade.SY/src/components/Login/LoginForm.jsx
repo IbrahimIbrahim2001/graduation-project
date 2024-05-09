@@ -14,7 +14,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { useThemeContext } from "../../context/ThemeModeProvider";
 
 //react-router
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //formik
 import { useFormik } from "formik";
@@ -27,14 +27,13 @@ import { useSignIn } from "../../hooks/useSignIn";
 export const LoginForm = () => {
   const { darkMode } = useThemeContext();
   const [showPassword, setShowPassword] = useState(true);
-  const navigate = useNavigate();
 
   const handleClickShowPassword = (event) => {
     event.preventDefault();
     setShowPassword((show) => !show);
   };
 
-  const signInMutation = useSignIn();
+  const { mutate } = useSignIn();
 
   const formik = useFormik({
     initialValues: {
@@ -59,21 +58,15 @@ export const LoginForm = () => {
     },
     onSubmit: async (values) => {
       try {
-        const data = await signInMutation({
+        const data = {
           email: values.email,
           password: values.password,
-        });
+          role: "customer",
+        };
+
+        mutate(data);
 
         console.log(data);
-
-        if (values.role === "customer") {
-          // dispatch(setUserData({ userId: data.userId, userName: data.userName }));
-          navigate("main/shops/shop/1");
-        } else if (values.role === "seller") {
-          navigate("my-shop");
-        } else {
-          console.error("Invalid role selected");
-        }
       } catch (error) {
         console.error("Sign-in failed", error);
       }

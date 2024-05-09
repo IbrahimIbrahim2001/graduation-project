@@ -1,15 +1,15 @@
 //mui
+import { Tooltip } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { Hidden } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Tooltip } from "@material-ui/core";
-import { Hidden } from "@mui/material";
 
 //context
 import { useThemeContext } from "../../context/ThemeModeProvider";
@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 //componetns
 import AddNewProduct from "./AddNewProduct";
 
-export default function MainNavbar() {
+export default function SellerNavbar() {
   const [showShadow, setShowShadow] = useState(false);
   const { darkMode, toggleTheme } = useThemeContext();
   const [openModal, setOpenModal] = useState(false);
@@ -35,6 +35,7 @@ export default function MainNavbar() {
 
   useEffect(() => {
     window.addEventListener("scroll", checkScroll);
+
     return () => {
       window.removeEventListener("scroll", checkScroll);
     };
@@ -77,16 +78,17 @@ export default function MainNavbar() {
           </Typography>
 
           <Tooltip title="add product" arrow>
-            <IconButton onClick={() => setOpenModal(true)}>
+            <IconButton onClick={() => setOpenModal(true)} sx={{ padding: 0 }}>
               <AddBoxIcon sx={{ color: "#2200FF", fontSize: "28px" }} />
             </IconButton>
           </Tooltip>
-          <IconButton onClick={toggleTheme}>
+          <IconButton onClick={toggleTheme} sx={{ paddingLeft: 1 }}>
             {darkMode === false ? <Brightness4 /> : <Brightness7 />}
           </IconButton>
+
           <StyledTextField
             placeholder="serach for products"
-            value={""}
+            sx={{ width: { xs: "30vw", sm: "210.4px" } }}
             // onChange={}
             // onSubmit={() => handleSearch(input)}
           />
@@ -102,9 +104,7 @@ export default function MainNavbar() {
 const StyledTextField = withStyles({
   root: {
     "& .MuiOutlinedInput-root": {
-      direction: "",
       height: "40px",
-
       "& fieldset": {},
     },
   },

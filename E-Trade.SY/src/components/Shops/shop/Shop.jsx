@@ -10,6 +10,7 @@ import { useThemeContext } from "../../../context/ThemeModeProvider";
 //react router
 import { NavLink } from "react-router-dom";
 
+//for drawer
 export default function Shop({ shop, toggleDrawer }) {
   const { darkMode } = useThemeContext();
 
@@ -30,7 +31,7 @@ export default function Shop({ shop, toggleDrawer }) {
               paddingX: { sm: 2, md: 6, lg: 8 },
               marginBottom: 1,
             }}
-            primary={shop.name}
+            primary={shop.StoreName}
           />
 
           <ArrowForwardIos fontSize="small" />

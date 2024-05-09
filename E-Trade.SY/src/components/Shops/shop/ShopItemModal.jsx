@@ -1,5 +1,3 @@
-//react hooks
-
 //mui
 import { Hidden, Typography } from "@material-ui/core";
 import { Box, Modal } from "@mui/material";
@@ -9,6 +7,7 @@ import { grey } from "@mui/material/colors";
 import { Star } from "@mui/icons-material";
 import { withStyles } from "@material-ui/core/styles";
 
+//for styled box
 const style = {
   position: "absolute",
   top: "50%",
@@ -17,16 +16,20 @@ const style = {
   width: 575,
   height: 300,
   display: "flex",
-  bgcolor: "background.paper",
   borderRadius: "12px",
   boxShadow: "0 8px 12px 0 rgba(31, 38, 135, 0.37)",
   p: 4,
 };
 
+const StyledBox = styled("div")(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === "light" ? "#fff" : "rgba(17, 25, 40, 1)",
+}));
+
 const Puller = styled("div")(({ theme }) => ({
   width: 30,
   height: 6,
-  backgroundColor: theme.palette.mode === "light" ? grey[300] : grey[900],
+  backgroundColor: theme.palette.mode === "light" ? grey[300] : grey[200],
   borderRadius: 3,
   position: "absolute",
   top: 8,
@@ -43,10 +46,11 @@ export default function ShopItemModal({ shopItem, openModal, setOpenModal }) {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
+          <StyledBox sx={style}>
             <Box
               component="img"
               src={shopItem.photo_data}
+              // src={`http://localhost:3000/images/` + shopItem.photo_data}
               sx={{ borderRadius: "12px", marginRight: 10 }}
             />
             <Box
@@ -56,12 +60,14 @@ export default function ShopItemModal({ shopItem, openModal, setOpenModal }) {
                 height: 200,
               }}
             >
-              <Typography className="shop-tile">store: Shop5</Typography>
               <Typography
                 className="shop-item-name"
                 sx={{ overflow: "hidden" }}
               >
-                name: {shopItem.name}
+                product: {shopItem.name}
+              </Typography>
+              <Typography className="shop-tile">
+                store: {shopItem.StoreName}
               </Typography>
               <Typography className="shop-item-price">
                 <span>price: </span> {shopItem.price} S.P.
@@ -79,7 +85,7 @@ export default function ShopItemModal({ shopItem, openModal, setOpenModal }) {
                 <Star color="warning" fontSize="small" />
               </Box>
             </Box>
-          </Box>
+          </StyledBox>
         </Modal>
       </Hidden>
       <Hidden smUp>
@@ -94,19 +100,20 @@ export default function ShopItemModal({ shopItem, openModal, setOpenModal }) {
             keepMounted: true,
           }}
         >
-          <Box
+          <StyledBox
             sx={{
+              style,
               py: 4,
               px: 2,
-              display: "flex",
+              border: "1px solid rgba(255, 255, 255, 0.125)",
               height: 500,
-              boxShadow: "0 8px 12px 0 rgba(31, 38, 135, 0.37)",
             }}
           >
             <Puller />
             <Box
               component="img"
               src={shopItem.photo_data}
+              // image={`http://localhost:3000/images/` + shopItem.photo_data}
               sx={{
                 borderRadius: "12px",
                 marginRight: 3,
@@ -119,12 +126,14 @@ export default function ShopItemModal({ shopItem, openModal, setOpenModal }) {
                 flexDirection: "column",
               }}
             >
-              <Typography className="shop-tile-xs">store: Shop5</Typography>
               <Typography
                 className="shop-item-name"
                 sx={{ overflow: "hidden" }}
               >
-                name: {shopItem.name}
+                product: {shopItem.name}
+              </Typography>
+              <Typography className="shop-tile">
+                store: {shopItem.StoreName}
               </Typography>
               <Typography className="shop-item-price">
                 <span>price: </span> {shopItem.price} S.P.
@@ -143,7 +152,7 @@ export default function ShopItemModal({ shopItem, openModal, setOpenModal }) {
                 <Star color="warning" fontSize="small" />
               </Box>
             </Box>
-          </Box>
+          </StyledBox>
         </StyledSwipeableDrawer>
       </Hidden>
     </>

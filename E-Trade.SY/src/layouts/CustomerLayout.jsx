@@ -22,7 +22,7 @@ export default function CustomerLayout() {
       <Hidden smUp>
         <BottomNavBar />
       </Hidden>
-      <Outlet /> {/* ShopsLayout */}
+      <Outlet /> {/* ShopsLayout || cart || customerProfile */}
     </>
   );
 }

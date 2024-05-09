@@ -2,12 +2,11 @@
 import { useState } from "react";
 
 //mui
-import { Box, Modal, FormControl, Button } from "@mui/material";
+import { Close } from "@mui/icons-material";
+import LoadingButton from "@mui/lab/LoadingButton";
+import { Box, FormControl, IconButton, Modal } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-// import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-// import { styled } from "@mui/material/styles";
-import LoadingButton from "@mui/lab/LoadingButton";
 
 const style = {
   position: "absolute",
@@ -32,43 +31,15 @@ const initialProduct = {
   price: 0,
 };
 
-// const VisuallyHiddenInput = styled("input")({
-//   clip: "rect(0 0 0 0)",
-//   clipPath: "inset(50%)",
-//   height: 1,
-//   overflow: "hidden",
-//   position: "absolute",
-//   bottom: 0,
-//   left: 0,
-//   whiteSpace: "nowrap",
-//   width: 1,
-// });
-
-{
-  /* <Button
-              component="label"
-              role={undefined}
-              variant="contained"
-              tabIndex={-1}
-              startIcon={<CloudUploadIcon />}
-              color="success"
-              onChange={(e) => handleChange("optionalImages", e.target.files)}
-              sx={{ mb: 2 }}
-            >
-              Upload files
-              <VisuallyHiddenInput type="file" />
-            </Button> */
-}
-
 export default function AddNewProduct({ openModal, setOpenModal }) {
   const [product, setProduct] = useState(initialProduct);
   const [loading, setLoading] = useState(false);
-  function handleSubmit(e) {
-    e.preventDefault();
-    setLoading(true);
-    console.log(product);
-    // here to mutate
-  }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   console.log(product);
+  //   // here to mutate
+  // };
 
   const handleChange = (field, value) => {
     if (field === "optionalImages") {
@@ -97,86 +68,102 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
   };
 
   return (
-    <Modal
-      open={openModal}
-      onClose={() => setOpenModal(false)}
-      closeAfterTransition
-    >
-      <Box sx={style}>
-        <Typography variant="h5" mb={2} color={"primary"}>
-          Add Product:
-        </Typography>
-        <form method="post" onSubmit={handleSubmit}>
-          <FormControl fullWidth>
-            <Typography mb={1} color={"primary"}>
-              Main Image:*
+    <>
+      <Modal open={openModal} onClose={() => setOpenModal(false)}>
+        <Box sx={style}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              mb: 2,
+            }}
+          >
+            <Typography variant="h5" color={"primary"} fontWeight={"600"}>
+              Add Product:
             </Typography>
-            <TextField
-              type="file"
-              required
-              onChange={(e) => handleChange("image", e.target.value)}
-              sx={{ mb: 2 }}
-            />
-
-            <Typography mb={1} color={"primary"}>
-              Optional Images:
-            </Typography>
-            <TextField
-              type="file"
-              multiple
-              onChange={(e) => handleChange("optionalImages", e.target.files)}
-              sx={{ mb: 2 }}
-            />
-
-            <Typography mb={1} color={"primary"}>
-              Product Name:*
-            </Typography>
-            <TextField
-              type="text"
-              required
-              placeholder="Product Name"
-              onChange={(e) => handleChange("name", e.target.value)}
-              sx={{ mb: 2 }}
-            />
-            <Typography mb={1} color={"primary"}>
-              Quantity:*
-            </Typography>
-            <TextField
-              type="number"
-              required
-              placeholder="Quantity"
-              onChange={(e) => handleChange("quantity", e.target.value)}
-              InputLabelProps={{
-                shrink: true,
+            <IconButton
+              onClick={() => setOpenModal(false)}
+              sx={{
+                backgroundColor: "#1976d2",
+                ":hover": { backgroundColor: "#ff4d4d" },
               }}
-              InputProps={{ inputProps: { min: 0 } }}
-              sx={{ mb: 2 }}
-            />
-            <Typography mb={1} color={"primary"}>
-              Price:*
-            </Typography>
-            <TextField
-              type="number"
-              required
-              placeholder="Price in Syrian pounds"
-              onChange={(e) => handleChange("price", e.target.value)}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              InputProps={{ inputProps: { min: 0 } }}
-              sx={{ mb: 2 }}
-            />
-            <LoadingButton
-              loading={loading}
-              type="submit"
-              variant="contained"
-              sx={{ fontWeight: "bold", color: "#fff" }}
             >
-              Add
-            </LoadingButton>
-          </FormControl>
-        </form>
-      </Box>
-    </Modal>
+              <Close sx={{ fontSize: "28px", color: "#fff" }} />
+            </IconButton>
+          </Box>
+          <form>
+            <FormControl fullWidth>
+              <Typography mb={1} color={"primary"}>
+                Main Image:*
+              </Typography>
+              <TextField
+                type="file"
+                required
+                onChange={(e) => handleChange("image", e.target.value)}
+                sx={{ mb: 2 }}
+              />
+
+              <Typography mb={1} color={"primary"}>
+                Optional Images:
+              </Typography>
+              <TextField
+                type="file"
+                multiple
+                onChange={(e) => handleChange("optionalImages", e.target.files)}
+                sx={{ mb: 2 }}
+              />
+
+              <Typography mb={1} color={"primary"}>
+                Product Name:*
+              </Typography>
+              <TextField
+                type="text"
+                required
+                placeholder="Product Name"
+                onChange={(e) => handleChange("name", e.target.value)}
+                sx={{ mb: 2 }}
+              />
+              <Typography mb={1} color={"primary"}>
+                Quantity:*
+              </Typography>
+              <TextField
+                type="number"
+                required
+                placeholder="Quantity"
+                onChange={(e) => handleChange("quantity", e.target.value)}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                InputProps={{ inputProps: { min: 0 } }}
+                sx={{ mb: 2 }}
+              />
+              <Typography mb={1} color={"primary"}>
+                Price:*
+              </Typography>
+              <TextField
+                type="number"
+                required
+                placeholder="Price in Syrian pounds"
+                onChange={(e) => handleChange("price", e.target.value)}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                InputProps={{ inputProps: { min: 0 } }}
+                sx={{ mb: 2 }}
+              />
+              <LoadingButton
+                loading={loading}
+                type="submit"
+                variant="contained"
+                sx={{ fontWeight: "bold", color: "#fff" }}
+              >
+                Add
+              </LoadingButton>
+            </FormControl>
+          </form>
+        </Box>
+      </Modal>
+    </>
   );
 }

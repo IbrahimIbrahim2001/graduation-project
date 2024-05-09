@@ -1,36 +1,39 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 
-async function signUp({ email, password, role }) {
+import { useNavigate } from 'react-router-dom';
+
+async function signUp({ firstName, lastName, email, password }) {
+
     try {
-        const response = await axios.post('/api/auth/signup', {
+        // const token = localStorage.getItem('token');
+        // const config = {
+        //     headers: {
+        //         Authorization: `Bearer ${token}`
+        //     }
+        // };
+
+        const response = await axios.post('http://localhost:3000/users', {
+            firstName,
+            lastName,
             email,
             password,
-            role,
         });
 
-        if (response.status !== 200) {
-            throw new Error('Failed to sign up');
-        }
+        return response.data;
 
-        const token = response.data.token;
-
-        localStorage.setItem('token', token);
-
-
-        const decodedToken = jwtDecode(token);
-
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-        return decodedToken;
     } catch (error) {
         throw new Error(`Error during sign-up: ${error.message}`);
     }
 }
-
 export function useSignUp() {
-    const { mutate: signUpMutation } = useMutation(signUp);
-
-    return signUpMutation;
+    const navigate = useNavigate();
+    return useMutation({
+        mutationFn: signUp,
+        onSuccess: () => navigate("../main/shops"),
+        onError: (error) => {
+            console.log(error.message);
+        }
+    })
 }

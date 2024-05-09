@@ -41,21 +41,21 @@ export default function BottomNavBar() {
           showLabels
           value={value}
           onChange={(event, newValue) => {
-            setValue(newValue);
+            setValue(() => newValue);
           }}
         >
           <BottomNavigationAction
-            label="المتاجر"
+            label="shops"
             icon={<StorefrontIcon />}
             onClick={toggleDrawer(true)}
           />
           <BottomNavigationAction
-            label="عربة التسوق"
+            label="cart"
             icon={<ShoppingCartIcon />}
             onClick={() => navigate("cart")}
           />
           <BottomNavigationAction
-            label="حسابي"
+            label="profile"
             icon={<AccountCircleIcon />}
             onClick={() => navigate("customer-profile")}
           />

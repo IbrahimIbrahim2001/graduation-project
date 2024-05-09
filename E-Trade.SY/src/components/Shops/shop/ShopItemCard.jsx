@@ -24,6 +24,7 @@ export default function ShopItemCard({ shopItem, handleOpen }) {
           component="img"
           height="150"
           image={shopItem.photo_data}
+          // image={`http://localhost:3000/images/` + shopItem.photo_data}
           alt={shopItem.name}
         />
 
@@ -38,7 +39,7 @@ export default function ShopItemCard({ shopItem, handleOpen }) {
             }}
           >
             <Typography className="shop-item-name" sx={{ overflow: "hidden" }}>
-              {shopItem.name}
+              <span>product:</span> {shopItem.name}
             </Typography>
 
             <Typography className="shop-item-price">

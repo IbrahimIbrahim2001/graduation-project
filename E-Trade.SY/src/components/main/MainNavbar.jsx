@@ -19,12 +19,11 @@ import { useThemeContext } from "../../context/ThemeModeProvider";
 import { useEffect, useState } from "react";
 
 //router
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function MainNavbar() {
   const [showShadow, setShowShadow] = useState(false);
   const { darkMode, toggleTheme } = useThemeContext();
-  const { id: currentId } = useParams();
   const checkScroll = () => {
     if (window.scrollY > 0) {
       setShowShadow(true);
@@ -71,10 +70,7 @@ export default function MainNavbar() {
           E-Mart
         </Typography>
         <Tooltip title="shops" arrow>
-          <NavLink
-            to={`shops/shop/${currentId ? currentId : 1}`}
-            className="navbar-link"
-          >
+          <NavLink to={`shops`} className="navbar-link">
             <IconButton>
               <StorefrontIcon />
             </IconButton>

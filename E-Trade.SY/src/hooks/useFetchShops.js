@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const fetchShops = () => {
-    return axios.get("http://localhost:8000/shops");
+    // return axios.get("http://localhost:3000/shops");
     //backend
-    // return axios.get("http://localhost:3000/stores");
+    return axios.get("http://localhost:3000/stores");
 }
 
 

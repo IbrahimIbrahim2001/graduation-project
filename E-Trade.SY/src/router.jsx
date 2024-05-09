@@ -11,12 +11,13 @@ import { LoginPage } from "./pages/LoginPage";
 import { SignupPage } from "./pages/SignupPage";
 import Error from "./pages/Error";
 import CustomerProfile from "./pages/CustomerProfile";
+import Cart from "./pages/Cart";
 import StoreRegisterPage from "./pages/StoreRegisterPage";
 
 //components
 import { ShopItems } from "./components/Shops/shop/ShopItems";
-import Cart from "./components/Cart/Cart";
 import { SellerProducts } from "./components/sellerShop/SellerProducts";
+import ShopsItems from "./components/Shops/ShopsItems";
 
 //layouts
 import SellerShopLayout from "./layouts/SellerShopLayout";
@@ -39,6 +40,7 @@ const routes = createRoutesFromElements(
     {isAuthenticated && userRole === "customer" && (
       <Route path="main" element={<CustomerLayout />}>
         <Route path="shops" element={<ShopsLayout />}>
+          <Route index element={<ShopsItems />} />
           <Route path="shop/:id" element={<ShopItems />} />
         </Route>
         <Route path="cart" element={<Cart />} />

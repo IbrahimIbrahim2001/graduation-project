@@ -2,9 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const fetchShopItems = (id = 1) => {
-    return axios.get(`http://localhost:8000/shops/${id}`);
-    //backend
-    // return axios.get(`http://localhost:3000/store/${id}`);
+    return axios.get(`http://localhost:3000/store/${id}`);
 };
 
 export function useFetchShopItems(id) {

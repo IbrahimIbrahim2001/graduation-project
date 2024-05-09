@@ -20,19 +20,31 @@ export const LoginContent = () => {
   const { darkMode } = useThemeContext();
   return (
     <Box>
-      <Link to="../">
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{
-            mb: { xs: 1, md: 5 },
-          }}
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Link to="../">
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            // sx={
+            //   {
+            //     // mb: { xs: 1, md: 5 },
+            //   }
+            // }
+          >
+            <AddShoppingCartIcon sx={{ fontSize: 30 }} />
+          </IconButton>
+        </Link>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ fontWeight: "bolder" }}
+          color="#2200FF"
         >
-          <AddShoppingCartIcon sx={{ fontSize: 30 }} />
-        </IconButton>
-      </Link>
+          E-Mart
+        </Typography>
+      </Box>
       <Box
         sx={{
           borderRadius: "16px",

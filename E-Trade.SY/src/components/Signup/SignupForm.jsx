@@ -21,7 +21,7 @@ import { useSignUp } from "../../hooks/useSignUp";
 export const SignupForm = () => {
   const { darkMode } = useThemeContext();
 
-  const signUpMutation = useSignUp();
+  const { mutate } = useSignUp();
 
   const formik = useFormik({
     initialValues: {
@@ -57,13 +57,13 @@ export const SignupForm = () => {
     },
     onSubmit: async (values) => {
       try {
-        const data = await signUpMutation({
+        const data = {
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
           password: values.password,
-        });
-        console.log(data);
+        };
+        mutate(data);
       } catch (error) {
         console.error("Sign-up failed", error);
       }

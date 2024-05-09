@@ -2,7 +2,8 @@
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
-import { Toolbar } from "@mui/material";
+import { Toolbar, Typography } from "@mui/material";
+import { ArrowBackIos } from "@mui/icons-material";
 
 //hooks
 import useFetchShops from "../../hooks/useFetchShops";
@@ -10,6 +11,9 @@ import useFetchShops from "../../hooks/useFetchShops";
 //components
 import Shop from "../Shops/shop/Shop";
 import ShopsDrawerSkeleton from "./ShopsDrawerSkeleton";
+
+//reacr router
+import { NavLink } from "react-router-dom";
 
 export default function ShopsDrawerOnSmallScreens({ open, toggleDrawer }) {
   const { isLoading, isError, data: shops } = useFetchShops();
@@ -33,6 +37,22 @@ export default function ShopsDrawerOnSmallScreens({ open, toggleDrawer }) {
       <Toolbar />
       <Box sx={{ overflow: "auto", paddingX: 2 }}>
         <List>
+          <NavLink
+            to="./shops"
+            onClick={toggleDrawer(false)}
+            className="all-shops-nav-link"
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                paddingX: 2,
+              }}
+            >
+              <ArrowBackIos fontSize="small" />
+              <Typography variant="body1">All shops</Typography>
+            </Box>
+          </NavLink>
           {shops?.data.map((shop) => (
             <Shop key={shop.id} shop={shop} toggleDrawer={toggleDrawer} />
           ))}

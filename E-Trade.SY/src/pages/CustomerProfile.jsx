@@ -1,10 +1,10 @@
-import { Toolbar } from "@material-ui/core";
+import { Box, Toolbar } from "@mui/material";
 
 export default function CustomerProfile() {
   return (
     <div>
       <Toolbar />
-      CustomerProfile
+      <Box>CustomerProfile</Box>
     </div>
   );
 }

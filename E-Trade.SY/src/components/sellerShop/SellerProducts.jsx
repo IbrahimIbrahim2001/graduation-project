@@ -31,7 +31,7 @@ export const SellerProducts = () => {
     paddingX = 80;
   }
 
-  const { isLoading, isError, data: shop } = useFetchShopItems(5);
+  const { isLoading, isError, data: shop } = useFetchShopItems();
 
   if (isLoading) {
     return <ShopItemsSkeleton />;
@@ -50,7 +50,7 @@ export const SellerProducts = () => {
           fontWeight: "bold",
         }}
       >
-        {shop?.data.name}:
+        {shop?.data.StoreName}:
       </Typography>
       <Grid
         container

@@ -25,39 +25,38 @@
 }
 
 /* ShopItem */
-.item {
-  /* box-shadow: 0 8px 12px 0 rgba(31, 38, 135, 0.37);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18); */
-}
 
-.item.dark {
-  -webkit-backdrop-filter: blur(25px) saturate(200%);
-  backdrop-filter: blur(25px) saturate(200%);
-  background-color: rgba(18, 18, 18, 1);
+/* why it is not working? only on item*/
+/* .item,
+.cart {
+  border: 1px solid;
   border-radius: 12px;
+  z-index: -1;
+} */
+
+.item.dark,
+.cart.dark {
+  -webkit-backdrop-filter: blur(25px) saturate(0%);
+  backdrop-filter: blur(25px) saturate(0%);
+  background-color: rgba(17, 25, 40, 1);
   border: 1px solid rgba(255, 255, 255, 0.125);
-  box-shadow: 0 8px 12px 0 rgba(31, 38, 135, 0.37);
+  border-color: rgba(255, 255, 255, 0.125);
+  border-radius: 12px;
   z-index: -1;
 }
 
-.item.light {
+.item.light,
+.cart.light {
   -webkit-backdrop-filter: blur(25px) saturate(200%);
   backdrop-filter: blur(25px) saturate(200%);
   background-color: rgba(255, 255, 255, 1);
-  border-radius: 12px;
   border: 1px solid rgba(209, 213, 219, 0.3);
-  box-shadow: 0 8px 12px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 12px;
   z-index: -1;
+  box-shadow: 0 8px 12px 0 rgba(31, 38, 135, 0.37);
 }
 
 p.shop-tile {
-  font-size: 25px;
-  font-weight: bolder;
-}
-
-p.shop-tile-xs {
-  font-size: 20px;
   font-weight: bolder;
 }
 
@@ -78,6 +77,23 @@ p.shop-item-modal-rating span {
 }
 
 /* drawer */
+.all-shops-nav-link {
+  text-decoration: none;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  background-color: #5d95ff;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  color: #2200ff;
+}
+
+.all-shops-nav-link:hover {
+  padding-left: 10px;
+  background-color: #2200ff;
+  color: #fff;
+}
+
 .drawer-link.active span {
   font-weight: bolder;
   padding-left: 10px;
@@ -107,4 +123,9 @@ p.shop-item-modal-rating span {
 .navbar-link.active svg {
   color: #2200ff;
   font-weight: 800;
+}
+
+/* cart */
+.cart::-webkit-scrollbar {
+  display: none;
 }

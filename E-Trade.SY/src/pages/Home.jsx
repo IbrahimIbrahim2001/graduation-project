@@ -23,6 +23,9 @@ import svg from "../assets/wave.svg";
 //styles
 import "../styles/home.css";
 
+//context
+import { useThemeContext } from "../context/ThemeModeProvider";
+
 const sections = [
   {
     homeImg: homeImg1,
@@ -40,8 +43,10 @@ const sections = [
 ];
 
 const Home = () => {
+  const { darkMode } = useThemeContext();
+
   return (
-    <Box dir="ltr">
+    <Box dir="ltr" sx={{ backgroundColor: darkMode ? "#121212" : "" }}>
       <HomeNavBar />
       <Box
         sx={{
