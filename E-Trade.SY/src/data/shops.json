@@ -54,14 +54,22 @@
         {
           "name": "Item1",
           "StoreName": "Shop1",
+          "StoreId": 1,
           "price": 10,
           "avg": "2.8",
           "quantity": 5,
-          "photo_data": "https://via.placeholder.com/150"
+          "photo_data": "https://via.placeholder.com/150",
+          "optionalImages": [
+            "https://via.placeholder.com/170",
+            "https://via.placeholder.com/120",
+            "https://via.placeholder.com/130",
+            "https://via.placeholder.com/160"
+          ]
         },
         {
           "name": "Item2",
           "StoreName": "Shop1",
+          "StoreId": 1,
           "price": 20,
           "quantity": 5,
           "avg": "2.8",
@@ -76,6 +84,7 @@
         {
           "name": "Item3",
           "StoreName": "Shop2",
+          "StoreId": 2,
           "price": 30,
           "quantity": 5,
           "avg": "2.8",
@@ -84,6 +93,7 @@
         {
           "name": "Item4",
           "StoreName": "Shop2",
+          "StoreId": 2,
           "price": 40,
           "quantity": 5,
           "avg": "2.8",
@@ -97,7 +107,8 @@
       "pro": [
         {
           "name": "Item5",
-          "StoreName": "Shop4",
+          "StoreName": "Shop3",
+          "StoreId": 3,
           "price": 50,
           "quantity": 5,
           "avg": "2.8",
@@ -106,6 +117,7 @@
         {
           "name": "Item6",
           "StoreName": "Shop3",
+          "StoreId": 3,
           "price": 70,
           "quantity": 5,
           "avg": "2.8",
@@ -114,6 +126,7 @@
         {
           "name": "Item2",
           "StoreName": "Shop3",
+          "StoreId": 3,
           "price": 20,
           "quantity": 5,
           "avg": "2.8",
@@ -122,6 +135,7 @@
         {
           "name": "Item2",
           "StoreName": "Shop3",
+          "StoreId": 3,
           "price": 20,
           "quantity": 5,
           "avg": "2.8",
@@ -130,6 +144,7 @@
         {
           "name": "Item2",
           "StoreName": "Shop3",
+          "StoreId": 3,
           "price": 20,
           "quantity": 5,
           "avg": "2.8",
@@ -138,6 +153,7 @@
         {
           "name": "Item2",
           "StoreName": "Shop3",
+          "StoreId": 3,
           "price": 20,
           "quantity": 5,
           "avg": "2.8",
@@ -152,6 +168,7 @@
         {
           "name": "Item8",
           "StoreName": "Shop4",
+          "StoreId": 4,
           "price": 80,
           "quantity": 5,
           "avg": "2.8",
@@ -160,6 +177,7 @@
         {
           "name": "Item9",
           "StoreName": "Shop4",
+          "StoreId": 4,
           "price": 90,
           "quantity": 5,
           "avg": "2.8",
@@ -174,6 +192,7 @@
         {
           "name": "Item1 sun glasses",
           "StoreName": "Shop5",
+          "StoreId": 5,
           "quantity": 25,
           "price": 10,
           "avg": "2.8",
@@ -182,6 +201,7 @@
         {
           "name": "Item2",
           "StoreName": "Shop5",
+          "StoreId": 5,
           "quantity": 30,
           "price": 20,
           "avg": "2.8",
@@ -190,6 +210,7 @@
         {
           "name": "Item3",
           "StoreName": "Shop5",
+          "StoreId": 5,
           "quantity": 39,
           "price": 30,
           "avg": "2.8",
@@ -198,6 +219,7 @@
         {
           "name": "Item4",
           "StoreName": "Shop5",
+          "StoreId": 5,
           "quantity": 5,
           "price": 40,
           "avg": "1.96",
@@ -206,6 +228,7 @@
         {
           "name": "Item5",
           "StoreName": "Shop5",
+          "StoreId": 5,
           "quantity": 5,
           "price": 50,
           "avg": "3.2",
@@ -214,6 +237,7 @@
         {
           "name": "Item6",
           "StoreName": "Shop5",
+          "StoreId": 5,
           "quantity": 5,
           "price": 60,
           "avg": "4.9",
@@ -222,6 +246,7 @@
         {
           "name": "Item8",
           "StoreName": "Shop5",
+          "StoreId": 5,
           "quantity": 5,
           "price": 80,
           "avg": "2.25",
@@ -230,6 +255,7 @@
         {
           "name": "Item9",
           "StoreName": "Shop5",
+          "StoreId": 5,
           "quantity": 100,
           "price": 90,
           "avg": "3.9",
@@ -238,6 +264,7 @@
         {
           "name": "Item10",
           "StoreName": "Shop5",
+          "StoreId": 5,
           "quantity": 5,
           "price": 100,
           "avg": "4.2",
@@ -246,6 +273,7 @@
         {
           "name": "Item11",
           "StoreName": "Shop5",
+          "StoreId": 5,
           "quantity": 5,
           "price": 110,
           "avg": "4.8",
@@ -260,6 +288,7 @@
         {
           "name": "Item12",
           "StoreName": "Shop6",
+          "StoreId": 6,
           "quantity": 5,
           "price": 120,
           "avg": "3.9",
@@ -268,6 +297,7 @@
         {
           "name": "Item13",
           "StoreName": "Shop6",
+          "StoreId": 6,
           "quantity": 5,
           "price": 130,
           "avg": "1.24",
@@ -282,6 +312,7 @@
         {
           "name": "Item14",
           "StoreName": "Shop7",
+          "StoreId": 7,
           "quantity": 5,
           "price": 140,
           "avg": "2.2",
@@ -290,6 +321,7 @@
         {
           "name": "Item5",
           "StoreName": "Shop7",
+          "StoreId": 7,
           "quantity": 5,
           "price": 150,
           "avg": "3.8",
@@ -312,11 +344,25 @@
       "email": "ii8538098@gmail.com",
       "password": "12345678",
       "id": "bddczca"
+    },
+    {
+      "id": "698d",
+      "email": "ii8538098@gmail.com",
+      "password": "sadsadsad"
+    },
+    {
+      "id": "329f",
+      "email": "ii8538098@gmail.com",
+      "password": "12345678"
     }
   ],
   "cart": [
     {
-      "id": "4b68"
+      "id": "704e",
+      "name": "Item2",
+      "price": 20,
+      "StoreId": 1,
+      "quantity": 1
     }
   ],
   "product": [
@@ -333,6 +379,7 @@
     {
       "name": "Item2",
       "StoreName": "Shop1",
+      "StoreId": 1,
       "price": 20,
       "quantity": 5,
       "avg": "2.8",
@@ -342,6 +389,7 @@
     {
       "name": "Item3",
       "StoreName": "Shop2",
+      "StoreId": 2,
       "price": 30,
       "quantity": 5,
       "avg": "2.8",
@@ -351,6 +399,7 @@
     {
       "name": "Item4",
       "StoreName": "Shop2",
+      "StoreId": 2,
       "price": 40,
       "quantity": 5,
       "avg": "2.8",
@@ -359,7 +408,8 @@
     },
     {
       "name": "Item5",
-      "StoreName": "Shop4",
+      "StoreName": "Shop3",
+      "StoreId": 3,
       "price": 50,
       "quantity": 5,
       "avg": "2.8",
@@ -369,6 +419,7 @@
     {
       "name": "Item6",
       "StoreName": "Shop3",
+      "StoreId": 3,
       "price": 70,
       "quantity": 5,
       "avg": "2.8",
@@ -378,6 +429,7 @@
     {
       "name": "Item2",
       "StoreName": "Shop3",
+      "StoreId": 3,
       "price": 20,
       "quantity": 5,
       "avg": "2.8",
@@ -387,6 +439,7 @@
     {
       "name": "Item2",
       "StoreName": "Shop3",
+      "StoreId": 3,
       "price": 20,
       "quantity": 5,
       "avg": "2.8",
@@ -396,6 +449,7 @@
     {
       "name": "Item2",
       "StoreName": "Shop3",
+      "StoreId": 3,
       "price": 20,
       "quantity": 5,
       "avg": "2.8",
@@ -405,6 +459,7 @@
     {
       "name": "Item2",
       "StoreName": "Shop3",
+      "StoreId": 3,
       "price": 20,
       "quantity": 5,
       "avg": "2.8",
@@ -414,6 +469,7 @@
     {
       "name": "Item8",
       "StoreName": "Shop4",
+      "StoreId": 4,
       "price": 80,
       "quantity": 5,
       "avg": "2.8",
@@ -423,6 +479,7 @@
     {
       "name": "Item9",
       "StoreName": "Shop4",
+      "StoreId": 4,
       "price": 90,
       "quantity": 5,
       "avg": "2.8",
@@ -432,6 +489,7 @@
     {
       "name": "Item1 sun glasses",
       "StoreName": "Shop5",
+      "StoreId": 5,
       "quantity": 25,
       "price": 10,
       "avg": "2.8",
@@ -441,6 +499,7 @@
     {
       "name": "Item2",
       "StoreName": "Shop5",
+      "StoreId": 5,
       "quantity": 30,
       "price": 20,
       "avg": "2.8",
@@ -450,6 +509,7 @@
     {
       "name": "Item3",
       "StoreName": "Shop5",
+      "StoreId": 5,
       "quantity": 39,
       "price": 30,
       "avg": "2.8",
@@ -459,6 +519,7 @@
     {
       "name": "Item4",
       "StoreName": "Shop5",
+      "StoreId": 5,
       "quantity": 5,
       "price": 40,
       "avg": "1.96",
@@ -468,6 +529,7 @@
     {
       "name": "Item5",
       "StoreName": "Shop5",
+      "StoreId": 5,
       "quantity": 5,
       "price": 50,
       "avg": "3.2",
@@ -477,6 +539,7 @@
     {
       "name": "Item6",
       "StoreName": "Shop5",
+      "StoreId": 5,
       "quantity": 5,
       "price": 60,
       "avg": "4.9",
@@ -486,6 +549,7 @@
     {
       "name": "Item8",
       "StoreName": "Shop5",
+      "StoreId": 5,
       "quantity": 5,
       "price": 80,
       "avg": "2.25",
@@ -495,6 +559,7 @@
     {
       "name": "Item9",
       "StoreName": "Shop5",
+      "StoreId": 5,
       "quantity": 100,
       "price": 90,
       "avg": "3.9",
@@ -504,6 +569,7 @@
     {
       "name": "Item10",
       "StoreName": "Shop5",
+      "StoreId": 5,
       "quantity": 5,
       "price": 100,
       "avg": "4.2",
@@ -513,6 +579,7 @@
     {
       "name": "Item11",
       "StoreName": "Shop5",
+      "StoreId": 5,
       "quantity": 5,
       "price": 110,
       "avg": "4.8",
@@ -522,6 +589,7 @@
     {
       "name": "Item12",
       "StoreName": "Shop6",
+      "StoreId": 6,
       "quantity": 5,
       "price": 120,
       "avg": "3.9",
@@ -531,6 +599,7 @@
     {
       "name": "Item13",
       "StoreName": "Shop6",
+      "StoreId": 6,
       "quantity": 5,
       "price": 130,
       "avg": "1.24",
@@ -540,6 +609,7 @@
     {
       "name": "Item14",
       "StoreName": "Shop7",
+      "StoreId": 7,
       "quantity": 5,
       "price": 140,
       "avg": "2.2",
@@ -549,6 +619,7 @@
     {
       "name": "Item5",
       "StoreName": "Shop7",
+      "StoreId": 7,
       "quantity": 5,
       "price": 150,
       "avg": "3.8",

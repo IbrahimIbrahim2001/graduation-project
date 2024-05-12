@@ -50,7 +50,7 @@ export default function ShopsDrawerOnSmallScreens({ open, toggleDrawer }) {
               }}
             >
               <ArrowBackIos fontSize="small" />
-              <Typography variant="body1">All shops</Typography>
+              <Typography>All shops</Typography>
             </Box>
           </NavLink>
           {shops?.data.map((shop) => (

@@ -1,16 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// import { useMutateCart } from "../../hooks/useFetchShopCart";
+
 const initialState = {
-    cartProducts: []
+    items: []
 }
+
+// const { mutate } = useMutateCart();
 
 const cartSlice = createSlice({
     name: "cart",
     initialState,
-    reducer: {
+    reducers: {
         addProduct: (state, action) => {
-            this.state = [...state, action.payload];
-
+            const { name, price, StoreId } = action.payload;
+            // state.items.push(action.payload);
+            console.log("action: ", name, price, StoreId);
+            console.log(action.payload);
         }
     }
 })
+
+
+export const { addProduct } = cartSlice.actions;
+export default cartSlice.reducer;

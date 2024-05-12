@@ -35,7 +35,13 @@ export default function ShopsDrawer() {
         }}
       >
         <Toolbar />
-        <Box sx={{ overflow: "auto", paddingX: 2 }}>
+        <Box
+          sx={{
+            overflowY: "scroll",
+            "::-webkit-Scrollbar": { display: "none" },
+            paddingX: 2,
+          }}
+        >
           <List>
             <NavLink to="../shops" className="all-shops-nav-link">
               <Box
@@ -43,12 +49,9 @@ export default function ShopsDrawer() {
                   display: "flex",
                   alignItems: "center",
                   paddingX: { sm: 3, md: 8, lg: 8 },
-                  // color: "#2200ff",
                 }}
               >
-                <Typography variant="body1" fontWeight="800">
-                  All shops
-                </Typography>
+                <Typography sx={{ fontWeight: "bold" }}>All shops</Typography>
               </Box>
             </NavLink>
             {/* shops.data.stores.map */}

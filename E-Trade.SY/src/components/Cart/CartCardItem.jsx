@@ -16,11 +16,14 @@ import {
   Typography,
 } from "@mui/material";
 
+import { useDeletaCartItem } from "../../hooks/useFetchShopCart";
+
 // import ImageIcon from "@mui/icons-material/Image";
 
 export default function CartCardItem({ item }) {
+  const { mutate } = useDeletaCartItem();
   return (
-    <Box sx={{ paddingLeft: 2 }}>
+    <Box sx={{ paddingLeft: { sm: 2 } }}>
       <Hidden smDown>
         <Box
           sx={{
@@ -29,7 +32,6 @@ export default function CartCardItem({ item }) {
             alignItems: "center",
           }}
         >
-          {/* <ImageIcon fontSize="large" /> */}
           <Typography
             component="p"
             sx={{
@@ -66,7 +68,7 @@ export default function CartCardItem({ item }) {
             </Tooltip>
           </Box>
           <Typography>{item.price * item.quantity} S.P</Typography>
-          <IconButton>
+          <IconButton onClick={() => mutate(item.id)}>
             <DeleteIcon />
           </IconButton>
         </Box>
@@ -74,7 +76,7 @@ export default function CartCardItem({ item }) {
         <Divider />
       </Hidden>
       <Hidden smUp>
-        <Accordion>
+        <Accordion style={{ borderRadius: "12px" }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             sx={{ marginTop: 1 }}
@@ -120,10 +122,11 @@ export default function CartCardItem({ item }) {
               <Button
                 variant="outlined"
                 color="warning"
-                sx={{ textTransform: "capitalize" }}
+                endIcon={<DeleteIcon />}
+                onClick={() => mutate(item.id)}
+                sx={{ textTransform: "capitalize", borderRadius: "8px" }}
               >
                 delete item
-                <DeleteIcon />
               </Button>
             </Tooltip>
           </AccordionDetails>

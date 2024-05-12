@@ -7,12 +7,6 @@ import { useNavigate } from 'react-router-dom';
 async function signUp({ firstName, lastName, email, password }) {
 
     try {
-        // const token = localStorage.getItem('token');
-        // const config = {
-        //     headers: {
-        //         Authorization: `Bearer ${token}`
-        //     }
-        // };
 
         const response = await axios.post('http://localhost:3000/users', {
             firstName,

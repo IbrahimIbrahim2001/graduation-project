@@ -1,11 +1,11 @@
 //mui
-import { Typography } from "@material-ui/core";
 import {
   Box,
   Card,
   CardActionArea,
   CardContent,
   CardMedia,
+  Typography,
 } from "@mui/material";
 
 //context
@@ -17,6 +17,7 @@ import ShopRatingProduct from "./ShopRatingProduct";
 
 export default function ShopItemCard({ shopItem, handleOpen }) {
   const { darkMode } = useThemeContext();
+
   return (
     <Card className={`item ${darkMode ? "dark" : "light"}`}>
       <CardActionArea onClick={() => handleOpen()}>
@@ -38,19 +39,20 @@ export default function ShopItemCard({ shopItem, handleOpen }) {
               whiteSpace: "nowrap",
             }}
           >
-            <Typography className="shop-item-name" sx={{ overflow: "hidden" }}>
+            <Typography sx={{ overflow: "hidden", fontWeight: "bold" }}>
               <span>product:</span> {shopItem.name}
             </Typography>
 
-            <Typography className="shop-item-price">
-              <span>price:</span> {shopItem.price} S.P.
+            <Typography>
+              <span style={{ fontWeight: "bold" }}>price:</span>{" "}
+              {shopItem.price} S.P.
             </Typography>
           </Box>
         </CardContent>
       </CardActionArea>
 
       <ShopRatingProduct shopItemRating={shopItem.avg} />
-      <ShopAddTocartBtn />
+      <ShopAddTocartBtn shopItem={shopItem} />
     </Card>
   );
 }

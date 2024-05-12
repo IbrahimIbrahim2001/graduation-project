@@ -3,7 +3,17 @@ import { IconButton } from "@material-ui/core";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Box } from "@mui/material";
 
-export default function ShopAddTocartBtn() {
+//hooks
+import { useMutateCart } from "../../../hooks/useFetchShopCart";
+
+//redux toolkit
+// import { useDispatch } from "react-redux";
+//cartSlice
+// import { addProduct } from "../../../features/cartSlice/cartSlice";
+
+export default function ShopAddTocartBtn({ shopItem }) {
+  // const dispatch = useDispatch();
+  const { mutate } = useMutateCart();
   return (
     <Box
       sx={{
@@ -14,7 +24,7 @@ export default function ShopAddTocartBtn() {
         borderRadius: "12px",
       }}
     >
-      <IconButton>
+      <IconButton onClick={() => mutate(shopItem)}>
         <AddShoppingCartIcon fontSize="small" sx={{ color: "#fff" }} />
       </IconButton>
     </Box>

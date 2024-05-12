@@ -1,10 +1,9 @@
 //mui
 import { ArrowBackIosNewRounded } from "@mui/icons-material";
-import { Box, Button, Toolbar } from "@mui/material";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { Box, Button, Toolbar, Hidden } from "@mui/material";
 
 //hooks
-import { useFetchShopItems } from "../hooks/useFetchShopItems";
+import { useFetchCartItems } from "../hooks/useFetchShopCart";
 
 //context
 import { useThemeContext } from "../context/ThemeModeProvider";
@@ -14,11 +13,15 @@ import { Link } from "react-router-dom";
 
 //components
 import CartCard from "../components/Cart/CartCard";
+// import { useSelector } from "react-redux";
 
 export default function Cart() {
-  const { data: items } = useFetchShopItems(5);
+  const { isLoading, isError, data: items } = useFetchCartItems();
   const { darkMode } = useThemeContext();
-  const matchXs = useMediaQuery("(max-width:600px)");
+
+  if (isLoading) return <>loading....</>;
+  if (isError) return <>error....</>;
+
   return (
     <Box
       sx={{
@@ -29,16 +32,16 @@ export default function Cart() {
       }}
     >
       <Toolbar />
-      <CartCard items={items} darkMode={darkMode} matchXs={matchXs} />
+      <CartCard items={items} darkMode={darkMode} />
 
-      {!matchXs && (
+      <Hidden smDown>
         <Link to="../shops">
           <Button variant="outlined">
             <ArrowBackIosNewRounded fontSize="sm" sx={{ paddingRight: 2 }} />
             continue shopping
           </Button>
         </Link>
-      )}
+      </Hidden>
     </Box>
   );
 }

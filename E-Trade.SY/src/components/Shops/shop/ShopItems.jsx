@@ -17,7 +17,6 @@ import { useParams } from "react-router-dom";
 export const ShopItems = () => {
   const { id: shopId } = useParams();
   const { isLoading, isError, data: shop } = useFetchShopItems(shopId);
-
   if (isLoading) {
     return <ShopItemsSkeleton />;
   }

@@ -14,7 +14,6 @@ import ShopItem from "./shop/ShopItem";
 
 export default function ShopsItems() {
   const { isLoading, isError, data: shopsItems } = useFetchShopsItems();
-
   if (isLoading) {
     return <ShopItemsSkeleton />;
   }
@@ -35,7 +34,6 @@ export default function ShopsItems() {
         }}
       >
         {shopsItems?.data.map((shopItem) => (
-          //   <Typography key={shopItem.id}>{shopItem.StoreName}</Typography>
           <ShopItem key={shopItem.id} shopItem={shopItem} />
         ))}
       </Grid>
