@@ -41,8 +41,13 @@ const Puller = styled("div")(({ theme }) => ({
   left: "calc(50% - 15px)",
 }));
 
-export default function ShopItemModal({ shopItem, openModal, setOpenModal }) {
-  const images = [shopItem.photo_data, ...(shopItem.optionalImages ?? [])];
+export default function ShopItemModal({
+  shopItem,
+  openModal,
+  setOpenModal,
+  shopName,
+}) {
+  const images = [shopItem?.photo_data, ...(shopItem?.optionalImages ?? [])];
   return (
     <>
       <Hidden xsDown>
@@ -54,7 +59,7 @@ export default function ShopItemModal({ shopItem, openModal, setOpenModal }) {
         >
           <StyledBox sx={style}>
             <ImageCarousel images={images} />
-            <ModalItemDescription shopItem={shopItem} />
+            <ModalItemDescription shopItem={shopItem} shopName={shopName} />
           </StyledBox>
         </Modal>
       </Hidden>
@@ -81,7 +86,7 @@ export default function ShopItemModal({ shopItem, openModal, setOpenModal }) {
           >
             <Puller />
             <ImageCarousel images={images} />
-            <ModalItemDescription shopItem={shopItem} />
+            <ModalItemDescription shopItem={shopItem} shopName={shopName} />
           </StyledBox>
         </StyledSwipeableDrawer>
       </Hidden>

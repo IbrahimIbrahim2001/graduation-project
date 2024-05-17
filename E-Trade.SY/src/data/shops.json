@@ -354,14 +354,133 @@
       "id": "329f",
       "email": "ii8538098@gmail.com",
       "password": "12345678"
+    },
+    {
+      "id": "a1b0",
+      "firstName": "sada",
+      "lastName": "asda",
+      "email": "ii8538098@gmail.com",
+      "password": "12345678"
+    },
+    {
+      "id": "651e",
+      "firstName": "ibrahim",
+      "lastName": "ibrahim",
+      "email": "ii8538098@gmail.com",
+      "password": "12345678"
     }
   ],
   "cart": [
     {
-      "id": "704e",
+      "id": "9abd",
+      "name": "Item3",
+      "price": 30,
+      "StoreId": 2,
+      "quantity": 1
+    },
+    {
+      "id": "0c8e",
+      "name": "Item3",
+      "price": 30,
+      "StoreId": 2,
+      "quantity": 1
+    },
+    {
+      "id": "cd9d",
+      "name": "Item3",
+      "price": 30,
+      "StoreId": 2,
+      "quantity": 1
+    },
+    {
+      "id": "7e52",
+      "name": "Item3",
+      "price": 30,
+      "StoreId": 2,
+      "quantity": 1
+    },
+    {
+      "id": "0eb0",
+      "name": "Item3",
+      "price": 30,
+      "StoreId": 2,
+      "quantity": 1
+    },
+    {
+      "id": "7265",
+      "name": "Item3",
+      "price": 30,
+      "StoreId": 2,
+      "quantity": 1
+    },
+    {
+      "id": "e869",
       "name": "Item2",
       "price": 20,
-      "StoreId": 1,
+      "StoreId": 3,
+      "quantity": 1
+    },
+    {
+      "id": "a24d",
+      "name": "Item2",
+      "price": 20,
+      "StoreId": 3,
+      "quantity": 1
+    },
+    {
+      "id": "3255",
+      "name": "Item8",
+      "price": 80,
+      "StoreId": 4,
+      "quantity": 1
+    },
+    {
+      "id": "9e69",
+      "name": "Item1 sun glasses",
+      "price": 10,
+      "StoreId": 5,
+      "quantity": 1
+    },
+    {
+      "id": "041e",
+      "name": "Item2",
+      "price": 20,
+      "StoreId": 5,
+      "quantity": 1
+    },
+    {
+      "id": "7007",
+      "name": "Item3",
+      "price": 30,
+      "StoreId": 5,
+      "quantity": 1
+    },
+    {
+      "id": "5e9a",
+      "name": "Item6",
+      "price": 60,
+      "StoreId": 5,
+      "quantity": 1
+    },
+    {
+      "id": "834b",
+      "name": "Item5",
+      "price": 50,
+      "StoreId": 5,
+      "quantity": 1
+    },
+    {
+      "id": "a417",
+      "name": "Item4",
+      "price": 40,
+      "StoreId": 5,
+      "quantity": 1
+    },
+    {
+      "id": "37d9",
+      "name": "Item3",
+      "price": 30,
+      "StoreId": 2,
       "quantity": 1
     }
   ],

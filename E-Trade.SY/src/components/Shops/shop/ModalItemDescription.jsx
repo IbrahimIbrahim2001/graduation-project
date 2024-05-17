@@ -2,7 +2,7 @@
 import { Star } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 
-export default function ModalItemDescription({ shopItem }) {
+export default function ModalItemDescription({ shopItem, shopName }) {
   return (
     <Box
       sx={{
@@ -17,7 +17,7 @@ export default function ModalItemDescription({ shopItem }) {
       <Typography sx={{ overflow: "hidden" }}>
         product: {shopItem.name}
       </Typography>
-      <Typography>store: {shopItem.StoreName}</Typography>
+      <Typography>store: {shopName}</Typography>
       <Typography>
         <span>price: </span> {shopItem.price} S.P.
       </Typography>

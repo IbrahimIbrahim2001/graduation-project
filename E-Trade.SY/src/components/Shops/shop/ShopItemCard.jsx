@@ -24,8 +24,7 @@ export default function ShopItemCard({ shopItem, handleOpen }) {
         <CardMedia
           component="img"
           height="150"
-          image={shopItem.photo_data}
-          // image={`http://localhost:3000/images/` + shopItem.photo_data}
+          image={`http://localhost:3000/images/` + shopItem.photo_data}
           alt={shopItem.name}
         />
 

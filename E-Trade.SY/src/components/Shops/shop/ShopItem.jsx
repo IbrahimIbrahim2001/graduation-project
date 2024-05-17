@@ -8,7 +8,7 @@ import { Grid } from "@mui/material";
 import ShopItemModal from "./ShopItemModal";
 import ShopItemCard from "./ShopItemCard";
 
-export default function ShopItem({ shopItem }) {
+export default function ShopItem({ shopItem, shopName }) {
   const [openModal, setOpenModal] = useState(false);
 
   return (
@@ -22,6 +22,7 @@ export default function ShopItem({ shopItem }) {
       {openModal && (
         <ShopItemModal
           shopItem={shopItem}
+          shopName={shopName}
           openModal={openModal}
           setOpenModal={setOpenModal}
         />

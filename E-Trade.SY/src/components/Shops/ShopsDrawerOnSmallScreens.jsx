@@ -53,7 +53,7 @@ export default function ShopsDrawerOnSmallScreens({ open, toggleDrawer }) {
               <Typography>All shops</Typography>
             </Box>
           </NavLink>
-          {shops?.data.map((shop) => (
+          {shops?.data.stores.map((shop) => (
             <Shop key={shop.id} shop={shop} toggleDrawer={toggleDrawer} />
           ))}
         </List>

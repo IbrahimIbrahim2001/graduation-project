@@ -14,7 +14,6 @@ export default function SellerShopProductCard({ shopItem }) {
   const { darkMode } = useThemeContext();
   return (
     <Card className={`item ${darkMode ? "dark" : "light"}`}>
-      {/* <CardActionArea> */}
       <CardMedia
         component="img"
         height="150"
@@ -41,11 +40,10 @@ export default function SellerShopProductCard({ shopItem }) {
           </Typography>
         </Box>
       </CardContent>
-      {/* </CardActionArea> */}
 
       <ProductRate productRate={shopItem.avg} />
       <SellerProductEdit />
-      <SellerShopQuantity quantity={shopItem.quantity} />
+      <SellerShopQuantity quantity={shopItem.count} />
     </Card>
   );
 }

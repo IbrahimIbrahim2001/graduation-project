@@ -54,8 +54,7 @@ export default function ShopsDrawer() {
                 <Typography sx={{ fontWeight: "bold" }}>All shops</Typography>
               </Box>
             </NavLink>
-            {/* shops.data.stores.map */}
-            {shops?.data.map((shop) => (
+            {shops?.data.stores.map((shop) => (
               //to avoid any errors "toggle drawer is not a function" fixed by toggleDrawer={() => false}
               <Shop key={shop.id} shop={shop} toggleDrawer={() => false} />
             ))}

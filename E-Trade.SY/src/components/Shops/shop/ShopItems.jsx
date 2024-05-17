@@ -17,6 +17,7 @@ import { useParams } from "react-router-dom";
 export const ShopItems = () => {
   const { id: shopId } = useParams();
   const { isLoading, isError, data: shop } = useFetchShopItems(shopId);
+  console.log(shop?.data.storeName);
   if (isLoading) {
     return <ShopItemsSkeleton />;
   }
@@ -34,7 +35,7 @@ export const ShopItems = () => {
           fontWeight: "bold",
         }}
       >
-        {shop?.data.StoreName}:
+        {shop?.data.storeName}:
       </Typography>
       <Grid
         container
@@ -47,7 +48,11 @@ export const ShopItems = () => {
         }}
       >
         {shop?.data?.pro?.map((shopItem, index) => (
-          <ShopItem key={index} shopItem={shopItem} />
+          <ShopItem
+            key={index}
+            shopItem={shopItem}
+            shopName={shop?.data.storeName}
+          />
         ))}
       </Grid>
     </>
