@@ -24,7 +24,7 @@ export default function ShopItemCard({ shopItem, handleOpen }) {
         <CardMedia
           component="img"
           height="150"
-          image={`http://localhost:3000/images/` + shopItem.photo_data}
+          image={`http://localhost:3000/images/products/` + shopItem.photo_data}
           alt={shopItem.name}
         />
 
@@ -51,7 +51,7 @@ export default function ShopItemCard({ shopItem, handleOpen }) {
       </CardActionArea>
 
       <ShopRatingProduct shopItemRating={shopItem.avg} />
-      <ShopAddTocartBtn shopItem={shopItem} />
+      <ShopAddTocartBtn shopItemId={shopItem.id} />
     </Card>
   );
 }

@@ -1,5 +1,5 @@
 //react hooks
-import { useState } from "react";
+// import { useState } from "react";
 
 //mui
 import { Close } from "@mui/icons-material";
@@ -7,6 +7,14 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { Box, FormControl, IconButton, Modal } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+
+//formik
+import { useFormik } from "formik";
+
+//hooks
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useAddProduct } from "../../hooks/useAddProduct";
 
 const style = {
   position: "absolute",
@@ -23,49 +31,80 @@ const style = {
   p: 4,
 };
 
-const initialProduct = {
-  name: "",
-  image: "",
-  optionalImages: [],
-  quantity: 0,
-  price: 0,
-};
-
 export default function AddNewProduct({ openModal, setOpenModal }) {
-  const [product, setProduct] = useState(initialProduct);
-  const [loading, setLoading] = useState(false);
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   console.log(product);
-  //   // here to mutate
-  // };
+  const storeId = useSelector((state) => state.auth.user.seller.id);
+  // eslint-disable-next-line no-unused-vars
+  const [image, setImage] = useState();
+  const { mutate, isLoading } = useAddProduct();
 
-  const handleChange = (field, value) => {
-    if (field === "optionalImages") {
-      const files = Array.from(value);
-      const urls = [];
-
-      files.forEach((file) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          urls.push(reader.result);
-          if (urls.length === files.length) {
-            setProduct({
-              ...product,
-              [field]: [...product[field], ...urls],
-            });
-          }
-        };
-        reader.readAsDataURL(file);
-      });
-    } else {
-      setProduct({
-        ...product,
-        [field]: value,
-      });
-    }
+  const handleImage = (e) => {
+    setImage(e.target.files[0]);
+    formik.setFieldValue("image", e.target.files[0]);
   };
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      // image,
+      optionalImages: [],
+      quantity: 0,
+      price: 0,
+    },
+    validate: (values) => {
+      const errors = {};
+      if (!values.name) {
+        errors.name = "Required";
+      }
+      if (!values.image) {
+        errors.image = "Required";
+      }
+      if (!values.quantity) {
+        errors.quantity = "Required";
+      }
+      if (!values.price) {
+        errors.price = "Required";
+      }
+      return errors;
+    },
+
+    onSubmit: async (values) => {
+      try {
+        const data = {
+          ...values,
+          storeId,
+        };
+        mutate(data);
+      } catch (error) {
+        console.error("Sign-in failed", error);
+      }
+    },
+  });
+
+  // const handleChange = (field, value) => {
+  //   if (field === "optionalImages") {
+  //     const files = Array.from(value);
+  //     const urls = [];
+
+  //     files.forEach((file) => {
+  //       const reader = new FileReader();
+  //       reader.onload = () => {
+  //         urls.push(reader.result);
+  //         if (urls.length === files.length) {
+  //           setProduct({
+  //             ...product,
+  //             [field]: [...product[field], ...urls],
+  //           });
+  //         }
+  //       };
+  //       reader.readAsDataURL(file);
+  //     });
+  //   } else {
+  //     setProduct({
+  //       ...product,
+  //       [field]: value,
+  //     });
+  //   }
+  // };
 
   return (
     <>
@@ -92,7 +131,7 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
               <Close sx={{ fontSize: "28px", color: "#fff" }} />
             </IconButton>
           </Box>
-          <form>
+          <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
             <FormControl fullWidth>
               <Typography mb={1} color={"primary"}>
                 Main Image:*
@@ -100,8 +139,10 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
               <TextField
                 type="file"
                 required
-                onChange={(e) => handleChange("image", e.target.value)}
+                onChange={handleImage}
                 sx={{ mb: 2 }}
+                error={formik.touched.image && !!formik.errors.image}
+                helperText={formik.touched.image && formik.errors.image}
               />
 
               <Typography mb={1} color={"primary"}>
@@ -110,8 +151,8 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
               <TextField
                 type="file"
                 multiple
-                onChange={(e) => handleChange("optionalImages", e.target.files)}
                 sx={{ mb: 2 }}
+                {...formik.getFieldProps("optionalImages")}
               />
 
               <Typography mb={1} color={"primary"}>
@@ -121,8 +162,10 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
                 type="text"
                 required
                 placeholder="Product Name"
-                onChange={(e) => handleChange("name", e.target.value)}
                 sx={{ mb: 2 }}
+                error={formik.touched.name && !!formik.errors.name}
+                helperText={formik.touched.name && formik.errors.name}
+                {...formik.getFieldProps("name")}
               />
               <Typography mb={1} color={"primary"}>
                 Quantity:*
@@ -131,12 +174,14 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
                 type="number"
                 required
                 placeholder="Quantity"
-                onChange={(e) => handleChange("quantity", e.target.value)}
                 InputLabelProps={{
                   shrink: true,
                 }}
                 InputProps={{ inputProps: { min: 0 } }}
                 sx={{ mb: 2 }}
+                error={formik.touched.quantity && !!formik.errors.quantity}
+                helperText={formik.touched.quantity && formik.errors.quantity}
+                {...formik.getFieldProps("quantity")}
               />
               <Typography mb={1} color={"primary"}>
                 Price:*
@@ -145,20 +190,22 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
                 type="number"
                 required
                 placeholder="Price in Syrian pounds"
-                onChange={(e) => handleChange("price", e.target.value)}
                 InputLabelProps={{
                   shrink: true,
                 }}
                 InputProps={{ inputProps: { min: 0 } }}
                 sx={{ mb: 2 }}
+                error={formik.touched.price && !!formik.errors.price}
+                helperText={formik.touched.price && formik.errors.price}
+                {...formik.getFieldProps("price")}
               />
               <LoadingButton
-                loading={loading}
+                loading={isLoading}
                 type="submit"
                 variant="contained"
                 sx={{ fontWeight: "bold", color: "#fff" }}
               >
-                Add
+                Add Product
               </LoadingButton>
             </FormControl>
           </form>

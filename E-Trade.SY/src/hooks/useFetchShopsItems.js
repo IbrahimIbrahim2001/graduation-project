@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const fetchShopsItems = () => {
-    return axios.get("http://localhost:3000/product");
+    return axios.get("http://localhost:3000/AllProduct");
 }
 
 export function useFetchShopsItems() {

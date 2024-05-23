@@ -39,7 +39,6 @@ export const LoginForm = () => {
     initialValues: {
       email: "",
       password: "",
-      role: "",
     },
     validate: (values) => {
       const errors = {};
@@ -61,12 +60,9 @@ export const LoginForm = () => {
         const data = {
           email: values.email,
           password: values.password,
-          role: "customer",
         };
 
         mutate(data);
-
-        console.log(data);
       } catch (error) {
         console.error("Sign-in failed", error);
       }

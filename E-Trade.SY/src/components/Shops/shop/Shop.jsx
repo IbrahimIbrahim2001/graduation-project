@@ -28,7 +28,7 @@ export default function Shop({ shop, toggleDrawer }) {
         <ListItemButton>
           <ListItemText
             sx={{
-              paddingX: { sm: 2, md: 6, lg: 8 },
+              paddingX: { sm: 2, md: 6, lg: 6 },
               marginBottom: 1,
             }}
             primary={shop.StoreName}

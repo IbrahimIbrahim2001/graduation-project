@@ -3,21 +3,22 @@ import axios from 'axios';
 // import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
 
+import { useDispatch } from 'react-redux';
+
+import { login } from '../features/authSlice/authSlice';
 
 import { useNavigate } from 'react-router-dom';
 
 async function signUp({ firstName, lastName, email, password }) {
-
     try {
-
-        const response = await axios.post('http://localhost:3000/users', {
+        const response = await axios.post('http://localhost:3000/Register', {
             firstName,
             lastName,
             email,
             password,
         });
-        // axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-        axios.defaults.withCredentials = true;
+
+        console.log(response);
 
         return response.data;
 
@@ -27,12 +28,13 @@ async function signUp({ firstName, lastName, email, password }) {
 }
 export function useSignUp() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     return useMutation({
         mutationFn: signUp,
-        onSuccess: (response) => {
-            console.log(response.token);
-            Cookies.set("token", response.token);
-            localStorage.setItem("token", response.token);
+        onSuccess: (data) => {
+            dispatch(login(data));
+            Cookies.set("token", data.token);
+            localStorage.setItem("token", data.token);
             navigate("../main/shops")
         },
         onError: (error) => {

@@ -17,7 +17,7 @@ export default function ImageCarousel({ images }) {
         {images?.map((image, i) => (
           <Box key={i} sx={{ marginX: 1 }}>
             <CardMedia
-              image={`http://localhost:3000/images/` + image}
+              image={`http://localhost:3000/images/products/` + image}
               sx={{ height: 400, width: "100%", borderRadius: "12px" }}
             />
           </Box>

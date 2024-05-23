@@ -1,6 +1,5 @@
 //mui
-import { Typography } from "@material-ui/core";
-import { Box, Grid, useMediaQuery } from "@mui/material";
+import { Box, Grid, useMediaQuery, Typography } from "@mui/material";
 
 //hooks
 import { useFetchShopItems } from "../../hooks/useFetchShopItems";
@@ -10,6 +9,7 @@ import ShopItemsSkeleton from "./SellerProductSkeleton";
 
 //components
 import SellerShopProduct from "./SellerShopProduct";
+import { useSelector } from "react-redux";
 
 //router
 // import { useParams } from "react-router-dom";
@@ -31,7 +31,9 @@ export const SellerProducts = () => {
     paddingX = 80;
   }
 
-  const { isLoading, isError, data: shop } = useFetchShopItems();
+  const shopId = useSelector((state) => state.auth.user.seller.id);
+
+  const { isLoading, isError, data: shop } = useFetchShopItems(shopId);
 
   if (isLoading) {
     return <ShopItemsSkeleton />;
@@ -44,7 +46,7 @@ export const SellerProducts = () => {
     <>
       <Typography
         variant={"h6"}
-        style={{
+        sx={{
           padding: `0 ${paddingX}px`,
           margin: "10px 0px",
           fontWeight: "bold",

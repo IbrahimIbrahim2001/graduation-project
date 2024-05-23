@@ -58,7 +58,7 @@ export default function CartCardItem({ item }) {
                 <AddIcon />
               </IconButton>
             </Tooltip>
-            <Typography disabled component="p" sx={{ marginX: 1 }}>
+            <Typography disabled sx={{ marginX: 1 }}>
               {item.quantity}
             </Typography>
             <Tooltip title="minus" arrow>
@@ -68,11 +68,11 @@ export default function CartCardItem({ item }) {
             </Tooltip>
           </Box>
           <Typography>{item.price * item.quantity} S.P</Typography>
+          <Typography>status</Typography>
           <IconButton onClick={() => mutate(item.id)}>
             <DeleteIcon />
           </IconButton>
         </Box>
-
         <Divider />
       </Hidden>
       <Hidden smUp>
@@ -117,7 +117,8 @@ export default function CartCardItem({ item }) {
             </Box>
             <Typography my={1}>
               total price: {item.price * item.quantity} S.P
-            </Typography>
+            </Typography>{" "}
+            <Typography my={1}>status: status</Typography>
             <Tooltip title="delete item" arrow>
               <Button
                 variant="outlined"

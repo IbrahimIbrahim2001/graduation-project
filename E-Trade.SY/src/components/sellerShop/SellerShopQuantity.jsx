@@ -1,6 +1,5 @@
 //mui
-import { Typography } from "@material-ui/core";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 export default function SellerShopQuantity({ quantity }) {
   return (

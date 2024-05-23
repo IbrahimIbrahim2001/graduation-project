@@ -4,18 +4,18 @@ import axios from "axios";
 
 // import { useSelector } from "react-redux";
 
-function fetchCart() {
-    return axios.get("http://localhost:3000/cart");
+function fetchCart(productId) {
+    console.log(productId);
+    return axios.get("http://localhost:3000/order", { productId });
     //must be => return axios.get(`http://localhost:3000/cart/${userId}`);
 }
 
-function mutateCart(data) {
-    const { name, price, StoreId } = data;
-    return axios.post("http://localhost:3000/cart", { name, price, StoreId, quantity: 1 })
+function mutateCart(productId) {
+    return axios.post("http://localhost:3000/order", { productId })
 }
 
 function deleteCartItem(id) {
-    return axios.delete(`http://localhost:3000/cart/${id}`);
+    return axios.delete(`http://localhost:3000/order/${id}`);
 }
 
 
@@ -32,7 +32,7 @@ export function useFetchCartItems() {
 export function useMutateCart() {
     return (
         useMutation({
-            mutationFn: (data) => mutateCart(data)
+            mutationFn: (productId) => mutateCart(productId)
         })
     )
 }

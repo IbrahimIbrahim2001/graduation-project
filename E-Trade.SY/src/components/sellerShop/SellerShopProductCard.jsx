@@ -1,6 +1,5 @@
 //mui
-import { Typography } from "@material-ui/core";
-import { Box, Card, CardContent, CardMedia } from "@mui/material";
+import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 //context
 import { useThemeContext } from "../../context/ThemeModeProvider";
@@ -17,7 +16,7 @@ export default function SellerShopProductCard({ shopItem }) {
       <CardMedia
         component="img"
         height="150"
-        image={shopItem.photo_data}
+        image={`http://localhost:3000/images/products/${shopItem.photo_data}`}
         alt={shopItem.name}
       />
 
@@ -31,11 +30,9 @@ export default function SellerShopProductCard({ shopItem }) {
             whiteSpace: "nowrap",
           }}
         >
-          <Typography className="shop-item-name" sx={{ overflow: "hidden" }}>
-            {shopItem.name}
-          </Typography>
+          <Typography sx={{ overflow: "hidden" }}>{shopItem.name}</Typography>
 
-          <Typography className="shop-item-price">
+          <Typography>
             <span>price:</span> {shopItem.price} S.P.
           </Typography>
         </Box>

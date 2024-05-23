@@ -23,13 +23,14 @@ export default function CardCartTitle({ darkMode }) {
               justifyContent: "space-between",
               alignItems: "center",
               marginY: 2,
-              width: "100%",
+              width: "98%",
             }}
           >
             <Typography width="190px">Product</Typography>
             <Typography component="p">Price</Typography>
             <Typography component="p">Quantity</Typography>
             <Typography component="p">Total price</Typography>
+            <Typography component="p">status</Typography>
             <Typography />{" "}
             {/* to fix the row alignment under each other with the <CardCartItem /> */}
           </Box>

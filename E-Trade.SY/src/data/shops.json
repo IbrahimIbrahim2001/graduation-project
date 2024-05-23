@@ -372,13 +372,6 @@
   ],
   "cart": [
     {
-      "id": "9abd",
-      "name": "Item3",
-      "price": 30,
-      "StoreId": 2,
-      "quantity": 1
-    },
-    {
       "id": "0c8e",
       "name": "Item3",
       "price": 30,

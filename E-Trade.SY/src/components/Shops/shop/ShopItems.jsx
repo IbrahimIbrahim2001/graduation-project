@@ -1,6 +1,5 @@
 //mui
-import { Box, Grid } from "@mui/material";
-import { Typography } from "@material-ui/core";
+import { Box, Grid, Typography } from "@mui/material";
 
 //hooks
 import { useFetchShopItems } from "../../../hooks/useFetchShopItems";
@@ -17,7 +16,6 @@ import { useParams } from "react-router-dom";
 export const ShopItems = () => {
   const { id: shopId } = useParams();
   const { isLoading, isError, data: shop } = useFetchShopItems(shopId);
-  console.log(shop?.data.storeName);
   if (isLoading) {
     return <ShopItemsSkeleton />;
   }
@@ -55,6 +53,16 @@ export const ShopItems = () => {
           />
         ))}
       </Grid>
+      {shop?.data.pro.length === 0 && (
+        <Typography
+          style={{
+            padding: "0 20px",
+            margin: "10px 0",
+          }}
+        >
+          This Shop is Empty
+        </Typography>
+      )}
     </>
   );
 };

@@ -43,9 +43,9 @@ const Puller = styled("div")(({ theme }) => ({
 
 export default function ShopItemModal({
   shopItem,
+  shopName,
   openModal,
   setOpenModal,
-  shopName,
 }) {
   const images = [shopItem?.photo_data, ...(shopItem?.optionalImages ?? [])];
   return (

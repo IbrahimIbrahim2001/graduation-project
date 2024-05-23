@@ -122,7 +122,6 @@ export default function StoreRegisterForm() {
       } catch (error) {
         console.error("Store creation failed", error);
       }
-      console.log(values);
     },
   });
 

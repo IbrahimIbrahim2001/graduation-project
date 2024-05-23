@@ -5,14 +5,8 @@ import {
   Route,
 } from "react-router-dom";
 
-//pages
-import Home from "./pages/Home";
-import { LoginPage } from "./pages/LoginPage";
-import { SignupPage } from "./pages/SignupPage";
-import Error from "./pages/Error";
 import CustomerProfile from "./pages/CustomerProfile";
 import Cart from "./pages/Cart";
-import StoreRegisterPage from "./pages/StoreRegisterPage";
 
 //components
 import { ShopItems } from "./components/Shops/shop/ShopItems";
@@ -24,12 +18,15 @@ import SellerShopLayout from "./layouts/SellerShopLayout";
 import ShopsLayout from "./layouts/ShopsLayout";
 import CustomerLayout from "./layouts/CustomerLayout";
 
-const isAuthenticated = true;
-const userRole = "customer";
-// const userRole = "seller";
-
-// const isAuthenticated = undefined;
-// const userRole = undefined;
+//pages
+import Home from "./pages/Home";
+import { LoginPage } from "./pages/LoginPage";
+import { SignupPage } from "./pages/SignupPage";
+import Error from "./pages/Error";
+import StoreRegisterPage from "./pages/StoreRegisterPage";
+//protecte routes
+import ProtectedRoutesCustomer from "./auth/ProtectedRoutesCustomer";
+import ProtectedRoutesSeller from "./auth/ProtectedRoutesSeller";
 
 const routes = createRoutesFromElements(
   <Route>
@@ -37,7 +34,8 @@ const routes = createRoutesFromElements(
     <Route path="login" element={<LoginPage />} />
     <Route path="signup" element={<SignupPage />} />
     <Route path="store-register" element={<StoreRegisterPage />} />
-    {isAuthenticated && userRole === "customer" && (
+    {/* customer */}
+    <Route element={<ProtectedRoutesCustomer />}>
       <Route path="main" element={<CustomerLayout />}>
         <Route path="shops" element={<ShopsLayout />}>
           <Route index element={<ShopsItems />} />
@@ -46,12 +44,14 @@ const routes = createRoutesFromElements(
         <Route path="cart" element={<Cart />} />
         <Route path="customer-profile" element={<CustomerProfile />} />
       </Route>
-    )}
-    {isAuthenticated && userRole === "seller" && (
+    </Route>
+
+    {/* seller */}
+    <Route element={<ProtectedRoutesSeller />}>
       <Route path="my-shop" element={<SellerShopLayout />}>
         <Route path="" element={<SellerProducts />} />
       </Route>
-    )}
+    </Route>
     <Route path="*" element={<Error />} />
   </Route>
 );

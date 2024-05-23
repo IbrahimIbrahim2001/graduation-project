@@ -11,7 +11,8 @@ import { useMutateCart } from "../../../hooks/useFetchShopCart";
 //cartSlice
 // import { addProduct } from "../../../features/cartSlice/cartSlice";
 
-export default function ShopAddTocartBtn({ shopItem }) {
+export default function ShopAddTocartBtn({ shopItemId }) {
+  // console.log(shopItem.id);
   // const dispatch = useDispatch();
   const { mutate } = useMutateCart();
   return (
@@ -24,7 +25,7 @@ export default function ShopAddTocartBtn({ shopItem }) {
         borderRadius: "12px",
       }}
     >
-      <IconButton onClick={() => mutate(shopItem)}>
+      <IconButton onClick={() => mutate(shopItemId)}>
         <AddShoppingCartIcon fontSize="small" sx={{ color: "#fff" }} />
       </IconButton>
     </Box>
