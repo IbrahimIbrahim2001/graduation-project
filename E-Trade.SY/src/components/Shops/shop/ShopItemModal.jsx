@@ -1,12 +1,17 @@
 //mui
 import { Hidden } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import { Modal } from "@mui/material";
+import { Box, Modal } from "@mui/material";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { grey } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
+
+//component
 import ImageCarousel from "./ImageCarousel";
 import ModalItemDescription from "./ModalItemDescription";
+
+//context
+import { useThemeContext } from "../../../context/ThemeModeProvider";
 
 //for styled box
 const style = {
@@ -14,11 +19,12 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: { sm: 500, md: 700, lg: 800 },
+  width: { xs: "100vw", sm: 500, md: 700, lg: 800 },
   height: 500,
   borderRadius: "12px",
   boxShadow: "0 8px 12px 0 rgba(31, 38, 135, 0.37)",
-  p: 4,
+  px: 2,
+  py: 4,
 };
 
 const StyledBox = styled("div")(({ theme }) => ({
@@ -37,7 +43,7 @@ const Puller = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.mode === "light" ? grey[300] : grey[200],
   borderRadius: 3,
   position: "absolute",
-  top: 8,
+  top: "50%",
   left: "calc(50% - 15px)",
 }));
 
@@ -48,6 +54,7 @@ export default function ShopItemModal({
   setOpenModal,
 }) {
   const images = [shopItem?.photo_data, ...(shopItem?.optionalImages ?? [])];
+  const { darkMode } = useThemeContext();
   return (
     <>
       <Hidden xsDown>
@@ -78,15 +85,27 @@ export default function ShopItemModal({
           <StyledBox
             sx={{
               style,
-              py: 4,
-              px: 2,
               height: 500,
               border: "1px solid rgba(255, 255, 255, 0.125)",
             }}
           >
-            <Puller />
-            <ImageCarousel images={images} />
-            <ModalItemDescription shopItem={shopItem} shopName={shopName} />
+            <Box
+              sx={{
+                backgroundColor: darkMode ? "rgba(17, 25, 40, 1)" : "#fff",
+                width: "calc(100vw - 4px)",
+                height: 35,
+                position: "absolute",
+                top: 0,
+                zIndex: 1000,
+                borderBottom: "1px solid #fff",
+              }}
+            >
+              <Puller />
+            </Box>
+            <Box sx={{ px: 2, pt: 6, pb: 2 }}>
+              <ImageCarousel images={images} />
+              <ModalItemDescription shopItem={shopItem} shopName={shopName} />
+            </Box>
           </StyledBox>
         </StyledSwipeableDrawer>
       </Hidden>

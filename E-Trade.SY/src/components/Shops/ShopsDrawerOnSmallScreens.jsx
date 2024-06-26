@@ -39,6 +39,7 @@ export default function ShopsDrawerOnSmallScreens({ open, toggleDrawer }) {
         <List>
           <NavLink
             to="./shops"
+            replace={true}
             onClick={toggleDrawer(false)}
             className="all-shops-nav-link"
           >

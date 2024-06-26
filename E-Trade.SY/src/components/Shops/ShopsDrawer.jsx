@@ -43,7 +43,11 @@ export default function ShopsDrawer() {
           }}
         >
           <List>
-            <NavLink to="../shops" className="all-shops-nav-link">
+            <NavLink
+              to="../shops"
+              replace={true}
+              className="all-shops-nav-link"
+            >
               <Box
                 sx={{
                   display: "flex",

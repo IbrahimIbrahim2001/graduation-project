@@ -1,17 +1,15 @@
 //mui
-import { withStyles } from "@material-ui/core/styles";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import AppBar from "@mui/material/AppBar";
+import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
-import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import Badge from "@mui/material/Badge";
 
 //context
 import { useThemeContext } from "../../context/ThemeModeProvider";
@@ -21,10 +19,34 @@ import { useEffect, useState } from "react";
 
 //router
 import { NavLink } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 export default function MainNavbar() {
   const [showShadow, setShowShadow] = useState(false);
   const { darkMode, toggleTheme } = useThemeContext();
+
+  const navItems = [
+    {
+      title: "shops",
+      to: "shops",
+      icon: <StorefrontIcon />,
+    },
+    {
+      title: "cart",
+      to: "cart",
+      icon: (
+        <Badge badgeContent={4} color="warning">
+          <ShoppingCartIcon />
+        </Badge>
+      ),
+    },
+    {
+      title: "profile",
+      to: "customer-profile",
+      icon: <AccountCircleIcon />,
+    },
+  ];
+
   const checkScroll = () => {
     if (window.scrollY > 0) {
       setShowShadow(true);
@@ -70,49 +92,18 @@ export default function MainNavbar() {
         >
           E-Mart
         </Typography>
-        <Tooltip title="shops" arrow>
-          <NavLink to={`shops`} className="navbar-link">
-            <IconButton>
-              <StorefrontIcon />
-            </IconButton>
-          </NavLink>
-        </Tooltip>
-        <Tooltip title="cart" arrow>
-          <NavLink to="cart" className="navbar-link">
-            <IconButton>
-              <Badge badgeContent={4} color="warning">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
-          </NavLink>
-        </Tooltip>
-        <Tooltip title="profile" arrow>
-          <NavLink to="customer-profile" className="navbar-link">
-            <IconButton>
-              <AccountCircleIcon />
-            </IconButton>
-          </NavLink>
-        </Tooltip>
+        {navItems.map((link, index) => (
+          <Tooltip key={index} title={link.title} arrow>
+            <NavLink to={link.to} replace={true} className="navbar-link">
+              <IconButton>{link.icon}</IconButton>
+            </NavLink>
+          </Tooltip>
+        ))}
         <IconButton onClick={toggleTheme}>
           {darkMode === false ? <Brightness4 /> : <Brightness7 />}
         </IconButton>
-        <StyledTextField
-          placeholder="serach for products"
-          value={""}
-          // onChange={}
-          // onSubmit={() => handleSearch(input)}
-        />
+        <SearchBar />
       </Toolbar>
     </AppBar>
   );
 }
-
-const StyledTextField = withStyles({
-  root: {
-    "& .MuiOutlinedInput-root": {
-      direction: "",
-      height: "40px",
-      "& fieldset": {},
-    },
-  },
-})(TextField);

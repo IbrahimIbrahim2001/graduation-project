@@ -8,7 +8,6 @@ export default function ModalItemDescription({ shopItem, shopName }) {
       sx={{
         display: "flex",
         flexDirection: "column",
-
         paddingX: 1,
       }}
     >

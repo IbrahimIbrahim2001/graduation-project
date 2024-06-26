@@ -6,14 +6,7 @@ import { Box } from "@mui/material";
 //hooks
 import { useMutateCart } from "../../../hooks/useFetchShopCart";
 
-//redux toolkit
-// import { useDispatch } from "react-redux";
-//cartSlice
-// import { addProduct } from "../../../features/cartSlice/cartSlice";
-
 export default function ShopAddTocartBtn({ shopItemId }) {
-  // console.log(shopItem.id);
-  // const dispatch = useDispatch();
   const { mutate } = useMutateCart();
   return (
     <Box

@@ -18,12 +18,12 @@ import { useThemeContext } from "../../context/ThemeModeProvider";
 import { useEffect, useState } from "react";
 
 //componetns
-import AddNewProduct from "./AddNewProduct";
+import { useAddProductContext } from "../../context/AddProductProvider";
 
 export default function SellerNavbar() {
   const [showShadow, setShowShadow] = useState(false);
   const { darkMode, toggleTheme } = useThemeContext();
-  const [openModal, setOpenModal] = useState(false);
+  const { setOpenModal } = useAddProductContext();
 
   const checkScroll = () => {
     if (window.scrollY > 0) {
@@ -78,7 +78,7 @@ export default function SellerNavbar() {
           </Typography>
 
           <Tooltip title="add product" arrow>
-            <IconButton onClick={() => setOpenModal(true)} sx={{ padding: 0 }}>
+            <IconButton sx={{ padding: 0 }} onClick={() => setOpenModal(true)}>
               <AddBoxIcon sx={{ color: "#2200FF", fontSize: "28px" }} />
             </IconButton>
           </Tooltip>
@@ -94,9 +94,6 @@ export default function SellerNavbar() {
           />
         </Toolbar>
       </AppBar>
-      {openModal && (
-        <AddNewProduct openModal={openModal} setOpenModal={setOpenModal} />
-      )}
     </>
   );
 }

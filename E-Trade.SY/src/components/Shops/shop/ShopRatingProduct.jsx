@@ -12,8 +12,8 @@ export default function ShopRatingProduct({ shopItemRating }) {
         right: 5,
         display: "flex",
         alignItems: "center",
-
         backgroundColor: "#fff",
+        boxShadow: "0 8px 25px 0 rgba(31, 38, 135, 0.37)",
         color: "#121212",
         borderRadius: "12px",
         paddingX: 1,

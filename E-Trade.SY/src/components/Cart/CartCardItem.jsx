@@ -21,6 +21,7 @@ import { useDeletaCartItem } from "../../hooks/useFetchShopCart";
 // import ImageIcon from "@mui/icons-material/Image";
 
 export default function CartCardItem({ item }) {
+  console.log(item);
   const { mutate } = useDeletaCartItem();
   return (
     <Box sx={{ paddingLeft: { sm: 2 } }}>
@@ -68,7 +69,8 @@ export default function CartCardItem({ item }) {
             </Tooltip>
           </Box>
           <Typography>{item.price * item.quantity} S.P</Typography>
-          <Typography>status</Typography>
+          <Typography>{item.Paid ? "Paid" : "Not Paid"}</Typography>
+
           <IconButton onClick={() => mutate(item.id)}>
             <DeleteIcon />
           </IconButton>
@@ -118,7 +120,9 @@ export default function CartCardItem({ item }) {
             <Typography my={1}>
               total price: {item.price * item.quantity} S.P
             </Typography>{" "}
-            <Typography my={1}>status: status</Typography>
+            <Typography my={1}>
+              status: {item.Paid ? "Paid" : "Not Paid"}
+            </Typography>
             <Tooltip title="delete item" arrow>
               <Button
                 variant="outlined"

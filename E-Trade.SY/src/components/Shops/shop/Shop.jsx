@@ -17,6 +17,7 @@ export default function Shop({ shop, toggleDrawer }) {
   return (
     <NavLink
       to={`/main/shops/shop/${shop.id}`}
+      replace={true}
       className="drawer-link"
       style={{
         textDecoration: "none",

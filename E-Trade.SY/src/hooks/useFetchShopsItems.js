@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import request from "../utils/axios-utils";
+
 
 const fetchShopsItems = () => {
-    return axios.get("http://localhost:3000/AllProduct");
+    return request({ url: '/AllProduct', method: 'get' });
 }
 
 export function useFetchShopsItems() {

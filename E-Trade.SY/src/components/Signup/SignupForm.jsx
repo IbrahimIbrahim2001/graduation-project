@@ -17,11 +17,18 @@ import { useFormik } from "formik";
 
 //hooks
 import { useSignUp } from "../../hooks/useSignUp";
+import { useState } from "react";
+import SignUpErrorSnackbar from "./SignUpErrorSnackbar";
 
 export const SignupForm = () => {
   const { darkMode } = useThemeContext();
+  const [errorMessage, setErrorMessage] = useState(false);
 
-  const { mutate } = useSignUp();
+  const onError = () => {
+    setErrorMessage(true);
+  };
+
+  const { mutate } = useSignUp(onError);
 
   const formik = useFormik({
     initialValues: {
@@ -71,93 +78,99 @@ export const SignupForm = () => {
   });
 
   return (
-    <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
-      <FormControl fullWidth>
-        <Grid container columnSpacing={2}>
-          <Grid item xs={12} sm={6}>
-            <StyledTextField
-              id="firstname"
-              label="First Name"
-              variant="outlined"
-              type="text"
-              fullWidth
-              autoComplete="off"
-              noValidate
-              required
-              sx={{ marginBottom: 2 }}
-              {...formik.getFieldProps("firstName")}
-              error={formik.touched.firstName && !!formik.errors.firstName}
-              helperText={formik.touched.firstName && formik.errors.firstName}
-            />
+    <>
+      <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
+        <FormControl fullWidth>
+          <Grid container columnSpacing={2}>
+            <Grid item xs={12} sm={6}>
+              <StyledTextField
+                id="firstname"
+                label="First Name"
+                variant="outlined"
+                type="text"
+                fullWidth
+                autoComplete="off"
+                noValidate
+                required
+                sx={{ marginBottom: 2 }}
+                {...formik.getFieldProps("firstName")}
+                error={formik.touched.firstName && !!formik.errors.firstName}
+                helperText={formik.touched.firstName && formik.errors.firstName}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <StyledTextField
+                id="lastname"
+                label="last name"
+                variant="outlined"
+                type="text"
+                fullWidth
+                autoComplete="off"
+                noValidate
+                required
+                sx={{ marginBottom: 2 }}
+                {...formik.getFieldProps("lastName")}
+                error={formik.touched.lastName && !!formik.errors.lastName}
+                helperText={formik.touched.lastName && formik.errors.lastName}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <StyledTextField
-              id="lastname"
-              label="last name"
-              variant="outlined"
-              type="text"
-              fullWidth
-              autoComplete="off"
-              noValidate
-              required
-              sx={{ marginBottom: 2 }}
-              {...formik.getFieldProps("lastName")}
-              error={formik.touched.lastName && !!formik.errors.lastName}
-              helperText={formik.touched.lastName && formik.errors.lastName}
-            />
-          </Grid>
-        </Grid>
-        <StyledTextField
-          id="email"
-          label="Email address"
-          variant="outlined"
-          type="email"
-          fullWidth
-          noValidate
-          required
-          sx={{
-            marginBottom: 2,
-          }}
-          {...formik.getFieldProps("email")}
-          error={formik.touched.email && !!formik.errors.email}
-          helperText={formik.touched.email && formik.errors.email}
-        />
-        <StyledTextField
-          id="password"
-          label="Password"
-          variant="outlined"
-          type="password"
-          fullWidth
-          autoComplete="off"
-          noValidate
-          required
-          sx={{ marginBottom: 2 }}
-          {...formik.getFieldProps("password")}
-          error={formik.touched.password && !!formik.errors.password}
-          helperText={formik.touched.password && formik.errors.password}
-        />
-        <Button
-          className="btn"
-          variant="contained"
-          color="primary"
-          type="submit"
-          fullWidth
-          size="large"
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            textTransform: "capitalize",
-            paddingX: "16.5px",
-            backgroundColor: darkMode ? "#fff" : "#333",
-            borderRadius: "8px",
-            height: "50px",
-          }}
-        >
-          <Typography variant="span">Signup</Typography>
-          <ArrowForwardIosOutlined fontSize="" />
-        </Button>
-      </FormControl>
-    </form>
+          <StyledTextField
+            id="email"
+            label="Email address"
+            variant="outlined"
+            type="email"
+            fullWidth
+            noValidate
+            required
+            sx={{
+              marginBottom: 2,
+            }}
+            {...formik.getFieldProps("email")}
+            error={formik.touched.email && !!formik.errors.email}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+          <StyledTextField
+            id="password"
+            label="Password"
+            variant="outlined"
+            type="password"
+            fullWidth
+            autoComplete="off"
+            noValidate
+            required
+            sx={{ marginBottom: 2 }}
+            {...formik.getFieldProps("password")}
+            error={formik.touched.password && !!formik.errors.password}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+          <Button
+            className="btn"
+            variant="contained"
+            color="primary"
+            type="submit"
+            fullWidth
+            size="large"
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              textTransform: "capitalize",
+              paddingX: "16.5px",
+              backgroundColor: darkMode ? "#fff" : "#333",
+              borderRadius: "8px",
+              height: "50px",
+            }}
+          >
+            <Typography variant="span">Signup</Typography>
+            <ArrowForwardIosOutlined fontSize="" />
+          </Button>
+        </FormControl>
+      </form>
+      <SignUpErrorSnackbar
+        errorMessage={errorMessage}
+        handleClose={() => setErrorMessage(false)}
+      />
+    </>
   );
 };
 

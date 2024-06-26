@@ -67,7 +67,6 @@ const HomeNavBar = () => {
           color="#2200FF"
         >
           E-Mart
-          {/* إي مارت */}
         </Typography>
         <IconButton onClick={toggleTheme}>
           {darkMode === false ? <Brightness4 /> : <Brightness7 />}

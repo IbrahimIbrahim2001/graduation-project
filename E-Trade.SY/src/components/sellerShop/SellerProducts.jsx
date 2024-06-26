@@ -1,5 +1,5 @@
 //mui
-import { Box, Grid, useMediaQuery, Typography } from "@mui/material";
+import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
 
 //hooks
 import { useFetchShopItems } from "../../hooks/useFetchShopItems";
@@ -8,13 +8,20 @@ import { useFetchShopItems } from "../../hooks/useFetchShopItems";
 import ShopItemsSkeleton from "./SellerProductSkeleton";
 
 //components
+import AddNewProduct from "./AddNewProduct";
 import SellerShopProduct from "./SellerShopProduct";
+
+//redux toolkit
 import { useSelector } from "react-redux";
 
-//router
-// import { useParams } from "react-router-dom";
-
 export const SellerProducts = () => {
+  const shopId = useSelector(
+    (state) => state.auth.user?.seller.id || localStorage.getItem("shopId")
+  );
+  localStorage.setItem("shopId", shopId);
+
+  const { isLoading, isError, data: shop } = useFetchShopItems(shopId);
+
   const matchesXS = useMediaQuery("(max-width:599px)");
   const matchesSM = useMediaQuery("(min-width:600px) and (max-width:899px)");
   const matchesMD = useMediaQuery("(min-width:900px) and (max-width:1199px)");
@@ -30,10 +37,6 @@ export const SellerProducts = () => {
   } else if (matchesLG) {
     paddingX = 80;
   }
-
-  const shopId = useSelector((state) => state.auth.user.seller.id);
-
-  const { isLoading, isError, data: shop } = useFetchShopItems(shopId);
 
   if (isLoading) {
     return <ShopItemsSkeleton />;
@@ -63,10 +66,11 @@ export const SellerProducts = () => {
           marginBottom: { xs: 7, sm: 0 },
         }}
       >
-        {shop?.data?.pro?.map((shopItem, index) => (
-          <SellerShopProduct key={index} shopItem={shopItem} />
+        {shop?.data?.pro?.map((shopItem) => (
+          <SellerShopProduct key={shopItem.id} shopItem={shopItem} />
         ))}
       </Grid>
+      <AddNewProduct />
     </>
   );
 };

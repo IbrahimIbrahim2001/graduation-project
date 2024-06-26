@@ -1,16 +1,14 @@
 //images
 import signup from "../assets/signup.png";
 
-//styles
-// import "../styles/login.css";
-
 import { Box, Grid, Hidden, useMediaQuery } from "@mui/material";
 
-//router
+//component
 import { SignupContent } from "../components/Signup/SignupContent";
 
 export const SignupPage = () => {
-  const matchesXs = useMediaQuery("(min-width:400px)");
+  const matchesXs = useMediaQuery("(min-width:500px)");
+  const matchesSM = useMediaQuery("(min-width:600px) and (max-width:700px)");
   return (
     <Grid
       container
@@ -20,31 +18,31 @@ export const SignupPage = () => {
     >
       <Grid
         item
-        xs={matchesXs ? 10 : 11}
-        sm={6}
-        md={3}
+        xs={matchesXs ? 9 : 11}
+        sm={matchesSM ? 8 : 7}
+        md={4}
         lg={3}
         sx={{ alignSelf: "flex-start", paddingTop: { xs: 2, md: 5 } }}
       >
         <SignupContent />
       </Grid>
       <Hidden mdDown>
+        {/* image component */}
         <Grid
           item
-          md={8}
+          md={7}
           lg={8}
           sx={{
             display: "flex",
-            justifyContent: "flex-end",
-            paddingTop: "1.5em",
+            alignItems: "center",
           }}
         >
           <Box
             component="img"
             src={signup}
-            sx={{ backgroundImage: "contain" }}
+            sx={{ backgroundImage: "cover", borderRadius: "12px" }}
             width={"100%"}
-            height={"93vh"}
+            height={"90vh"}
           />
         </Grid>
       </Hidden>

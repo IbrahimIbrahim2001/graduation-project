@@ -30,7 +30,10 @@ export default function SellerShopProductCard({ shopItem }) {
             whiteSpace: "nowrap",
           }}
         >
-          <Typography sx={{ overflow: "hidden" }}>{shopItem.name}</Typography>
+          <Typography sx={{ overflow: "hidden" }}>
+            {" "}
+            <span>product:</span> {shopItem.name}
+          </Typography>
 
           <Typography>
             <span>price:</span> {shopItem.price} S.P.

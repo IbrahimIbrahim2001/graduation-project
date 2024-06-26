@@ -1,11 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 
-// const axiosInstance = axios.create();
+import request from "../utils/axios-utils";
+
 
 async function AddNewProduct(productData) {
     const { name, image, price, quantity, storeId } = productData;
-    console.log(productData);
     // const imageFile = new File([image], 'filename', { type: 'image/jpeg' });
     const formData = new FormData();
     formData.append('productName', name);
@@ -14,10 +13,7 @@ async function AddNewProduct(productData) {
     formData.append('productPrice', price);
 
     try {
-        const response = await axios.post(
-            `http://localhost:3000/AddProduct/${storeId}`,
-            formData,
-        );
+        const response = await request({ url: `/AddProduct/${storeId}`, method: 'post', data: formData });
         return response.data;
     } catch (error) {
         throw new Error(`Error adding product: ${error.message}`);
@@ -26,12 +22,16 @@ async function AddNewProduct(productData) {
 
 
 
-export function useAddProduct() {
+export function useAddProduct(addProductSuccesfully, addProductError
+) {
     const queryClient = useQueryClient();
     return useMutation({
         mutationKey: "add product",
         mutationFn: AddNewProduct,
-        onSuccess: () => queryClient.invalidateQueries("add product"),
-        onError: (error) => console.log(error.message),
+        onSuccess: () => {
+            queryClient.invalidateQueries("shops-items");
+            addProductSuccesfully();
+        },
+        onError: () => addProductError(),
     })
 }

@@ -1,24 +1,28 @@
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
-// import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
+
 
 import { useDispatch } from 'react-redux';
 
 import { login } from '../features/authSlice/authSlice';
 
 import { useNavigate } from 'react-router-dom';
+// import axios from 'axios';
+
+import request from '../utils/axios-utils';
+
 
 async function signUp({ firstName, lastName, email, password }) {
     try {
-        const response = await axios.post('http://localhost:3000/Register', {
-            firstName,
-            lastName,
-            email,
-            password,
+        const response = await request({
+            url: '/Register', method: 'post',
+            data: {
+                firstName,
+                lastName,
+                email,
+                password,
+            }
         });
-
-        console.log(response);
 
         return response.data;
 
@@ -26,19 +30,22 @@ async function signUp({ firstName, lastName, email, password }) {
         throw new Error(`Error during sign-up: ${error.message}`);
     }
 }
-export function useSignUp() {
+export function useSignUp(onError) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     return useMutation({
         mutationFn: signUp,
         onSuccess: (data) => {
-            dispatch(login(data));
-            Cookies.set("token", data.token);
-            localStorage.setItem("token", data.token);
-            navigate("../main/shops")
+            if (data.result === 'This email is already exists') {
+                onError();
+            }
+            else {
+                dispatch(login(data));
+                Cookies.set("token", data.token);
+                localStorage.setItem("token", data.token);
+                navigate("../login");
+            }
         },
-        onError: (error) => {
-            console.log(error.message);
-        }
+        onError,
     })
 }

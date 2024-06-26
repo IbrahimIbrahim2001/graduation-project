@@ -1,18 +1,14 @@
-//redux toolkit
-import { useSelector } from "react-redux";
+import { jwtDecode } from "jwt-decode";
 
-import { Outlet, Navigate } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 export default function ProtectedRoutesCustomer(props) {
-  //must be updated soon...
-  const user = useSelector((state) => state.auth.user);
-  const isAuthenticated = true;
+  const location = useLocation();
+  const token = localStorage.getItem("token") || undefined;
+  const decodedToken = token ? jwtDecode(token) : undefined;
+  const isAuthenticated = decodedToken && token;
 
-  if (user) {
-    if (isAuthenticated && user.result === "customer")
-      return <Outlet {...props} />;
-    else return <Navigate to="./login" />;
-  } else {
-    return <Navigate to="./login" />;
-  }
+  if (isAuthenticated && location?.key !== "default")
+    return <Outlet {...props} />;
+  else return <Navigate to="./login" replace={true} />;
 }

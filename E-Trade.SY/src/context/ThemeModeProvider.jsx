@@ -2,14 +2,16 @@
 import { createContext, useContext, useState } from "react";
 
 //mui
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Paper } from "@mui/material";
 import { withStyles } from "@material-ui/core/styles";
+import { Paper } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const ThemeContext = createContext();
 
 export const ThemeModeProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    JSON.parse(localStorage.getItem("theme")) ? true : false
+  );
   const theme = createTheme({
     palette: {
       mode: darkMode ? "dark" : "light",
@@ -17,8 +19,10 @@ export const ThemeModeProvider = ({ children }) => {
   });
 
   const toggleTheme = () => {
-    setDarkMode(!darkMode);
+    setDarkMode((prev) => !prev);
+    localStorage.setItem("theme", !darkMode);
   };
+
   return (
     <ThemeContext.Provider value={{ darkMode, toggleTheme }}>
       <ThemeProvider theme={theme}>

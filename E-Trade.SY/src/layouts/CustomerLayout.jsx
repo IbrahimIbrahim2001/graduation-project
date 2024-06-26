@@ -18,8 +18,6 @@ export default function CustomerLayout() {
       </Hidden>
       <Hidden smUp>
         <MainNavbarOnSmallScreens />
-      </Hidden>
-      <Hidden smUp>
         <BottomNavBar />
       </Hidden>
       <Outlet /> {/* ShopsLayout || cart || customerProfile */}

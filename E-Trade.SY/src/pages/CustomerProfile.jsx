@@ -1,102 +1,76 @@
-import { Edit } from "@mui/icons-material";
-import {
-  Box,
-  Card,
-  Toolbar,
-  CardContent,
-  Typography,
-  CardHeader,
-  Avatar,
-  IconButton,
-} from "@mui/material";
-import TextField from "@mui/material/TextField";
+//mui
+import { Box, Toolbar, Typography, useMediaQuery } from "@mui/material";
 
 //context
 import { useThemeContext } from "../context/ThemeModeProvider";
 
+//component
+import CustomerProfileCard from "../components/CustomerProfile/CustomerProfileCard";
+import LougoutButton from "../components/CustomerProfile/LougoutButton";
+import ThemeSwitch from "../components/CustomerProfile/ThemeSwitch";
+
 export default function CustomerProfile() {
-  const { darkMode } = useThemeContext();
+  const matchesXS = useMediaQuery("(max-width:599px)");
+  const { darkMode, toggleTheme } = useThemeContext();
   return (
     <Box
       sx={{
-        height: "90vh",
+        minHeight: {
+          xs: "130vh",
+          sm: "90vh",
+        },
+        overflowY: { xs: "scroll", sm: "none" },
+        "::-webkit-scrollbar": {
+          display: "none",
+        },
         backgroundColor: darkMode ? "#121212" : "#fff",
-        display: { xs: "flex", sm: "block" },
-        flexDirection: "column",
         paddingY: 5,
-        paddingX: { xs: 2, sm: 5, md: 10 },
+        paddingX: { xs: 2, sm: 5, md: 10, lg: 25 },
       }}
     >
       <Toolbar />
-      <Typography variant="h6" mb={3}>
+      <Typography variant="h6" sx={{ fontWeight: "bold" }} mb={3}>
         Customer Profile:
       </Typography>
       <Box
         sx={{
-          alignSelf: "center",
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          justifyContent: "space-between",
+          alignItems: { xs: "flex-start", sm: "center" },
+          height: "420px",
         }}
       >
-        <Card
-          sx={{
-            width: { xs: "330px", sm: "500px" },
-            borderRadius: "12px",
-            height: "400px",
-            backgroundColor: "red",
+        <CustomerProfileCard darkMode={darkMode} />
+        <Box
+          alignSelf={{
+            xs: "center",
+            sm: "flex-start",
+            height: "inherit",
           }}
-          className={`item ${darkMode ? "dark" : "light"}`}
+          sx={{
+            width: { xs: "94vw", sm: "full-width", md: 230, lg: 250 },
+            ml: { sm: 2, md: 0 },
+          }}
         >
-          <CardHeader
-            avatar={
-              <Avatar sx={{ bgcolor: "#2200FF" }} aria-label="recipe">
-                {"Ibrahim".slice(0, 1).toUpperCase()}
-                {"Ibrahim".slice(0, 1).toUpperCase()}
-              </Avatar>
-            }
-            action={
-              <IconButton aria-label="settings">
-                <Edit />
-              </IconButton>
-            }
-            title="User Details:"
-          />
-          <CardContent>
-            <TextField
-              defaultValue="first name"
-              variant="standard"
-              // disabled
-              fullWidth
-              sx={{ marginBottom: 2 }}
-            />
-            <TextField
-              defaultValue="hello world"
-              variant="standard"
-              disabled
-              fullWidth
-              sx={{ marginBottom: 2 }}
-            />
-            <TextField
-              defaultValue="password"
-              variant="standard"
-              disabled
-              fullWidth
-              sx={{ marginBottom: 2 }}
-            />
-            <TextField
-              defaultValue="phone number: phone number"
-              variant="standard"
-              disabled
-              fullWidth
-              sx={{ marginBottom: 2 }}
-            />
-            <TextField
-              defaultValue="address"
-              variant="standard"
-              disabled
-              fullWidth
-              sx={{ marginBottom: 2 }}
-            />
-          </CardContent>
-        </Card>
+          <LougoutButton darkMode={darkMode} />
+          {matchesXS && (
+            <Box
+              className={`item ${darkMode ? "dark" : "light"}`}
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexDirection: "row",
+                p: 2,
+                mb: 3,
+              }}
+            >
+              <Typography>Theme Mode:</Typography>
+              <ThemeSwitch onClick={toggleTheme} />
+            </Box>
+          )}
+        </Box>
       </Box>
     </Box>
   );

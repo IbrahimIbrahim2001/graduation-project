@@ -19,12 +19,6 @@ export default function StoreRegisterContent() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={
-              {
-                // mb: 1,
-                // justifySelf: "start",
-              }
-            }
           >
             <AddShoppingCartIcon sx={{ fontSize: 30 }} />
           </IconButton>

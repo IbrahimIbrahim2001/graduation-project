@@ -30,6 +30,7 @@ import { useCreateStore } from "../../hooks/useCreateStore";
 //react
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import CreateStoreErrorSnackbar from "./CreateStoreErrorSnackbar";
 
 const storeTypes = [
   {
@@ -49,13 +50,18 @@ const storeTypes = [
 export default function StoreRegisterForm() {
   const [showPassword, setShowPassword] = useState(true);
   const { darkMode } = useThemeContext();
+  const [errorMessage, setErrorMessage] = useState(false);
+
+  const onError = () => {
+    setErrorMessage(true);
+  };
 
   const handleClickShowPassword = (event) => {
     event.preventDefault();
     setShowPassword((show) => !show);
   };
 
-  const { mutate } = useCreateStore();
+  const { mutate } = useCreateStore(onError);
 
   const formik = useFormik({
     initialValues: {
@@ -126,180 +132,195 @@ export default function StoreRegisterForm() {
   });
 
   return (
-    <Box
-      sx={{
-        borderRadius: "16px",
-        background: darkMode
-          ? "rgba(17, 25, 40, 1)"
-          : "rgba( 255, 255, 255, 0.9)",
-        boxShadow: darkMode ? "" : "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-        border: "1px solid rgba(255, 255, 255, 0.125)",
-        paddingX: { xs: 2, sm: 5 },
-        paddingY: { xs: 2, sm: 3 },
-        marginBottom: 3,
-      }}
-    >
-      <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
-        <FormControl fullWidth>
-          <Grid container spacing={2} sx={{ placeContent: "space-between" }}>
-            <Grid item xs={12} sm={6}>
-              <StyledTextField
-                id="storeName"
-                label="store name"
-                variant="outlined"
-                required
-                fullWidth
-                {...formik.getFieldProps("storeName")}
-                error={formik.touched.storeName && !!formik.errors.storeName}
-                helperText={formik.touched.storeName && formik.errors.storeName}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <StyledTextField
-                id="storeType"
-                label="store type"
-                select
-                variant="outlined"
-                required
-                fullWidth
-                {...formik.getFieldProps("storeType")}
-                error={formik.touched.storeType && !!formik.errors.storeType}
-                helperText={formik.touched.storeType && formik.errors.storeType}
-              >
-                {storeTypes.map((option) => (
-                  <MenuItem key={option.type} value={option.type}>
-                    {option.type}
-                  </MenuItem>
-                ))}
-              </StyledTextField>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <StyledTextField
-                id="sellerEmail"
-                label="email"
-                variant="outlined"
-                required
-                fullWidth
-                {...formik.getFieldProps("sellerEmail")}
-                error={
-                  formik.touched.sellerEmail && !!formik.errors.sellerEmail
-                }
-                helperText={
-                  formik.touched.sellerEmail && formik.errors.sellerEmail
-                }
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <StyledTextField
-                id="password"
-                label="Password"
-                variant="outlined"
-                type={showPassword ? "text" : "password"}
-                autoComplete="off"
-                required
-                fullWidth
-                {...formik.getFieldProps("password")}
-                error={formik.touched.password && !!formik.errors.password}
-                helperText={formik.touched.password && formik.errors.password}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <StyledTextField
-                id="sellerName"
-                label="full name"
-                variant="outlined"
-                required
-                fullWidth
-                {...formik.getFieldProps("sellerName")}
-                error={formik.touched.sellerName && !!formik.errors.sellerName}
-                helperText={
-                  formik.touched.sellerName && formik.errors.sellerName
-                }
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <StyledTextField
-                id="sellerPhone"
-                label="phone number"
-                variant="outlined"
-                type="tel"
-                required
-                fullWidth
-                {...formik.getFieldProps("sellerPhone")}
-                error={
-                  formik.touched.sellerPhone && !!formik.errors.sellerPhone
-                }
-                helperText={
-                  formik.touched.sellerPhone && formik.errors.sellerPhone
-                }
-              />
-            </Grid>
-            <Hidden smDown>
-              <Grid item sm={5} md={4}>
-                <Typography sx={{ fontWeight: 600 }}>
-                  have a store?{" "}
-                  <Link
-                    to="../login"
-                    style={{ color: "#7B66FF", textDecoration: "none" }}
-                  >
-                    Sign in
-                  </Link>
-                </Typography>
+    <>
+      <Box
+        sx={{
+          borderRadius: { sm: "12px" },
+          background: {
+            xs: "",
+            sm: darkMode ? "rgba(17, 25, 40, 1)" : "rgba( 255, 255, 255, 0.9)",
+          },
+          boxShadow: {
+            sm: darkMode ? "" : "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+          },
+          border: { sm: "1px solid rgba(255, 255, 255, 0.125)" },
+          paddingX: { sm: 5 },
+          paddingY: { sm: 3 },
+          marginBottom: 3,
+        }}
+      >
+        <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
+          <FormControl fullWidth>
+            <Grid container spacing={2} sx={{ placeContent: "space-between" }}>
+              <Grid item xs={12} sm={6}>
+                <StyledTextField
+                  id="storeName"
+                  label="store name"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  {...formik.getFieldProps("storeName")}
+                  error={formik.touched.storeName && !!formik.errors.storeName}
+                  helperText={
+                    formik.touched.storeName && formik.errors.storeName
+                  }
+                />
               </Grid>
-            </Hidden>
-            <Grid item xs={12} sm={5} md={4} lg={4}>
-              <Button
-                className="btn"
-                variant="contained"
-                color="primary"
-                type="submit"
-                fullWidth
-                size="large"
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  textTransform: "capitalize",
-
-                  backgroundColor: darkMode ? "#fff" : "#333",
-                  borderRadius: "8px",
-                  height: "50px",
-                }}
-              >
-                <Typography variant="span">Create Store</Typography>
-                <ArrowForwardIosOutlined fontSize="" />
-              </Button>
-            </Grid>
-            <Hidden smUp>
-              <Grid item xs={12}>
-                <Typography sx={{ fontWeight: 600 }}>
-                  have a store?{" "}
-                  <Link
-                    to="../login"
-                    style={{ color: "#7B66FF", textDecoration: "none" }}
-                  >
-                    Sign in
-                  </Link>
-                </Typography>
+              <Grid item xs={12} sm={6}>
+                <StyledTextField
+                  id="storeType"
+                  label="store type"
+                  select
+                  variant="outlined"
+                  required
+                  fullWidth
+                  {...formik.getFieldProps("storeType")}
+                  error={formik.touched.storeType && !!formik.errors.storeType}
+                  helperText={
+                    formik.touched.storeType && formik.errors.storeType
+                  }
+                >
+                  {storeTypes.map((option) => (
+                    <MenuItem key={option.type} value={option.type}>
+                      {option.type}
+                    </MenuItem>
+                  ))}
+                </StyledTextField>
               </Grid>
-            </Hidden>
-          </Grid>
-        </FormControl>
-      </form>
-    </Box>
+
+              <Grid item xs={12} sm={6}>
+                <StyledTextField
+                  id="sellerEmail"
+                  label="email"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  {...formik.getFieldProps("sellerEmail")}
+                  error={
+                    formik.touched.sellerEmail && !!formik.errors.sellerEmail
+                  }
+                  helperText={
+                    formik.touched.sellerEmail && formik.errors.sellerEmail
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <StyledTextField
+                  id="password"
+                  label="Password"
+                  variant="outlined"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="off"
+                  required
+                  fullWidth
+                  {...formik.getFieldProps("password")}
+                  error={formik.touched.password && !!formik.errors.password}
+                  helperText={formik.touched.password && formik.errors.password}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <StyledTextField
+                  id="sellerName"
+                  label="full name"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  {...formik.getFieldProps("sellerName")}
+                  error={
+                    formik.touched.sellerName && !!formik.errors.sellerName
+                  }
+                  helperText={
+                    formik.touched.sellerName && formik.errors.sellerName
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <StyledTextField
+                  id="sellerPhone"
+                  label="phone number"
+                  variant="outlined"
+                  type="tel"
+                  required
+                  fullWidth
+                  {...formik.getFieldProps("sellerPhone")}
+                  error={
+                    formik.touched.sellerPhone && !!formik.errors.sellerPhone
+                  }
+                  helperText={
+                    formik.touched.sellerPhone && formik.errors.sellerPhone
+                  }
+                />
+              </Grid>
+              <Hidden smDown>
+                <Grid item sm={5} md={4}>
+                  <Typography sx={{ fontWeight: 600 }}>
+                    have a store?{" "}
+                    <Link
+                      to="../login"
+                      style={{ color: "#7B66FF", textDecoration: "none" }}
+                    >
+                      Sign in
+                    </Link>
+                  </Typography>
+                </Grid>
+              </Hidden>
+              <Grid item xs={12} sm={5} md={4} lg={4}>
+                <Button
+                  className="btn"
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  fullWidth
+                  size="large"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    textTransform: "capitalize",
+
+                    backgroundColor: darkMode ? "#fff" : "#333",
+                    borderRadius: "8px",
+                    height: "50px",
+                  }}
+                >
+                  <Typography variant="span">Create Store</Typography>
+                  <ArrowForwardIosOutlined fontSize="" />
+                </Button>
+              </Grid>
+              <Hidden smUp>
+                <Grid item xs={12}>
+                  <Typography sx={{ fontWeight: 600 }}>
+                    have a store?{" "}
+                    <Link
+                      to="../login"
+                      style={{ color: "#7B66FF", textDecoration: "none" }}
+                    >
+                      Sign in
+                    </Link>
+                  </Typography>
+                </Grid>
+              </Hidden>
+            </Grid>
+          </FormControl>
+        </form>
+      </Box>
+      <CreateStoreErrorSnackbar
+        errorMessage={errorMessage}
+        handleClose={() => setErrorMessage(false)}
+      />
+    </>
   );
 }
 

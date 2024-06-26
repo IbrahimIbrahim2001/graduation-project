@@ -1,5 +1,5 @@
 //react hooks
-// import { useState } from "react";
+import { useState } from "react";
 
 //mui
 import { Close } from "@mui/icons-material";
@@ -12,9 +12,15 @@ import Typography from "@mui/material/Typography";
 import { useFormik } from "formik";
 
 //hooks
-import { useState } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { useAddProduct } from "../../hooks/useAddProduct";
+
+//component
+import AddNewProductSnackbarSuccess from "./AddNewProductSnackbarSuccess";
+import AddNewProductSnackbarError from "./AddNewProductSnackbarError";
+
+//context
+import { useAddProductContext } from "../../context/AddProductProvider";
 
 const style = {
   position: "absolute",
@@ -31,11 +37,26 @@ const style = {
   p: 4,
 };
 
-export default function AddNewProduct({ openModal, setOpenModal }) {
-  const storeId = useSelector((state) => state.auth.user.seller.id);
+export default function AddNewProduct() {
+  const { openModal, setOpenModal } = useAddProductContext();
+  const storeId = localStorage.getItem("shopId");
   // eslint-disable-next-line no-unused-vars
-  const [image, setImage] = useState();
-  const { mutate, isLoading } = useAddProduct();
+  const [_image, setImage] = useState();
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(false);
+
+  const addProductError = () => {
+    setErrorMessage(true);
+  };
+
+  const addProductSuccesfully = () => {
+    setSuccessMessage(true);
+  };
+
+  const { mutate, isLoading } = useAddProduct(
+    addProductSuccesfully,
+    addProductError
+  );
 
   const handleImage = (e) => {
     setImage(e.target.files[0]);
@@ -53,16 +74,16 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
     validate: (values) => {
       const errors = {};
       if (!values.name) {
-        errors.name = "Required";
+        errors.name = "product's name is required please";
       }
       if (!values.image) {
-        errors.image = "Required";
+        errors.image = "product's image is required please";
       }
       if (!values.quantity) {
-        errors.quantity = "Required";
+        errors.quantity = "quantinty is required please";
       }
       if (!values.price) {
-        errors.price = "Required";
+        errors.price = "product's price is required please";
       }
       return errors;
     },
@@ -74,6 +95,8 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
           storeId,
         };
         mutate(data);
+        setOpenModal(false);
+        formik.resetForm();
       } catch (error) {
         console.error("Sign-in failed", error);
       }
@@ -108,7 +131,13 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
 
   return (
     <>
-      <Modal open={openModal} onClose={() => setOpenModal(false)}>
+      <Modal
+        open={openModal}
+        onClose={() => {
+          setOpenModal(false);
+          formik.resetForm();
+        }}
+      >
         <Box sx={style}>
           <Box
             sx={{
@@ -122,7 +151,10 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
               Add Product:
             </Typography>
             <IconButton
-              onClick={() => setOpenModal(false)}
+              onClick={() => {
+                setOpenModal(false);
+                formik.resetForm();
+              }}
               sx={{
                 backgroundColor: "#1976d2",
                 ":hover": { backgroundColor: "#ff4d4d" },
@@ -211,6 +243,25 @@ export default function AddNewProduct({ openModal, setOpenModal }) {
           </form>
         </Box>
       </Modal>
+
+      {successMessage && (
+        <AddNewProductSnackbarSuccess
+          successMessage={successMessage}
+          handleClose={() => {
+            setSuccessMessage(false);
+            setErrorMessage(false);
+          }}
+        />
+      )}
+      {errorMessage && (
+        <AddNewProductSnackbarError
+          errorMessage={errorMessage}
+          handleClose={() => {
+            setSuccessMessage(false);
+            setErrorMessage(false);
+          }}
+        />
+      )}
     </>
   );
 }

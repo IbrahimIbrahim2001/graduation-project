@@ -20,18 +20,16 @@ export default function CartCard({ items, darkMode }) {
       }}
     >
       <Typography variant="h6" sx={{ mb: 2, fontWeight: 800 }}>
-        Cart: {items?.data && <>({items?.data?.length})</>}
+        Cart: {items?.data && <>{items?.data?.length}</>}
       </Typography>
       <Divider />
       <CardCartTitle darkMode={darkMode} />
-      {items?.data?.length === 0 ? (
+      {!items?.order ? (
         <Typography sx={{ padding: 2, fontWeight: "bold" }}>
           your cart is empty
         </Typography>
       ) : (
-        items?.data?.map((item, index) => (
-          <CartCardItem key={index} item={item} />
-        ))
+        items?.order?.map((item) => <CartCardItem key={item.id} item={item} />)
       )}
     </Box>
   );

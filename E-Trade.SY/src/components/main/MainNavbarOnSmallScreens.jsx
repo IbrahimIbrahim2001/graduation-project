@@ -1,9 +1,11 @@
+//react hooks
+
 //mui
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import Slide from "@mui/material/Slide";
-import TextField from "@mui/material/TextField";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
+import SearchBar from "./SearchBar";
 
 //HOC
 function HideOnScroll({ children }) {
@@ -24,7 +26,7 @@ export default function MainNavbarOnSmallScreens() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             E-Mart
           </Typography>
-          <StyledTextField placeholder="search for products" />
+          <SearchBar />
         </Toolbar>
       </StyledAppBar>
     </HideOnScroll>
@@ -43,15 +45,3 @@ const StyledAppBar = withStyles({
     },
   },
 })(AppBar);
-
-const StyledTextField = withStyles({
-  root: {
-    "& .MuiOutlinedInput-root": {
-      direction: "",
-      height: "40px",
-      backgroundColor: "white",
-      color: "#333",
-      "& fieldset": {},
-    },
-  },
-})(TextField);

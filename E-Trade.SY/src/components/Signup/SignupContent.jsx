@@ -1,5 +1,3 @@
-//react
-
 //mui
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -13,14 +11,13 @@ import { Link } from "react-router-dom";
 //component
 import { SignupForm } from "./SignupForm";
 
-//context
-
 import { useThemeContext } from "../../context/ThemeModeProvider";
 
 export const SignupContent = () => {
   const { darkMode } = useThemeContext();
+
   return (
-    <Box marginBottom={5}>
+    <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Link to="../">
           <IconButton
@@ -28,11 +25,6 @@ export const SignupContent = () => {
             edge="start"
             color="inherit"
             aria-label="menu"
-            // sx={
-            //   {
-            //     // mb: { xs: 1, md: 5 },
-            //   }
-            // }
           >
             <AddShoppingCartIcon sx={{ fontSize: 30 }} />
           </IconButton>
@@ -49,19 +41,29 @@ export const SignupContent = () => {
 
       <Box
         sx={{
-          borderRadius: "16px",
-          paddingY: { xs: 4, md: 0 },
-          paddingX: { xs: 3, md: 0 },
+          borderRadius: {
+            sm: "16px",
+            md: 0,
+          },
           background: {
-            xs: darkMode
-              ? "rgba( 0, 0, 0, 0.75 )"
-              : "rgba( 255, 255, 255, 0.9 )",
-            md: "none",
+            xs: "",
+            sm: darkMode ? "rgba(17, 25, 40, 1)" : "rgba( 255, 255, 255, 0.9)",
+            md: "transparent",
           },
           boxShadow: {
-            xs: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+            sm: darkMode ? "" : "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
             md: "none",
           },
+          border: { sm: "1px solid rgba(255, 255, 255, 0.125)", md: "none" },
+          paddingX: {
+            sm: 2,
+            md: 0,
+          },
+          paddingY: {
+            sm: 3,
+            md: 0,
+          },
+          marginBottom: 3,
         }}
       >
         <Typography variant={"h6"} sx={{ marginBottom: 2, fontWeight: "bold" }}>
@@ -110,6 +112,6 @@ export const SignupContent = () => {
 
         <SignupForm />
       </Box>
-    </Box>
+    </>
   );
 };

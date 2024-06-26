@@ -11,10 +11,8 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         login: (state, action) => {
-            // const navigate = useNavigate();
             state.user = action.payload;
             state.token = action.payload.token;
-            // state.user.result === "Seller" ? navigate('../my-shop') : navigate('../main/shops');
 
         },
         logout: (state) => {
