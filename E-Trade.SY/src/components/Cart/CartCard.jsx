@@ -20,11 +20,17 @@ export default function CartCard({ items, darkMode }) {
       }}
     >
       <Typography variant="h6" sx={{ mb: 2, fontWeight: 800 }}>
-        Cart: {items?.data && <>{items?.data?.length}</>}
+        Cart:{" "}
+        {items?.order.length !== 0 && (
+          <>
+            {items?.order?.length}{" "}
+            {items?.order?.length === 1 ? "item" : "items"}
+          </>
+        )}
       </Typography>
       <Divider />
       <CardCartTitle darkMode={darkMode} />
-      {!items?.order ? (
+      {!items?.order.length > 0 ? (
         <Typography sx={{ padding: 2, fontWeight: "bold" }}>
           your cart is empty
         </Typography>

@@ -1,12 +1,12 @@
 //react hooks
-import { useState } from "react";
+import React, { Suspense, useState } from "react";
 
 //mui
 import { Grid } from "@mui/material";
 
 //components
-import ShopItemModal from "./ShopItemModal";
 import ShopItemCard from "./ShopItemCard";
+const ShopItemModal = React.lazy(() => import("./ShopItemModal"));
 
 export default function ShopItem({ shopItem, shopName }) {
   const [openModal, setOpenModal] = useState(false);
@@ -19,14 +19,14 @@ export default function ShopItem({ shopItem, shopName }) {
           handleOpen={() => setOpenModal(true)}
         />
       </Grid>
-      {openModal && (
+      <Suspense>
         <ShopItemModal
           shopItem={shopItem}
           shopName={shopName}
           openModal={openModal}
           setOpenModal={setOpenModal}
         />
-      )}
+      </Suspense>
     </>
   );
 }

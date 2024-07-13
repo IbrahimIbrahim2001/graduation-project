@@ -6,21 +6,30 @@ import { Box } from "@mui/material";
 //hooks
 import { useMutateCart } from "../../../hooks/useFetchShopCart";
 
-export default function ShopAddTocartBtn({ shopItemId }) {
+export default function ShopAddToCartBtn({
+  shopItemId,
+  handleClose = () => {}, //optional params only used with QrReaderComponent
+  ...styles
+}) {
   const { mutate } = useMutateCart();
   return (
     <Box
+      component={IconButton}
       sx={{
-        position: "absolute",
-        top: 5,
-        right: 5,
+        ...styles,
         backgroundColor: "#2200FF",
         borderRadius: "12px",
+        ":hover": {
+          backgroundColor: "#2200FF",
+        },
+      }}
+      onClick={() => {
+        mutate(shopItemId);
+        handleClose();
       }}
     >
-      <IconButton onClick={() => mutate(shopItemId)}>
-        <AddShoppingCartIcon fontSize="small" sx={{ color: "#fff" }} />
-      </IconButton>
+      <AddShoppingCartIcon fontSize="small" sx={{ color: "#fff" }} />
     </Box>
   );
+  // return null;
 }

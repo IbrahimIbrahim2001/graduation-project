@@ -27,16 +27,17 @@ import { useSignIn } from "../../hooks/useSignIn";
 
 //component
 import LoginErrorSnackbar from "./LoginErrorSnackbar";
-
-import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { logout } from "../../features/authSlice/authSlice";
 
 export const LoginForm = () => {
-  // to prevent going back to previous pages, this is additional protection
-  localStorage.removeItem("token");
-  Cookies.remove("name", { path: "" });
-  const { darkMode } = useThemeContext();
   const [showPassword, setShowPassword] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
+  const { darkMode } = useThemeContext();
+
+  // // to prevent going back to previous pages, this is additional protection
+  const dispatch = useDispatch();
+  dispatch(logout());
 
   const handleClickShowPassword = (event) => {
     event.preventDefault();

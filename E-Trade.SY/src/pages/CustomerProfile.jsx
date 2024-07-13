@@ -8,6 +8,7 @@ import { useThemeContext } from "../context/ThemeModeProvider";
 import CustomerProfileCard from "../components/CustomerProfile/CustomerProfileCard";
 import LougoutButton from "../components/CustomerProfile/LougoutButton";
 import ThemeSwitch from "../components/CustomerProfile/ThemeSwitch";
+import CameraToolBar from "../components/CustomerProfile/CameraToolBar";
 
 export default function CustomerProfile() {
   const matchesXS = useMediaQuery("(max-width:599px)");
@@ -16,20 +17,20 @@ export default function CustomerProfile() {
     <Box
       sx={{
         minHeight: {
-          xs: "130vh",
-          sm: "90vh",
+          xs: "63em",
+          sm: "99vh",
         },
         overflowY: { xs: "scroll", sm: "none" },
         "::-webkit-scrollbar": {
           display: "none",
         },
         backgroundColor: darkMode ? "#121212" : "#fff",
-        paddingY: 5,
+        paddingY: 2,
         paddingX: { xs: 2, sm: 5, md: 10, lg: 25 },
       }}
     >
       <Toolbar />
-      <Typography variant="h6" sx={{ fontWeight: "bold" }} mb={3}>
+      <Typography variant="h6" sx={{ fontWeight: "bold" }} mb={2}>
         Customer Profile:
       </Typography>
       <Box
@@ -53,6 +54,8 @@ export default function CustomerProfile() {
             ml: { sm: 2, md: 0 },
           }}
         >
+          <CameraToolBar darkMode={darkMode} />
+
           <LougoutButton darkMode={darkMode} />
           {matchesXS && (
             <Box
@@ -63,7 +66,7 @@ export default function CustomerProfile() {
                 alignItems: "center",
                 flexDirection: "row",
                 p: 2,
-                mb: 3,
+                mb: 2,
               }}
             >
               <Typography>Theme Mode:</Typography>

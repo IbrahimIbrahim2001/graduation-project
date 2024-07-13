@@ -101,7 +101,7 @@ export const SignupForm = () => {
             <Grid item xs={12} sm={6}>
               <StyledTextField
                 id="lastname"
-                label="last name"
+                label="Last name"
                 variant="outlined"
                 type="text"
                 fullWidth

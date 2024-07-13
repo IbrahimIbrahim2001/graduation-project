@@ -9,7 +9,7 @@ import { login } from '../features/authSlice/authSlice';
 
 import request from "../utils/axios-utils";
 
-
+//
 async function signIn({ email, password, }) {
     try {
         const response = await request({ url: '/login', method: 'post', data: { email, password } });
@@ -20,6 +20,14 @@ async function signIn({ email, password, }) {
     }
 }
 
+const logout = async () => {
+    const response = await request({ url: "logout", method: "get" });
+    return response;
+}
+
+
+
+//
 export function useSignIn(onError) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -36,5 +44,14 @@ export function useSignIn(onError) {
             data.seller ? navigate('../my-shop') : navigate('../main/shops');
         },
         onError,
+    })
+}
+
+
+
+export function useLogOut() {
+    return useMutation({
+        mutationKey: 'logout',
+        mutationFn: logout,
     })
 }

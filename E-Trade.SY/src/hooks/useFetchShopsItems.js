@@ -2,8 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import request from "../utils/axios-utils";
 
 
-const fetchShopsItems = () => {
-    return request({ url: '/AllProduct', method: 'get' });
+const fetchShopsItems = async () => {
+    const response = await request({ url: '/AllProduct', method: 'get' });
+    return response.data;
 }
 
 export function useFetchShopsItems() {

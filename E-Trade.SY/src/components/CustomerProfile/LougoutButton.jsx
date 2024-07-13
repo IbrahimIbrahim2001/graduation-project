@@ -15,7 +15,7 @@ export default function LougoutButton({ darkMode }) {
         className={`item ${darkMode ? "dark" : "light"}`}
         sx={{
           height: { xs: 100, sm: 100, md: 100 },
-          mb: 3,
+          mb: 2,
           p: 2,
           display: "flex",
           flexDirection: "column",
@@ -36,13 +36,11 @@ export default function LougoutButton({ darkMode }) {
           logout
         </Button>
       </Box>
-      {openModal && (
-        <LogoutConfirmModal
-          darkMode={darkMode}
-          openModal={openModal}
-          handleClose={() => setOpenModal(false)}
-        />
-      )}
+      <LogoutConfirmModal
+        darkMode={darkMode}
+        openModal={openModal}
+        handleClose={() => setOpenModal(false)}
+      />
     </>
   );
 }

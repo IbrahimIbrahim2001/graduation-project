@@ -11,7 +11,7 @@ import { useThemeContext } from "../../../context/ThemeModeProvider";
 import { NavLink } from "react-router-dom";
 
 //for drawer
-export default function Shop({ shop, toggleDrawer }) {
+export default function Shop({ shop, toggleDrawer = () => {} }) {
   const { darkMode } = useThemeContext();
 
   return (

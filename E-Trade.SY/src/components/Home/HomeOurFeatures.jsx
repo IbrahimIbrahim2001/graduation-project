@@ -78,7 +78,6 @@ const HomeOurFeatures = () => {
         rowGap={10}
         sx={{
           marginTop: 5,
-
           marginBottom: 10,
           justifyContent: { xs: "center", sm: "center" },
           alignItems: "center",
@@ -107,8 +106,6 @@ const HomeOurFeatures = () => {
               <IconButton>{box.icon}</IconButton>
               <Typography
                 variant="body1"
-                ml={"auto"}
-                mr={"auto"}
                 sx={{ width: "60%", height: "40%", fontWeight: "600" }}
               >
                 {box.text}

@@ -3,6 +3,9 @@ import { Box } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import Carousel from "react-material-ui-carousel";
 
+//utils
+import { BASEURL } from "../../../utils/axios-utils";
+
 export default function ImageCarousel({ images }) {
   return (
     <Box
@@ -13,11 +16,11 @@ export default function ImageCarousel({ images }) {
         marginBottom: 4,
       }}
     >
-      <Carousel animation="slide" duration={2000} interval={4000}>
+      <Carousel animation="slide" duration={2000} interval={4000} height={400}>
         {images?.map((image, i) => (
-          <Box key={i} sx={{ marginX: 1 }}>
+          <Box key={i}>
             <CardMedia
-              image={`http://localhost:3000/images/products/` + image}
+              image={`${BASEURL}/images/products/${image}`}
               sx={{
                 height: 400,
                 width: "100%",

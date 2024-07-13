@@ -11,7 +11,7 @@ const drawerWidth = 260;
 export default function ShopsDrawerSkeleton() {
   return (
     <Drawer
-      variant="permanent"
+      variant="persistent"
       sx={{
         width: drawerWidth,
         flexShrink: 0,

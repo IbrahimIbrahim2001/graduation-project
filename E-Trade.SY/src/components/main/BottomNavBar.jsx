@@ -1,59 +1,77 @@
 //react hooks
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 //router
-import { useNavigate } from "react-router-dom";
+import { useHref, useNavigate } from "react-router-dom";
 
 //mui
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StorefrontIcon from "@mui/icons-material/Storefront";
+import Badge from "@mui/material/Badge";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Box from "@mui/material/Box";
-import Badge from "@mui/material/Badge";
 
 import ShopsDrawerOnSmallScreens from "../Shops/ShopsDrawerOnSmallScreens";
 
+const SHOPS = "shops";
+const CART = "cart";
+const CUSTOMERPROFILE = "customer-profile";
+
 export default function BottomNavBar() {
   const [value, setValue] = useState(
-    JSON.parse(localStorage.getItem("bottomNavValue")) || 0
+    JSON.parse(window.localStorage.getItem("bottomNavValue"))
   );
+  const [open, setOpen] = useState(false); //use context api
 
-  const [open, setOpen] = useState(false);
+  const href = useHref();
 
   const navigate = useNavigate();
 
+  //use context api
   const toggleDrawer = (newOpen) => () => {
     setOpen(() => newOpen);
   };
 
   const navigationItems = [
     {
-      label: "shops",
+      label: SHOPS,
       icon: <StorefrontIcon />,
       onClick: toggleDrawer(true),
     },
     {
-      label: "cart",
+      label: CART,
       icon: (
         <Badge badgeContent={7} color="warning">
           <ShoppingCartIcon />
         </Badge>
       ),
-      onClick: () => navigate("cart", { replace: true }),
+      onClick: () => navigate(CART, { replace: true }),
     },
     {
       label: "profile",
       icon: <AccountCircleIcon />,
-      onClick: () => navigate("customer-profile", { replace: true }),
+      onClick: () => navigate(CUSTOMERPROFILE, { replace: true }),
     },
   ];
 
-  const handleChange = (_event, newValue) => {
-    setValue(newValue);
-    localStorage.setItem("bottomNavValue", newValue);
-  };
+  const handleChange = useCallback(() => {
+    if (href.includes(SHOPS)) {
+      setValue(0);
+      window.localStorage.setItem("bottomNavValue", 0);
+    } else if (href.includes(CART)) {
+      setValue(1);
+      window.localStorage.setItem("bottomNavValue", 1);
+    } else if (href.includes(CUSTOMERPROFILE)) {
+      setValue(2);
+      window.localStorage.setItem("bottomNavValue", 2);
+    }
+  }, [href]);
+
+  useEffect(() => {
+    handleChange();
+  }, [handleChange]);
 
   return (
     <>
@@ -71,7 +89,6 @@ export default function BottomNavBar() {
         <BottomNavigation showLabels value={value} onChange={handleChange}>
           {navigationItems.map((item, index) => (
             <BottomNavigationAction
-              onChange={handleChange}
               key={index}
               label={item.label}
               icon={item.icon}

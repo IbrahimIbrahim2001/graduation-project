@@ -1,6 +1,13 @@
 //mui
-import { Star } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
+
+import ShopRatingProduct from "../shop/ShopRatingProduct";
+
+const ratingStyles = {
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "row-reverse",
+};
 
 export default function ModalItemDescription({ shopItem, shopName }) {
   return (
@@ -16,7 +23,7 @@ export default function ModalItemDescription({ shopItem, shopName }) {
       <Typography sx={{ overflow: "hidden" }}>
         product: {shopItem.name}
       </Typography>
-      <Typography>store: {shopName}</Typography>
+      <Typography>store: {shopName || shopItem?.Store.StoreName}</Typography>
       <Typography>
         <span>price: </span> {shopItem.price} S.P.
       </Typography>
@@ -26,11 +33,8 @@ export default function ModalItemDescription({ shopItem, shopName }) {
           alignItems: "center",
         }}
       >
-        <Typography>
-          <span>rating: </span>
-          {shopItem.avg ? shopItem.avg : 0}/5
-        </Typography>
-        <Star color="warning" fontSize="small" />
+        <span>rating: </span>
+        <ShopRatingProduct shopItemRating={shopItem.avg} {...ratingStyles} />
       </Box>
     </Box>
   );

@@ -5,7 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import request from "../utils/axios-utils";
 
 const fetchProfileDetails = async () => {
-    const response = await request({ url: '/', method: 'get' });
+    const response = await request({ url: '/getProfile', method: 'get' });
+    // console.log(response.data)
     return response.data;
 }
 

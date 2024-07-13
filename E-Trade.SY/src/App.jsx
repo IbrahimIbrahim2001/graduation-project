@@ -4,11 +4,9 @@ import "./App.css";
 //context
 import { ThemeModeProvider } from "./context/ThemeModeProvider";
 
-//router
+//react router
 import { RouterProvider } from "react-router-dom";
 import router from "./router.jsx";
-
-//clerk
 
 function App() {
   return (

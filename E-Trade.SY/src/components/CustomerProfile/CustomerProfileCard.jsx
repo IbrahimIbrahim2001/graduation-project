@@ -18,6 +18,10 @@ import { useSelector } from "react-redux";
 //component
 import UpdateProfileForm from "./UpdateProfileForm";
 
+//hooks
+// import { useFetchProfileDetails } from "../../hooks/useFetchProfileDetails";
+
+//must use redux persist
 export default function CustomerProfileCard({ darkMode }) {
   const [isEditable, setIsEditable] = useState(false);
   const userDetails = useSelector((state) => state.auth.user?.customer);
@@ -25,11 +29,12 @@ export default function CustomerProfileCard({ darkMode }) {
   const handleEditableState = () => {
     setIsEditable((prev) => !prev);
   };
+
   return (
     <Box
       sx={{
         alignSelf: { xs: "center", sm: "flex-start" },
-        mb: { xs: 3, md: 0 },
+        mb: { xs: 2, md: 0 },
       }}
     >
       <Card
@@ -44,8 +49,8 @@ export default function CustomerProfileCard({ darkMode }) {
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: "#2200FF" }} aria-label="full-name">
-              {userDetails.first_name.slice(0, 1).toUpperCase()}
-              {userDetails.second_name.slice(0, 1).toUpperCase()}
+              {userDetails?.first_name.slice(0, 1).toUpperCase()}
+              {userDetails?.second_name.slice(0, 1).toUpperCase()}
             </Avatar>
           }
           action={

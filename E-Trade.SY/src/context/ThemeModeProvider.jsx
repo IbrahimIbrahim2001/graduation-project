@@ -1,4 +1,4 @@
-//hooks
+//react hooks
 import { createContext, useContext, useState } from "react";
 
 //mui

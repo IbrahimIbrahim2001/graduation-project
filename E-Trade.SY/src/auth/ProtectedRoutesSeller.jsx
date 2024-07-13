@@ -9,7 +9,6 @@ export default function ProtectedRoutesSeller(props) {
   const token = localStorage.getItem("token") || undefined;
   const decodedToken = token ? jwtDecode(token) : undefined;
   const isAuthenticated = decodedToken && token;
-
   if (isAuthenticated && location?.key !== "default")
     return <Outlet {...props} />;
   else return <Navigate to="./login" replace={true} />;

@@ -21,7 +21,7 @@ const HomeResponsiveTypography = ({ text, spanText, etc }) => {
     <div style={{ whiteSpace: "pre-wrap" }}>
       <Typography
         variant={responsiveVariant}
-        width={{ xs: 200, sm: "auto" }}
+        width={{ xs: 280, sm: "auto" }}
         height={{ xs: 150, sm: "auto" }}
       >
         {text}{" "}

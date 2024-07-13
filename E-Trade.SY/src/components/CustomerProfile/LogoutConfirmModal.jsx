@@ -9,6 +9,7 @@ import { logout } from "../../features/authSlice/authSlice";
 
 //react router
 import { useNavigate } from "react-router-dom";
+import { useLogOut } from "../../hooks/useSignIn";
 
 //for styled box
 const style = {
@@ -38,6 +39,14 @@ export default function LogoutConfirmModal({
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { mutate } = useLogOut();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    mutate();
+    navigate("../../login", { replace: true });
+  };
+
   return (
     <Modal open={openModal} onClose={handleClose}>
       <StyledBox sx={style}>
@@ -56,11 +65,7 @@ export default function LogoutConfirmModal({
             variant={darkMode ? "outlined" : "contained"}
             color="success"
             endIcon={<CheckIcon />}
-            onClick={() => {
-              localStorage.removeItem("token");
-              dispatch(logout);
-              navigate("../../login", { replace: true });
-            }}
+            onClick={handleLogout}
           >
             confirm
           </Button>

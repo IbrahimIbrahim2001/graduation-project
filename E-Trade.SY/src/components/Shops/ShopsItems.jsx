@@ -33,9 +33,10 @@ export default function ShopsItems() {
           marginBottom: { xs: 7, sm: 0 },
         }}
       >
-        {shopsItems?.data.prod.map((shopItem) => (
-          <ShopItem key={shopItem.id} shopItem={shopItem} />
-        ))}
+        {shopsItems &&
+          shopsItems.map((shopItem) => (
+            <ShopItem key={shopItem.id} shopItem={shopItem} />
+          ))}
       </Grid>
     </>
   );

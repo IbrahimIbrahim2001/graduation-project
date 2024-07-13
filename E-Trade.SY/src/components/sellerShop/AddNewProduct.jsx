@@ -53,7 +53,7 @@ export default function AddNewProduct() {
     setSuccessMessage(true);
   };
 
-  const { mutate, isLoading } = useAddProduct(
+  const { mutate, status } = useAddProduct(
     addProductSuccesfully,
     addProductError
   );
@@ -232,7 +232,7 @@ export default function AddNewProduct() {
                 {...formik.getFieldProps("price")}
               />
               <LoadingButton
-                loading={isLoading}
+                loading={status === "pending"}
                 type="submit"
                 variant="contained"
                 sx={{ fontWeight: "bold", color: "#fff" }}

@@ -9,6 +9,9 @@ import ProductRate from "./ProductRate";
 import SellerShopQuantity from "./SellerShopQuantity";
 import SellerProductEdit from "./SellerProductEdit";
 
+//utils
+import { BASEURL } from "../../utils/axios-utils";
+
 export default function SellerShopProductCard({ shopItem }) {
   const { darkMode } = useThemeContext();
   return (
@@ -16,7 +19,7 @@ export default function SellerShopProductCard({ shopItem }) {
       <CardMedia
         component="img"
         height="150"
-        image={`http://localhost:3000/images/products/${shopItem.photo_data}`}
+        image={`${BASEURL}/images/products/${shopItem.photo_data}`}
         alt={shopItem.name}
       />
 

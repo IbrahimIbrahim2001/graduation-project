@@ -10,7 +10,6 @@ export default function UpdateProfileForm({ userDetails, isEditable }) {
         defaultValue={first_name}
         variant="standard"
         disabled={!isEditable}
-        // InputProps={{ color: "red" }}
         fullWidth
         sx={{ marginBottom: 2 }}
       />
@@ -52,4 +51,5 @@ export default function UpdateProfileForm({ userDetails, isEditable }) {
       </Button>
     </>
   );
+  // return null;
 }
