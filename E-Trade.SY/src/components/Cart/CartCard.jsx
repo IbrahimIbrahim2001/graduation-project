@@ -12,7 +12,6 @@ export default function CartCard({ items, darkMode }) {
     <Box
       className={matchXs ? "" : `cart ${darkMode ? "dark" : "light"}`}
       sx={{
-        maxHeight: { sm: "60vh" },
         overflowY: { sm: "scroll" },
         marginBottom: { xs: 5, sm: "" },
         paddingX: { xs: 0, sm: 3 },
@@ -30,7 +29,7 @@ export default function CartCard({ items, darkMode }) {
       </Typography>
       <Divider />
       <CardCartTitle darkMode={darkMode} />
-      {!items?.order.length > 0 ? (
+      {!items?.order?.length > 0 ? (
         <Typography sx={{ padding: 2, fontWeight: "bold" }}>
           your cart is empty
         </Typography>

@@ -19,9 +19,9 @@ const style = {
   height: { xs: "100%", sm: "500px" },
   borderRadius: "12px",
   px: 2,
+  py: 2,
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-around",
 };
 
 const StyledBox = styled("div")(({ theme }) => ({
@@ -45,7 +45,7 @@ export default function CameraToolBar({ darkMode }) {
       <Box
         className={`item ${darkMode ? "dark" : "light"}`}
         sx={{
-          height: { xs: 100, sm: 100, md: 100 },
+          minHeight: "133.6px",
           mb: 2,
           p: 2,
           display: "flex",

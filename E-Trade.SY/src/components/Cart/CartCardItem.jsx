@@ -21,8 +21,6 @@ import {
   useDeleteCartItem,
 } from "../../hooks/useFetchShopCart";
 
-// import ImageIcon from "@mui/icons-material/Image";
-
 //must be two main component also...
 export default function CartCardItem({ item }) {
   const { mutate: deleteCartItem } = useDeleteCartItem();

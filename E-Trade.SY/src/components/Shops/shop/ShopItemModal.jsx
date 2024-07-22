@@ -24,8 +24,13 @@ export default function ShopItemModal({
   openModal,
   setOpenModal,
 }) {
-  const images = [shopItem?.photo_data, ...(shopItem?.optionalImages ?? [])];
-
+  const images = [
+    shopItem?.photo_data,
+    ...shopItem.images.reduce(
+      (acc, curr) => [...acc, ...Object.values(curr)],
+      []
+    ),
+  ];
   const handelClose = () => {
     setOpenModal(false);
   };

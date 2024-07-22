@@ -1,20 +1,14 @@
 //mui
-import { withStyles } from "@material-ui/core/styles";
-import { ArrowForwardIosOutlined } from "@mui/icons-material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import {
-  Box,
-  Button,
-  FormControl,
-  Grid,
-  Hidden,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, FormControl, Grid, Hidden, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import MenuItem from "@mui/material/MenuItem";
+
+//components
+import FormButton from "../UI/FormButton";
+import Input from "../UI/Input";
 
 //context
 import { useThemeContext } from "../../context/ThemeModeProvider";
@@ -28,7 +22,7 @@ import { useFormik } from "formik";
 import { useCreateStore } from "../../hooks/useCreateStore";
 
 //react
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import CreateStoreErrorSnackbar from "./CreateStoreErrorSnackbar";
 
@@ -131,6 +125,82 @@ export default function StoreRegisterForm() {
     },
   });
 
+  const StoreRegisterFormFields = [
+    {
+      props: {
+        id: "storeName",
+        label: "Store Name",
+        variant: "outlined",
+        type: "text",
+      },
+      fieldProps: "storeName",
+    },
+    {
+      props: {
+        id: "storeType",
+        label: "Store Type",
+        variant: "outlined",
+        type: "text",
+        extra: true,
+      },
+      fieldProps: "storeType",
+      children: storeTypes.map((option) => (
+        <MenuItem key={option.type} value={option.type}>
+          {option.type}
+        </MenuItem>
+      )),
+    },
+    {
+      props: {
+        id: "sellerEmail",
+        label: "Email address",
+        variant: "outlined",
+        type: "email",
+      },
+      fieldProps: "sellerEmail",
+    },
+    {
+      props: {
+        id: "password",
+        label: "Password",
+        variant: "outlined",
+        type: showPassword ? "text" : "password",
+      },
+      fieldProps: "password",
+      inputProps: {
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={handleClickShowPassword}
+              edge="end"
+            >
+              {showPassword ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </InputAdornment>
+        ),
+      },
+    },
+    {
+      props: {
+        id: "sellerName",
+        label: "Full Name",
+        variant: "outlined",
+        type: "text",
+      },
+      fieldProps: "sellerName",
+    },
+    {
+      props: {
+        id: "sellerPhone",
+        label: "Phone Number",
+        variant: "outlined",
+        type: "number",
+      },
+      fieldProps: "sellerPhone",
+    },
+  ];
+
   return (
     <>
       <Box
@@ -151,121 +221,27 @@ export default function StoreRegisterForm() {
       >
         <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
           <FormControl fullWidth>
-            <Grid container spacing={2} sx={{ placeContent: "space-between" }}>
-              <Grid item xs={12} sm={6}>
-                <StyledTextField
-                  id="storeName"
-                  label="store name"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  {...formik.getFieldProps("storeName")}
-                  error={formik.touched.storeName && !!formik.errors.storeName}
-                  helperText={
-                    formik.touched.storeName && formik.errors.storeName
-                  }
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <StyledTextField
-                  id="storeType"
-                  label="store type"
-                  select
-                  variant="outlined"
-                  required
-                  fullWidth
-                  {...formik.getFieldProps("storeType")}
-                  error={formik.touched.storeType && !!formik.errors.storeType}
-                  helperText={
-                    formik.touched.storeType && formik.errors.storeType
-                  }
-                >
-                  {storeTypes.map((option) => (
-                    <MenuItem key={option.type} value={option.type}>
-                      {option.type}
-                    </MenuItem>
-                  ))}
-                </StyledTextField>
-              </Grid>
-
-              <Grid item xs={12} sm={6}>
-                <StyledTextField
-                  id="sellerEmail"
-                  label="email"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  {...formik.getFieldProps("sellerEmail")}
-                  error={
-                    formik.touched.sellerEmail && !!formik.errors.sellerEmail
-                  }
-                  helperText={
-                    formik.touched.sellerEmail && formik.errors.sellerEmail
-                  }
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <StyledTextField
-                  id="password"
-                  label="Password"
-                  variant="outlined"
-                  type={showPassword ? "text" : "password"}
-                  autoComplete="off"
-                  required
-                  fullWidth
-                  {...formik.getFieldProps("password")}
-                  error={formik.touched.password && !!formik.errors.password}
-                  helperText={formik.touched.password && formik.errors.password}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <StyledTextField
-                  id="sellerName"
-                  label="full name"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  {...formik.getFieldProps("sellerName")}
-                  error={
-                    formik.touched.sellerName && !!formik.errors.sellerName
-                  }
-                  helperText={
-                    formik.touched.sellerName && formik.errors.sellerName
-                  }
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <StyledTextField
-                  id="sellerPhone"
-                  label="phone number"
-                  variant="outlined"
-                  type="tel"
-                  required
-                  fullWidth
-                  {...formik.getFieldProps("sellerPhone")}
-                  error={
-                    formik.touched.sellerPhone && !!formik.errors.sellerPhone
-                  }
-                  helperText={
-                    formik.touched.sellerPhone && formik.errors.sellerPhone
-                  }
-                />
-              </Grid>
+            <Grid
+              container
+              columnSpacing={2}
+              sx={{ placeContent: "space-between" }}
+            >
+              {StoreRegisterFormFields.map((field) => (
+                <Fragment key={field.props.id}>
+                  <Grid item xs={12} sm={6}>
+                    <Input
+                      {...field.props}
+                      fieldProps={field.fieldProps}
+                      formik={formik}
+                      InputProps={{ ...field.inputProps }}
+                    >
+                      {field.children}
+                    </Input>
+                  </Grid>
+                </Fragment>
+              ))}
               <Hidden smDown>
-                <Grid item sm={5} md={4}>
+                <Grid item sm={5} md={4} mt={2}>
                   <Typography sx={{ fontWeight: 600 }}>
                     have a store?{" "}
                     <Link
@@ -278,29 +254,10 @@ export default function StoreRegisterForm() {
                 </Grid>
               </Hidden>
               <Grid item xs={12} sm={5} md={4} lg={4}>
-                <Button
-                  className="btn"
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  fullWidth
-                  size="large"
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    textTransform: "capitalize",
-
-                    backgroundColor: darkMode ? "#fff" : "#333",
-                    borderRadius: "8px",
-                    height: "50px",
-                  }}
-                >
-                  <Typography variant="span">Create Store</Typography>
-                  <ArrowForwardIosOutlined fontSize="" />
-                </Button>
+                <FormButton text="Create Store" />
               </Grid>
               <Hidden smUp>
-                <Grid item xs={12}>
+                <Grid item xs={12} mt={2}>
                   <Typography sx={{ fontWeight: 600 }}>
                     have a store?{" "}
                     <Link
@@ -323,13 +280,3 @@ export default function StoreRegisterForm() {
     </>
   );
 }
-
-const StyledTextField = withStyles({
-  root: {
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderRadius: "8px",
-      },
-    },
-  },
-})(TextField);

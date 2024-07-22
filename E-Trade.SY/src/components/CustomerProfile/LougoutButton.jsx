@@ -14,7 +14,7 @@ export default function LougoutButton({ darkMode }) {
       <Box
         className={`item ${darkMode ? "dark" : "light"}`}
         sx={{
-          height: { xs: 100, sm: 100, md: 100 },
+          minHeight: "133.6px",
           mb: 2,
           p: 2,
           display: "flex",

@@ -37,8 +37,8 @@ export default function ShopItemModalDesktop({
     <Modal
       open={openModal}
       onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
+      aria-labelledby="modal-item"
+      aria-describedby="modal-item"
     >
       <StyledBox sx={style}>
         {children}

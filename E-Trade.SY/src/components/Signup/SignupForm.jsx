@@ -1,31 +1,67 @@
+import { Fragment, useState } from "react";
 //mui
-import { ArrowForwardIosOutlined } from "@mui/icons-material";
-import {
-  Button,
-  FormControl,
-  Grid,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { styled } from "@mui/system";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { FormControl, Grid, IconButton } from "@mui/material";
+import InputAdornment from "@mui/material/InputAdornment";
 
+//component
+import FormButton from "../UI/FormButton";
+import Input from "../UI/Input";
 //context
-import { useThemeContext } from "../../context/ThemeModeProvider";
-
 //fromik
 import { useFormik } from "formik";
 
 //hooks
 import { useSignUp } from "../../hooks/useSignUp";
-import { useState } from "react";
 import SignUpErrorSnackbar from "./SignUpErrorSnackbar";
 
+//Yup
+import * as Yup from "yup";
+
+const userSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .required("first name is required")
+    .min(2, "first name must be at least 2 characters")
+    .max(10, "first name must be at most 10 characters")
+    .test("noNumber", "First name cannot start with a number", (value) => {
+      return !/^(0|[1-9])/.test(value);
+    }),
+  lastName: Yup.string()
+    .required("last name is required")
+    .min(2, "last name must be at least 2 characters")
+    .max(10, "last name must be at most 10 characters") // changed from 2 to 10
+    .test("noNumber", "Last name cannot start with a number", (value) => {
+      return !/^(0|[1-9])/.test(value);
+    }),
+  email: Yup.string()
+    .email("Invalid email")
+    .required("Email is Required")
+    .strict()
+    .lowercase("invalid email"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters")
+    .max(20, "Password must be at most 20 characters")
+    .test(
+      "passwordPolicy: ",
+      "Password must contain at least one uppercase letter, one lowercase letter, one digit",
+      (value) => {
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[!?.@#$*%]*.{8,20}$/.test(value);
+      }
+    ),
+});
 export const SignupForm = () => {
-  const { darkMode } = useThemeContext();
+  const [showPassword, setShowPassword] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
 
   const onError = () => {
     setErrorMessage(true);
+  };
+
+  const handleClickShowPassword = (event) => {
+    event.preventDefault();
+    setShowPassword((show) => !show);
   };
 
   const { mutate } = useSignUp(onError);
@@ -37,31 +73,7 @@ export const SignupForm = () => {
       email: "",
       password: "",
     },
-    validate: (values) => {
-      const errors = {};
-      if (!values.firstName) {
-        errors.firstName = "First name is required";
-      } else if (values.firstName.length < 2 || values.firstName.length > 20) {
-        errors.firstName = "First name must be between {2-20} characters";
-      }
-      if (!values.lastName) {
-        errors.lastName = "Last name is required";
-      } else if (values.lastName.length < 2 || values.lastName.length > 20) {
-        errors.lastName = "Last name must be between {2-20} characters";
-      }
-      if (!values.email) {
-        errors.email = "Email is required";
-      } else if (!/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(values.email)) {
-        errors.email = "Invalid email address";
-      }
-      if (!values.password) {
-        errors.password = "password is required";
-      } else if (values.password.length < 8 || values.password.length > 20) {
-        errors.password = "Password must be between {8-20} characters";
-        // !/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}/.test(values.password)
-      }
-      return errors;
-    },
+    validationSchema: userSchema,
     onSubmit: async (values) => {
       try {
         const data = {
@@ -77,93 +89,108 @@ export const SignupForm = () => {
     },
   });
 
+  const SignUpFormFields = [
+    {
+      props: {
+        id: "firstname",
+        label: "First Name",
+        variant: "outlined",
+        type: "text",
+      },
+      fieldProps: "firstName",
+    },
+    {
+      props: {
+        id: "lastname",
+        label: "Last name",
+        variant: "outlined",
+        type: "text",
+      },
+      fieldProps: "lastName",
+    },
+    {
+      props: {
+        id: "email",
+        label: "Email address",
+        variant: "outlined",
+        type: "email",
+      },
+      fieldProps: "email",
+    },
+    {
+      props: {
+        id: "password",
+        label: "Password",
+        variant: "outlined",
+        type: showPassword ? "text" : "password",
+      },
+      fieldProps: "password",
+      inputProps: {
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={handleClickShowPassword}
+              edge="end"
+            >
+              {showPassword ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </InputAdornment>
+        ),
+      },
+    },
+    // {
+    //   props: {
+    //     id: "address",
+    //     label: "Address",
+    //     variant: "outlined",
+    //     type: "text",
+    //   },
+    //   fieldProps: "address",
+    // },
+    // {
+    //   props: {
+    //     id: "phone number",
+    //     label: "Phone Number",
+    //     variant: "outlined",
+    //     type: "number",
+    //   },
+    //   fieldProps: "number",
+    // },
+  ];
+
   return (
     <>
       <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
         <FormControl fullWidth>
           <Grid container columnSpacing={2}>
-            <Grid item xs={12} sm={6}>
-              <StyledTextField
-                id="firstname"
-                label="First Name"
-                variant="outlined"
-                type="text"
-                fullWidth
-                autoComplete="off"
-                noValidate
-                required
-                sx={{ marginBottom: 2 }}
-                {...formik.getFieldProps("firstName")}
-                error={formik.touched.firstName && !!formik.errors.firstName}
-                helperText={formik.touched.firstName && formik.errors.firstName}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <StyledTextField
-                id="lastname"
-                label="Last name"
-                variant="outlined"
-                type="text"
-                fullWidth
-                autoComplete="off"
-                noValidate
-                required
-                sx={{ marginBottom: 2 }}
-                {...formik.getFieldProps("lastName")}
-                error={formik.touched.lastName && !!formik.errors.lastName}
-                helperText={formik.touched.lastName && formik.errors.lastName}
-              />
-            </Grid>
+            {SignUpFormFields.map((field, index) => (
+              <Fragment key={field.props.id}>
+                {index < 2 && (
+                  <Grid item xs={12} sm={6}>
+                    <Input
+                      {...field.props}
+                      fieldProps={field.fieldProps}
+                      formik={formik}
+                      InputProps={{ ...field.inputProps }}
+                    />
+                  </Grid>
+                )}
+                {index >= 2 && (
+                  <Grid item xs={12}>
+                    <Input
+                      {...field.props}
+                      fieldProps={field.fieldProps}
+                      formik={formik}
+                      InputProps={{ ...field.inputProps }}
+                    />
+                  </Grid>
+                )}
+              </Fragment>
+            ))}
           </Grid>
-          <StyledTextField
-            id="email"
-            label="Email address"
-            variant="outlined"
-            type="email"
-            fullWidth
-            noValidate
-            required
-            sx={{
-              marginBottom: 2,
-            }}
-            {...formik.getFieldProps("email")}
-            error={formik.touched.email && !!formik.errors.email}
-            helperText={formik.touched.email && formik.errors.email}
-          />
-          <StyledTextField
-            id="password"
-            label="Password"
-            variant="outlined"
-            type="password"
-            fullWidth
-            autoComplete="off"
-            noValidate
-            required
-            sx={{ marginBottom: 2 }}
-            {...formik.getFieldProps("password")}
-            error={formik.touched.password && !!formik.errors.password}
-            helperText={formik.touched.password && formik.errors.password}
-          />
-          <Button
-            className="btn"
-            variant="contained"
-            color="primary"
-            type="submit"
-            fullWidth
-            size="large"
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              textTransform: "capitalize",
-              paddingX: "16.5px",
-              backgroundColor: darkMode ? "#fff" : "#333",
-              borderRadius: "8px",
-              height: "50px",
-            }}
-          >
-            <Typography variant="span">Signup</Typography>
-            <ArrowForwardIosOutlined fontSize="" />
-          </Button>
+
+          <FormButton text="Sign up" />
         </FormControl>
       </form>
       <SignUpErrorSnackbar
@@ -173,10 +200,3 @@ export const SignupForm = () => {
     </>
   );
 };
-
-//styled component for the input
-const StyledTextField = styled(TextField)`
-  fieldset {
-    border-radius: 8px;
-  }
-`;

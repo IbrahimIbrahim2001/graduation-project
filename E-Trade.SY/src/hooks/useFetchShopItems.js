@@ -2,8 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 
 import request from "../utils/axios-utils";
 
-const fetchShopItems = (id = parseInt(localStorage.getItem('shopId'))) => {
-    return request({ url: `/store/${id}`, method: 'get' });
+const fetchShopItems = async (id = parseInt(localStorage.getItem('shopId'))) => {
+    const res = await request({ url: `/store/${id}`, method: 'get' });
+    return res
 };
 
 export function useFetchShopItems(id) {

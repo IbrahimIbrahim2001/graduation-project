@@ -1,29 +1,28 @@
 //mui
 import { Tooltip } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
-import AddBoxIcon from "@mui/icons-material/AddBox";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Hidden } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
-import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
 //context
 import { useThemeContext } from "../../context/ThemeModeProvider";
 
+import { NavLink } from "react-router-dom";
+
 //react hooks
 import { useEffect, useState } from "react";
-
-//componetns
-import { useAddProductContext } from "../../context/AddProductProvider";
+import SearchBar from "../main/SearchBar";
+import { NavItems } from "../UI/SellerBottomNavbar/sellerBottomNavElements";
 
 export default function SellerNavbar() {
   const [showShadow, setShowShadow] = useState(false);
   const { darkMode, toggleTheme } = useThemeContext();
-  const { setOpenModal } = useAddProductContext();
+
+  const navItems = NavItems();
 
   const checkScroll = () => {
     if (window.scrollY > 0) {
@@ -40,7 +39,6 @@ export default function SellerNavbar() {
       window.removeEventListener("scroll", checkScroll);
     };
   }, []);
-
   return (
     <>
       <AppBar
@@ -76,33 +74,20 @@ export default function SellerNavbar() {
           >
             E-Mart
           </Typography>
-
-          <Tooltip title="add product" arrow>
-            <IconButton sx={{ padding: 0 }} onClick={() => setOpenModal(true)}>
-              <AddBoxIcon sx={{ color: "#2200FF", fontSize: "28px" }} />
-            </IconButton>
-          </Tooltip>
+          {navItems.map((link, index) => (
+            <Tooltip key={index} title={link.title} arrow>
+              <NavLink to={link.to} replace={true} className="navbar-link">
+                <IconButton onClick={link.onClick}>{link.icon}</IconButton>
+              </NavLink>
+            </Tooltip>
+          ))}
           <IconButton onClick={toggleTheme} sx={{ paddingLeft: 1 }}>
             {darkMode === false ? <Brightness4 /> : <Brightness7 />}
           </IconButton>
 
-          <StyledTextField
-            placeholder="serach for products"
-            sx={{ width: { xs: "30vw", sm: "210.4px" } }}
-            // onChange={}
-            // onSubmit={() => handleSearch(input)}
-          />
+          <SearchBar />
         </Toolbar>
       </AppBar>
     </>
   );
 }
-
-const StyledTextField = withStyles({
-  root: {
-    "& .MuiOutlinedInput-root": {
-      height: "40px",
-      "& fieldset": {},
-    },
-  },
-})(TextField);

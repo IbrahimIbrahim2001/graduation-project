@@ -10,7 +10,7 @@ export default function QrReaderComponent({ handleClose }) {
 
   return (
     <>
-      <IconButton onClick={handleClose}>
+      <IconButton onClick={handleClose} sx={{ alignSelf: "flex-end" }}>
         <Close />
       </IconButton>
       <QrReader
@@ -18,6 +18,10 @@ export default function QrReaderComponent({ handleClose }) {
           if (result) {
             setData(result?.text);
           }
+        }}
+        className="qr-reader"
+        videoContainerStyle={{
+          justifySelf: "center",
         }}
       />
       {data && <ShopAddToCartBtn shopItemId={data} handleClose={handleClose} />}

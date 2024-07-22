@@ -17,7 +17,6 @@ import ShopRatingProduct from "./ShopRatingProduct";
 
 //utils
 import { BASEURL } from "../../../utils/axios-utils";
-
 const ratingStyles = {
   position: "absolute",
   bottom: 90,

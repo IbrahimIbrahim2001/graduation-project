@@ -1,7 +1,7 @@
 //mui
 import { ArrowBackIosNewRounded } from "@mui/icons-material";
 import { Box, Button, Toolbar, Hidden } from "@mui/material";
-
+import CssBaseline from "@mui/material/CssBaseline";
 //hooks
 import { useFetchCartItems } from "../hooks/useFetchShopCart";
 
@@ -13,7 +13,6 @@ import { Link } from "react-router-dom";
 
 //components
 import CartCard from "../components/Cart/CartCard";
-// import { useSelector } from "react-redux";
 
 export default function Cart() {
   const { isLoading, isError, data: items } = useFetchCartItems();
@@ -25,12 +24,13 @@ export default function Cart() {
   return (
     <Box
       sx={{
-        minHeight: "100vh",
+        minHeight: "98vh",
         paddingX: { xs: 2, sm: 5, md: 10, lg: 10 },
         paddingY: 1,
         backgroundColor: darkMode ? "#121212" : "#fff",
       }}
     >
+      <CssBaseline />
       <Toolbar />
       <CartCard items={items} darkMode={darkMode} />
 

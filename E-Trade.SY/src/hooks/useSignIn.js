@@ -41,7 +41,7 @@ export function useSignIn(onError) {
             }
             localStorage.setItem("token", data.token);
             dispatch(login(data));
-            data.seller ? navigate('../my-shop') : navigate('../main/shops');
+            data.seller ? navigate('../my-shop/my-products') : navigate('../main/shops');
         },
         onError,
     })

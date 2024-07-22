@@ -54,7 +54,10 @@ const StyledTextFieldForXsScreens = withStyles({
       height: "40px",
       backgroundColor: "white",
       color: "#333",
-      "& fieldset": {},
+      borderRadius: "8px",
+      "& fieldset": {
+        borderRadius: "8px",
+      },
     },
   },
 })(TextField);

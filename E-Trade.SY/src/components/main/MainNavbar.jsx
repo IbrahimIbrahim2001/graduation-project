@@ -1,11 +1,11 @@
 //mui
 import { Brightness4, Brightness7 } from "@mui/icons-material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import StorefrontIcon from "@mui/icons-material/Storefront";
+// import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+// import StorefrontIcon from "@mui/icons-material/Storefront";
 import AppBar from "@mui/material/AppBar";
-import Badge from "@mui/material/Badge";
+// import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
@@ -21,31 +21,11 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
+import { navItems } from "../UI/CustomerBottomNavbar/CustomerBottomNavElements";
+
 export default function MainNavbar() {
   const [showShadow, setShowShadow] = useState(false);
   const { darkMode, toggleTheme } = useThemeContext();
-
-  const navItems = [
-    {
-      title: "shops",
-      to: "shops",
-      icon: <StorefrontIcon />,
-    },
-    {
-      title: "cart",
-      to: "cart",
-      icon: (
-        <Badge badgeContent={4} color="warning">
-          <ShoppingCartIcon />
-        </Badge>
-      ),
-    },
-    {
-      title: "profile",
-      to: "customer-profile",
-      icon: <AccountCircleIcon />,
-    },
-  ];
 
   const checkScroll = () => {
     if (window.scrollY > 0) {

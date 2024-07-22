@@ -18,7 +18,7 @@ export default function ImageCarousel({ images }) {
     >
       <Carousel animation="slide" duration={2000} interval={4000} height={400}>
         {images?.map((image, i) => (
-          <Box key={i}>
+          <Box key={i} mx={2}>
             <CardMedia
               image={`${BASEURL}/images/products/${image}`}
               sx={{

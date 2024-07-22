@@ -14,9 +14,11 @@ import ShopsDrawerSkeleton from "./ShopsDrawerSkeleton";
 
 //reacr router
 import { NavLink } from "react-router-dom";
-
-export default function ShopsDrawerOnSmallScreens({ open, toggleDrawer }) {
+import { useToggleDarwerContext } from "../../context/ToggleDrawerProvider";
+// { open, toggleDrawer }
+export default function ShopsDrawerOnSmallScreens() {
   const { isLoading, isError, data: shops } = useFetchShops();
+  const { open, toggleDrawer } = useToggleDarwerContext();
   if (isLoading) return <ShopsDrawerSkeleton />;
   if (isError) return <div>Error...</div>;
 
@@ -40,7 +42,7 @@ export default function ShopsDrawerOnSmallScreens({ open, toggleDrawer }) {
           <NavLink
             to="./shops"
             replace={true}
-            onClick={toggleDrawer(false)}
+            onClick={() => toggleDrawer(false)}
             className="all-shops-nav-link"
           >
             <Box
@@ -63,7 +65,7 @@ export default function ShopsDrawerOnSmallScreens({ open, toggleDrawer }) {
   );
 
   return (
-    <Drawer open={open} onClose={toggleDrawer(false)}>
+    <Drawer open={open} onClose={() => toggleDrawer(false)}>
       {DrawerList}
     </Drawer>
   );

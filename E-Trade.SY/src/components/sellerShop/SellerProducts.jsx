@@ -47,6 +47,7 @@ export const SellerProducts = () => {
 
   return (
     <>
+      <AddNewProduct />
       <Typography
         variant={"h6"}
         sx={{
@@ -55,7 +56,7 @@ export const SellerProducts = () => {
           fontWeight: "bold",
         }}
       >
-        {shop?.data.storeName}:
+        {shop?.data?.storeName}:
       </Typography>
       <Grid
         container
@@ -70,7 +71,6 @@ export const SellerProducts = () => {
           <SellerShopProduct key={shopItem.id} shopItem={shopItem} />
         ))}
       </Grid>
-      <AddNewProduct />
     </>
   );
 };

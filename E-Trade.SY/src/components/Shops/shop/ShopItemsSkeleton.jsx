@@ -34,7 +34,7 @@ export default function ShopItemsSkeleton() {
                 animation="wave"
                 height={150}
                 width={"100%"}
-                sx={{ borderRadius: "12px 12px 0 0 " }}
+                sx={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }}
               />
               <Box
                 sx={{

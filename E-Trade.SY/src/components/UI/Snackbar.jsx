@@ -3,7 +3,12 @@
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
-export default function SnackbarComponent({ message, handleClose, open }) {
+export default function SnackbarComponent({
+  message,
+  handleClose,
+  open,
+  status,
+}) {
   return (
     <Snackbar
       open={open}
@@ -13,7 +18,7 @@ export default function SnackbarComponent({ message, handleClose, open }) {
     >
       <Alert
         onClose={handleClose}
-        severity="error"
+        severity={status}
         variant="filled"
         sx={{ width: "100%" }}
       >

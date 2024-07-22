@@ -4,13 +4,15 @@ import request from "../utils/axios-utils";
 
 
 async function AddNewProduct(productData) {
-    const { name, image, price, quantity, storeId } = productData;
-    // const imageFile = new File([image], 'filename', { type: 'image/jpeg' });
+    const { name, image, price, quantity, storeId, optionalImages = [] } = productData;
+    console.log(productData);
+
     const formData = new FormData();
     formData.append('productName', name);
     formData.append('image', image);
     formData.append('productCount', quantity);
     formData.append('productPrice', price);
+    optionalImages.forEach((image) => formData.append('OptionImage', image));
 
     try {
         const response = await request({ url: `/AddProduct/${storeId}`, method: 'post', data: formData });
@@ -32,6 +34,9 @@ export function useAddProduct(addProductSuccesfully, addProductError
             queryClient.invalidateQueries("shops-items");
             addProductSuccesfully();
         },
-        onError: () => addProductError(),
+        onError: (error) => {
+            console.log(error.message)
+            addProductError()
+        },
     })
 }

@@ -10,7 +10,6 @@ import { useThemeContext } from "../../../context/ThemeModeProvider";
 //react router
 import { NavLink } from "react-router-dom";
 
-//for drawer
 export default function Shop({ shop, toggleDrawer = () => {} }) {
   const { darkMode } = useThemeContext();
 
@@ -23,7 +22,7 @@ export default function Shop({ shop, toggleDrawer = () => {} }) {
         textDecoration: "none",
         color: `${darkMode ? "white" : "black"}`,
       }}
-      onClick={toggleDrawer(false)}
+      onClick={() => toggleDrawer(false)}
     >
       <ListItem disablePadding sx={{ marginBottom: 1 }}>
         <ListItemButton>

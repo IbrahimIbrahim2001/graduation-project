@@ -1,18 +1,11 @@
 //react
-import { useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 
 //mui
-import { ArrowForwardIosOutlined } from "@mui/icons-material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { Button, FormControl, TextField, Typography } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
-
-import { withStyles } from "@material-ui/core/styles";
-
-//context
-import { useThemeContext } from "../../context/ThemeModeProvider";
+import { FormControl, Typography, IconButton } from "@mui/material";
 
 //react-router
 import { Link } from "react-router-dom";
@@ -20,24 +13,48 @@ import { Link } from "react-router-dom";
 //formik
 import { useFormik } from "formik";
 
-//clerk
-
 //hooks
 import { useSignIn } from "../../hooks/useSignIn";
 
 //component
-import LoginErrorSnackbar from "./LoginErrorSnackbar";
 import { useDispatch } from "react-redux";
 import { logout } from "../../features/authSlice/authSlice";
+import Input from "../UI/Input";
+import LoginErrorSnackbar from "./LoginErrorSnackbar";
+import FormButton from "../UI/FormButton";
+
+//Yup
+import * as Yup from "yup";
+
+const userSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Invalid email")
+    .required("Email is Required")
+    .strict()
+    .lowercase("invalid email"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters")
+    .max(20, "Password must be at most 20 characters")
+    .test(
+      "passwordPolicy: ",
+      "Password must contain at least one uppercase letter, one lowercase letter, one digit",
+      (value) => {
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[!?.@#$*%]*.{8,20}$/.test(value);
+      }
+    ),
+});
 
 export const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
-  const { darkMode } = useThemeContext();
 
-  // // to prevent going back to previous pages, this is additional protection
+  // to prevent going back to previous pages, this is additional protection - look for a better way
   const dispatch = useDispatch();
-  dispatch(logout());
+
+  useEffect(() => {
+    dispatch(logout());
+  }, [dispatch]);
 
   const handleClickShowPassword = (event) => {
     event.preventDefault();
@@ -54,22 +71,8 @@ export const LoginForm = () => {
       email: "",
       password: "",
     },
-    validate: (values) => {
-      const errors = {};
-      if (!values.email) {
-        errors.email = "Email is required";
-      } else if (!/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(values.email)) {
-        errors.email = "Invalid email address";
-      }
-      if (!values.password) {
-        errors.password = "password is required";
-      } else if (values.password.length < 8 || values.password.length > 20) {
-        errors.password = "Password must be between {8-20} characters";
-        // !/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}/.test(values.password)
-      }
-      return errors;
-    },
-    onSubmit: async (values) => {
+    validationSchema: userSchema,
+    onSubmit: (values) => {
       try {
         const data = {
           email: values.email,
@@ -83,75 +86,60 @@ export const LoginForm = () => {
     },
   });
 
+  const loginFormFields = [
+    {
+      props: {
+        id: "email",
+        label: "Email address",
+        variant: "outlined",
+        type: "email",
+      },
+      fieldProps: "email",
+    },
+    {
+      props: {
+        id: "password",
+        label: "Password",
+        variant: "outlined",
+        type: showPassword ? "text" : "password",
+      },
+      fieldProps: "password",
+      inputProps: {
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={handleClickShowPassword}
+              edge="end"
+            >
+              {showPassword ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </InputAdornment>
+        ),
+      },
+    },
+  ];
+
   return (
     <>
       <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
         <FormControl fullWidth>
-          <StyledTextField
-            id="email"
-            label="Email address"
-            variant="outlined"
-            type="email"
-            fullWidth
-            required
-            sx={{
-              marginBottom: 2,
-            }}
-            {...formik.getFieldProps("email")}
-            error={formik.touched.email && !!formik.errors.email}
-            helperText={formik.touched.email && formik.errors.email}
-          />
-          <StyledTextField
-            id="password"
-            label="Password"
-            variant="outlined"
-            type={showPassword ? "text" : "password"}
-            fullWidth
-            autoComplete="off"
-            required
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            sx={{ marginBottom: 2 }}
-            {...formik.getFieldProps("password")}
-            error={formik.touched.password && !!formik.errors.password}
-            helperText={formik.touched.password && formik.errors.password}
-          />
+          {loginFormFields.map((field) => (
+            <Fragment key={field.props.id}>
+              <Input
+                {...field.props}
+                fieldProps={field.fieldProps}
+                formik={formik}
+                InputProps={{ ...field.inputProps }}
+              />
+            </Fragment>
+          ))}
           <Typography mb={2} textAlign={"end"}>
             <Link style={{ color: "#7B66FF", textDecoration: "none" }}>
               Forget password?
             </Link>
           </Typography>
-          <Button
-            className="btn"
-            variant="contained"
-            color="primary"
-            type="submit"
-            fullWidth
-            size="large"
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              textTransform: "capitalize",
-              paddingX: "16.5px",
-              backgroundColor: darkMode ? "#fff" : "#333",
-              borderRadius: "8px",
-              height: "50px",
-            }}
-          >
-            <Typography variant="span">Login</Typography>
-            <ArrowForwardIosOutlined fontSize="" />
-          </Button>
+          <FormButton text="Login" />
         </FormControl>
       </form>
       <LoginErrorSnackbar
@@ -161,13 +149,3 @@ export const LoginForm = () => {
     </>
   );
 };
-
-const StyledTextField = withStyles({
-  root: {
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderRadius: "8px",
-      },
-    },
-  },
-})(TextField);

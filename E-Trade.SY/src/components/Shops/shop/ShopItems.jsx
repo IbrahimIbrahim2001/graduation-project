@@ -24,7 +24,7 @@ export const ShopItems = () => {
   }
 
   return (
-    <>
+    <Box>
       <Typography
         variant={"h6"}
         style={{
@@ -33,7 +33,7 @@ export const ShopItems = () => {
           fontWeight: "bold",
         }}
       >
-        {shop?.data.storeName}:
+        {shop?.data?.storeName}:
       </Typography>
       <Grid
         container
@@ -63,6 +63,6 @@ export const ShopItems = () => {
           This Shop is Empty
         </Typography>
       )}
-    </>
+    </Box>
   );
 };
