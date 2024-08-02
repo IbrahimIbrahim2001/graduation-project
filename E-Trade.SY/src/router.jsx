@@ -25,6 +25,8 @@ import SearchResultsPage from "./pages/SearchResultsPage";
 import { SignupPage } from "./pages/SignupPage";
 import StoreRegisterPage from "./pages/StoreRegisterPage";
 import SellerProfile from "./pages/SellerProfile";
+import CustomerHistory from "./pages/CustomerHistory";
+import SellerNotificationPage from "./pages/SellerNotificationPage";
 
 //protected routes
 import ProtectedRoutesCustomer from "./auth/ProtectedRoutesCustomer";
@@ -47,6 +49,7 @@ const routes = createRoutesFromElements(
         <Route path="cart" element={<Cart />} />
         <Route path="customer-profile" element={<CustomerProfile />} />
         <Route path="search-results" element={<SearchResultsPage />} />
+        <Route path="history" element={<CustomerHistory />} />
       </Route>
     </Route>
 
@@ -58,9 +61,12 @@ const routes = createRoutesFromElements(
           <Route index element={<ShopsItems />} />
           <Route path="shop/:id" element={<ShopItems />} />
         </Route>
-        <Route path="cart" element={<Cart />} /> */}
+        <Route path="cart" element={<Cart />} /> 
+        <Route path="history" element={<CustomerHistory />} />
+        */}
         <Route path="seller-profile" element={<SellerProfile />} />
         <Route path="search-results" element={<SearchResultsPage />} />
+        <Route path="notification" element={<SellerNotificationPage />} />
       </Route>
     </Route>
     <Route path="*" element={<Error />} />

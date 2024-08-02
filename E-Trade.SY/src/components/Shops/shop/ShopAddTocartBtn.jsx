@@ -6,12 +6,28 @@ import { Box } from "@mui/material";
 //hooks
 import { useMutateCart } from "../../../hooks/useFetchShopCart";
 
+//redux
+import { useDispatch } from "react-redux";
+import { setBadgeontent, setBill } from "../../../features/cartSlice/cartSlice";
+
 export default function ShopAddToCartBtn({
   shopItemId,
+  shopItemPrice,
   handleClose = () => {}, //optional params only used with QrReaderComponent
   ...styles
 }) {
-  const { mutate } = useMutateCart();
+  const dispatch = useDispatch();
+  const onSuccessAddToCart = () => {
+    dispatch(setBadgeontent(true));
+    dispatch(setBill({ signal: true, price: shopItemPrice }));
+  };
+  const { mutate } = useMutateCart(onSuccessAddToCart);
+
+  const handleClick = () => {
+    mutate(shopItemId);
+    handleClose();
+  };
+
   return (
     <Box
       component={IconButton}
@@ -23,10 +39,7 @@ export default function ShopAddToCartBtn({
           backgroundColor: "#2200FF",
         },
       }}
-      onClick={() => {
-        mutate(shopItemId);
-        handleClose();
-      }}
+      onClick={handleClick}
     >
       <AddShoppingCartIcon fontSize="small" sx={{ color: "#fff" }} />
     </Box>

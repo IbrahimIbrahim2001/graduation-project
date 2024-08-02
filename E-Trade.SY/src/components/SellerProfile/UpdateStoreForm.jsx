@@ -9,21 +9,22 @@ export default function UpdateStoreForm({
   return (
     <>
       <TextField
-        label="first name:"
+        label="Store Name:"
         defaultValue={StoreName}
         variant="standard"
         fullWidth
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="last name:"
+        label="Store Type:"
         defaultValue={StoreKind}
         variant="standard"
         fullWidth
+        disabled
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="email:"
+        label="Email:"
         defaultValue={email}
         variant="standard"
         fullWidth
@@ -31,16 +32,16 @@ export default function UpdateStoreForm({
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="phone number:"
-        defaultValue={SellerPhone || "empty"}
+        label="Phone Number:"
+        defaultValue={SellerPhone}
         variant="standard"
         fullWidth
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="address:"
-        defaultValue={SellerName || "empty"}
-        placeholder="adress:"
+        label="Seller Name:"
+        defaultValue={SellerName}
+        placeholder="Seller Name:"
         variant="standard"
         fullWidth
         sx={{ marginBottom: 2 }}

@@ -1,7 +1,5 @@
 //mui
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GoogleIcon from "@mui/icons-material/Google";
 import { Box, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 
@@ -9,8 +7,8 @@ import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 
 //component
-import { LoginForm } from "./LoginForm";
 import { useThemeContext } from "../../context/ThemeModeProvider";
+import { LoginForm } from "./LoginForm";
 
 export const LoginContent = () => {
   const { darkMode } = useThemeContext();
@@ -66,37 +64,6 @@ export const LoginContent = () => {
         <Typography variant={"h6"} sx={{ marginBottom: 2, fontWeight: "bold" }}>
           Sign in to E-mart:
         </Typography>
-        <IconButton
-          sx={{
-            backgroundColor: "#f81616",
-            marginBottom: 2,
-            marginRight: 2,
-            color: "#fff",
-            border: "1 #f81616",
-            borderRadius: 3,
-            "&:hover": {
-              color: "#f81616",
-              backgroundColor: "#fff",
-            },
-          }}
-        >
-          <GoogleIcon />
-        </IconButton>
-        <IconButton
-          sx={{
-            backgroundColor: "#2200FF",
-            marginBottom: 2,
-            color: "#fff",
-            border: "1 #2200FF",
-            borderRadius: 3,
-            "&:hover": {
-              color: "#2200FF",
-              backgroundColor: "#fff",
-            },
-          }}
-        >
-          <FacebookIcon />
-        </IconButton>
         <Typography sx={{ marginBottom: 2, fontWeight: 600 }}>
           New customer?{" "}
           <Link

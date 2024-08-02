@@ -1,11 +1,15 @@
 //react
-import { Fragment, useState, useEffect } from "react";
+import {
+  Fragment,
+  // useEffect,
+  useState,
+} from "react";
 
 //mui
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { FormControl, IconButton, Typography } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
-import { FormControl, Typography, IconButton } from "@mui/material";
 
 //react-router
 import { Link } from "react-router-dom";
@@ -16,12 +20,12 @@ import { useFormik } from "formik";
 //hooks
 import { useSignIn } from "../../hooks/useSignIn";
 
-//component
-import { useDispatch } from "react-redux";
-import { logout } from "../../features/authSlice/authSlice";
+// import { logout } from "../../features/authSlice/authSlice";
+
+//component UI
+import FormButton from "../UI/FormButton";
 import Input from "../UI/Input";
 import LoginErrorSnackbar from "./LoginErrorSnackbar";
-import FormButton from "../UI/FormButton";
 
 //Yup
 import * as Yup from "yup";
@@ -50,11 +54,9 @@ export const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState(false);
 
   // to prevent going back to previous pages, this is additional protection - look for a better way
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(logout());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(logout());
+  // }, []);
 
   const handleClickShowPassword = (event) => {
     event.preventDefault();

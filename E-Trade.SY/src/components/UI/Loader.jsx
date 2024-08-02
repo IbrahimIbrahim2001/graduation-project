@@ -1,5 +1,9 @@
-//soon... for cart
+import { Box, CircularProgress } from "@mui/material";
 
 export default function Loader() {
-  return <div>Loader</div>;
+  return (
+    <Box sx={{ height: "100vh", display: "grid", placeContent: "center" }}>
+      <CircularProgress />
+    </Box>
+  );
 }

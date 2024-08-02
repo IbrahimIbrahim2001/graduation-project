@@ -30,7 +30,6 @@ export default function ShopItemModalDesktop({
   shopItem,
   openModal,
   handleClose,
-
   children,
 }) {
   return (
@@ -42,7 +41,11 @@ export default function ShopItemModalDesktop({
     >
       <StyledBox sx={style}>
         {children}
-        <ShopAddToCartBtn shopItemId={shopItem.id} {...addToCartBtnStyles} />
+        <ShopAddToCartBtn
+          shopItemPrice={shopItem.price}
+          shopItemId={shopItem.id}
+          {...addToCartBtnStyles}
+        />
       </StyledBox>
     </Modal>
   );

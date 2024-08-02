@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 import ShopsDrawerOnSmallScreens from "../components/Shops/ShopsDrawerOnSmallScreens";
 import MainNavbar from "../components/main/MainNavbar";
 import MainNavbarOnSmallScreens from "../components/main/MainNavbarOnSmallScreens";
-import CustomerBottomNavbar from "../components/UI/CustomerBottomNavbar/CustomerBottomNavbar";
+import CustomerBottomNavbar from "../components/UI/CustomerNavigation/CustomerBottomNavbar";
 
 //mui
 import { Hidden, Box } from "@mui/material";

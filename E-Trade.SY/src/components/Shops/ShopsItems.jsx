@@ -10,10 +10,9 @@ import ShopItemsSkeleton from "./shop/ShopItemsSkeleton";
 //components
 import ShopItem from "./shop/ShopItem";
 
-//router
-
 export default function ShopsItems() {
   const { isLoading, isError, data: shopsItems } = useFetchShopsItems();
+
   if (isLoading) {
     return <ShopItemsSkeleton />;
   }

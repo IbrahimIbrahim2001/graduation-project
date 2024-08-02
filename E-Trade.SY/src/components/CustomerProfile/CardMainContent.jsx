@@ -9,7 +9,7 @@ import UserProfileData from "./UserProfileData";
 import { useSelector } from "react-redux";
 
 export default function CardMainContent({ isEditable, handleEditableState }) {
-  const userDetails = useSelector((state) => state.auth.user?.customer);
+  const userDetails = useSelector((state) => state.auth?.user?.customer);
   return (
     <CardContent
       sx={{

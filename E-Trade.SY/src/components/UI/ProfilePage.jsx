@@ -21,8 +21,8 @@ export default function ProfilePage({
     <Box
       sx={{
         minHeight: {
-          xs: "65em",
-          sm: "90vh",
+          xs: "72em",
+          sm: "91vh",
         },
         overflowY: { xs: "scroll", sm: "none" },
         "::-webkit-scrollbar": {

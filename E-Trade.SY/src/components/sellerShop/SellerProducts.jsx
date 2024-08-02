@@ -1,5 +1,5 @@
 //mui
-import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
+import { Box, Grid, Toolbar, Typography, useMediaQuery } from "@mui/material";
 
 //hooks
 import { useFetchShopItems } from "../../hooks/useFetchShopItems";
@@ -48,6 +48,7 @@ export const SellerProducts = () => {
   return (
     <>
       <AddNewProduct />
+      <Toolbar />
       <Typography
         variant={"h6"}
         sx={{

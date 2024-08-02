@@ -1,15 +1,11 @@
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
-import { Box, Button, Modal, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { Box, Button, Modal, Typography } from "@mui/material";
 
 //redux toolkit
-import { useDispatch } from "react-redux";
-import { logout } from "../../features/authSlice/authSlice";
-
-//react router
-import { useNavigate } from "react-router-dom";
-import { useLogOut } from "../../hooks/useSignIn";
+// import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 //for styled box
 const style = {
@@ -32,22 +28,13 @@ const StyledBox = styled("div")(({ theme }) => ({
   color: theme.palette.mode === "light" ? "rgba(17, 25, 40, 1)" : "#fff",
 }));
 
-export default function LogoutConfirmModal({ openModal, handleClose }) {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { mutate } = useLogOut();
-
-  const handleLogout = () => {
-    dispatch(logout());
-    mutate();
-    navigate("../../login", { replace: true });
-  };
-
+export default function ConfirmPayment({ openModal, handleClose }) {
+  const bill = useSelector((state) => state.cart.bill);
   return (
     <Modal open={openModal} onClose={handleClose}>
       <StyledBox sx={style}>
         <Typography variant="h6" component="h2">
-          Are you sure?
+          Your Bill is: {bill} SYP
         </Typography>
         <Box
           sx={{
@@ -61,7 +48,7 @@ export default function LogoutConfirmModal({ openModal, handleClose }) {
             variant="outlined"
             color="success"
             endIcon={<CheckIcon />}
-            onClick={handleLogout}
+            // onClick={handleLogout}
             sx={{ fontWeight: "bold" }}
           >
             confirm

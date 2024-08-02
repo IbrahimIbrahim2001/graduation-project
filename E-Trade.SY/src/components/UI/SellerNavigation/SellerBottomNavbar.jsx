@@ -2,10 +2,10 @@
 import Box from "@mui/material/Box";
 
 import BottomNavigationList from "../../main/BottomNavigationList";
-import CustomerBottomNavElements from "./CustomerBottomNavElements";
+import SellerBottomNavElements from "./sellerNavElements";
+export default function SellerBottomNavbar() {
+  const navigationItems = SellerBottomNavElements();
 
-export default function CustomerBottomNavbar() {
-  const navigationItems = CustomerBottomNavElements();
   return (
     <>
       <Box

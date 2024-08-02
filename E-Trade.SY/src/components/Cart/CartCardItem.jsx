@@ -16,6 +16,8 @@ import {
   Typography,
 } from "@mui/material";
 
+import { useDispatch } from "react-redux";
+import { setBadgeontent, setBill } from "../../features/cartSlice/cartSlice";
 import {
   useChangeQuantity,
   useDeleteCartItem,
@@ -23,8 +25,17 @@ import {
 
 //must be two main component also...
 export default function CartCardItem({ item }) {
+  const dispatch = useDispatch();
+  const onSuccessAddToCart = (signal) => {
+    dispatch(setBadgeontent(signal));
+    dispatch(setBill({ signal, price: item.product.price }));
+  };
   const { mutate: deleteCartItem } = useDeleteCartItem();
-  const { mutate: changeQuantity } = useChangeQuantity();
+  const { mutate: changeQuantity } = useChangeQuantity(onSuccessAddToCart);
+
+  const handleDeleteCartItem = () => {
+    deleteCartItem(item.productId);
+  };
 
   const handleClick = (signal) => {
     changeQuantity({ orderId: item.id, signal: signal });
@@ -85,7 +96,7 @@ export default function CartCardItem({ item }) {
           <Typography>{item.product.price * item.quantity} S.P</Typography>
           <Typography>{item.Paid ? "Paid" : "Not Paid"}</Typography>
 
-          <IconButton onClick={() => deleteCartItem(item.productId)}>
+          <IconButton type="button" onClick={handleDeleteCartItem}>
             <DeleteIcon />
           </IconButton>
         </Box>
@@ -152,7 +163,7 @@ export default function CartCardItem({ item }) {
                 variant="outlined"
                 color="warning"
                 endIcon={<DeleteIcon />}
-                onClick={() => deleteCartItem(item.productId)}
+                onClick={handleDeleteCartItem}
                 sx={{ textTransform: "capitalize", borderRadius: "8px" }}
               >
                 delete item

@@ -5,8 +5,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 //components
 import CardCartTitle from "./CardCartTitle";
 import CartCardItem from "./CartCardItem";
+import { useSelector } from "react-redux";
 
 export default function CartCard({ items, darkMode }) {
+  const badgeContent = useSelector((state) => state.cart.badgeContent);
   const matchXs = useMediaQuery("(max-width:600px)");
   return (
     <Box
@@ -20,12 +22,11 @@ export default function CartCard({ items, darkMode }) {
     >
       <Typography variant="h6" sx={{ mb: 2, fontWeight: 800 }}>
         Cart:{" "}
-        {items?.order.length !== 0 && (
-          <>
-            {items?.order?.length}{" "}
-            {items?.order?.length === 1 ? "item" : "items"}
-          </>
-        )}
+        {badgeContent
+          ? badgeContent === 1
+            ? `${badgeContent} item`
+            : `${badgeContent} items`
+          : null}
       </Typography>
       <Divider />
       <CardCartTitle darkMode={darkMode} />

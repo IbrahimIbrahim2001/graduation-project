@@ -21,10 +21,12 @@ export default function AddProductDrawer({
       onOpen={() => setOpenModal(true)}
       swipeAreaWidth={0} // to avoid any problems with BottomNavigation
       disableSwipeToOpen={false}
+      allowSwipeInChildren
     >
       <StyledBox
         sx={{
-          height: 500,
+          maxHeight: 500,
+          overflow: "auto",
           paddingX: 2,
           border: "1px solid rgba(255, 255, 255, 0.125)",
         }}

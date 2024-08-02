@@ -1,9 +1,6 @@
 //mui
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import { Toolbar, Typography } from "@mui/material";
 import { ArrowBackIos } from "@mui/icons-material";
+import { SwipeableDrawer, Toolbar, Typography, Box, List } from "@mui/material";
 
 //hooks
 import useFetchShops from "../../hooks/useFetchShops";
@@ -12,32 +9,35 @@ import useFetchShops from "../../hooks/useFetchShops";
 import Shop from "../Shops/shop/Shop";
 import ShopsDrawerSkeleton from "./ShopsDrawerSkeleton";
 
-//reacr router
+//react router
 import { NavLink } from "react-router-dom";
+
+//context
 import { useToggleDarwerContext } from "../../context/ToggleDrawerProvider";
-// { open, toggleDrawer }
+import { useThemeContext } from "../../context/ThemeModeProvider";
+
 export default function ShopsDrawerOnSmallScreens() {
   const { isLoading, isError, data: shops } = useFetchShops();
   const { open, toggleDrawer } = useToggleDarwerContext();
+  const { darkMode } = useThemeContext();
   if (isLoading) return <ShopsDrawerSkeleton />;
   if (isError) return <div>Error...</div>;
 
   const DrawerList = (
-    <Drawer
-      variant="permanent"
+    <Box
       sx={{
-        width: 260,
-        borderRadius: `50px`,
-        flexShrink: 0,
-
-        [`& .MuiDrawer-paper`]: {
-          width: 260,
-          boxSizing: "border-box",
-        },
+        minHeight: "100vh",
+        backgroundColor: darkMode ? "rgba(17, 25, 40, 1)" : "#f2f2f2",
       }}
     >
       <Toolbar />
-      <Box sx={{ overflow: "auto", paddingX: 2 }}>
+      <Box
+        sx={{
+          overflow: "auto",
+          paddingX: 2,
+          width: 260,
+        }}
+      >
         <List>
           <NavLink
             to="./shops"
@@ -61,12 +61,21 @@ export default function ShopsDrawerOnSmallScreens() {
           ))}
         </List>
       </Box>
-    </Drawer>
+    </Box>
   );
 
   return (
-    <Drawer open={open} onClose={() => toggleDrawer(false)}>
+    <SwipeableDrawer
+      anchor="left"
+      swipeAreaWidth={60}
+      open={open}
+      onOpen={() => toggleDrawer(true)}
+      onClose={() => toggleDrawer(false)}
+      ModalProps={{
+        keepMounted: true,
+      }}
+    >
       {DrawerList}
-    </Drawer>
+    </SwipeableDrawer>
   );
 }

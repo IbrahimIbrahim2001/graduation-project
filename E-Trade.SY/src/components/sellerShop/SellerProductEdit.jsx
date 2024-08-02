@@ -1,24 +1,31 @@
 //mui
 import EditIcon from "@mui/icons-material/Edit";
-import { Box } from "@mui/material";
+import { IconButton } from "@mui/material";
+// import { useState } from "react";
 
-export default function SellerProductEdit() {
+export default function SellerProductEdit({ onClick }) {
   return (
-    <Box
+    <IconButton
+      onClick={onClick}
+      variant="contained"
       sx={{
         position: "absolute",
         bottom: 90,
         left: 10,
         display: "flex",
         alignItems: "center",
-
-        backgroundColor: "#e6b356",
-        color: "#fff",
+        boxShadow: "0 8px 25px 0 rgba(31, 38, 135, 0.37)",
+        color: "#121212",
+        backgroundColor: "#f2f2f2",
         borderRadius: "12px",
         paddingX: 1,
+        ":hover": {
+          color: "#2200FF",
+          backgroundColor: "#f2f2f2",
+        },
       }}
     >
-      <EditIcon color="#e6b356" fontSize="medium" />
-    </Box>
+      <EditIcon fontSize="medium" />
+    </IconButton>
   );
 }

@@ -2,20 +2,24 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StorefrontIcon from "@mui/icons-material/Storefront";
+import HistoryIcon from "@mui/icons-material/History";
 import Badge from "@mui/material/Badge";
 //router
 import { useNavigate } from "react-router-dom";
 
 //context
 import { useToggleDarwerContext } from "../../../context/ToggleDrawerProvider";
+import { useSelector } from "react-redux";
 
 const SHOPS = "shops";
 const CART = "cart";
 const CUSTOMERPROFILE = "customer-profile";
+const HistoryPage = "history";
 
-//rename the file to CustomerNavElements
+//for sx screens
 export default function CustomerBottomNavElements() {
   const navigate = useNavigate();
+  const badgeContent = useSelector((state) => state.cart.badgeContent);
   const { toggleDrawer } = useToggleDarwerContext();
 
   const navigationItems = [
@@ -27,7 +31,7 @@ export default function CustomerBottomNavElements() {
     {
       label: CART,
       icon: (
-        <Badge badgeContent={7} color="warning">
+        <Badge badgeContent={badgeContent} color="warning">
           <ShoppingCartIcon />
         </Badge>
       ),
@@ -42,26 +46,34 @@ export default function CustomerBottomNavElements() {
 
   return navigationItems;
 }
-
-//need updates for the badge => use it with useSelector
-export const navItems = [
-  {
-    title: SHOPS,
-    to: SHOPS,
-    icon: <StorefrontIcon />,
-  },
-  {
-    title: CART,
-    to: CART,
-    icon: (
-      <Badge badgeContent={4} color="warning">
-        <ShoppingCartIcon />
-      </Badge>
-    ),
-  },
-  {
-    title: CUSTOMERPROFILE,
-    to: CUSTOMERPROFILE,
-    icon: <AccountCircleIcon />,
-  },
-];
+//for sm screens and above
+export const CustomerNavbarElements = () => {
+  const badgeContent = useSelector((state) => state.cart.badgeContent);
+  const navigationItems = [
+    {
+      title: SHOPS,
+      to: SHOPS,
+      icon: <StorefrontIcon />,
+    },
+    {
+      title: CART,
+      to: CART,
+      icon: (
+        <Badge badgeContent={badgeContent} color="warning">
+          <ShoppingCartIcon />
+        </Badge>
+      ),
+    },
+    {
+      title: CUSTOMERPROFILE,
+      to: CUSTOMERPROFILE,
+      icon: <AccountCircleIcon />,
+    },
+    {
+      title: HistoryPage,
+      to: HistoryPage,
+      icon: <HistoryIcon />,
+    },
+  ];
+  return navigationItems;
+};

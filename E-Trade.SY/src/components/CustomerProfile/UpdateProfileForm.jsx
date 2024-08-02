@@ -1,28 +1,49 @@
-//mui
-import { Button, TextField } from "@mui/material";
+//react
+import { Fragment } from "react";
 
+//mui
+import { Button } from "@mui/material";
+
+//formik
 import { useFormik } from "formik";
+
+//hooks
 import { useUpdateProfileDetails } from "../../hooks/useUpdateProfile";
 
+//react-redux
 import { useDispatch } from "react-redux";
 
+//redux toolkit
 import { updateUserDetails } from "../../features/authSlice/authSlice";
 
-// import { z } from "zod";
-// import { zodResolver } from "@hookfrom/resolver/zod";
+//Yup
+import * as Yup from "yup";
+import Input from "../UI/Input";
 
-// const updatePrifileSchema = z.object({
-//   firstName: z.string().min(3).max(20),
-//   lastName: z.string().min(3).max(20),
-//   address: z
-//     .string()
-//     .min(8, { message: "Enter a valid address please" })
-//     .max(20, { message: "Enter a valid address please" }),
-//   phoneNumber: z
-//     .string()
-//     .startsWith("963")
-//     .length(13, { message: "Must be exactly 13 characters long" }),
-// });
+const userSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .required("first name is required")
+    .min(2, "first name must be at least 2 characters")
+    .max(10, "first name must be at most 10 characters")
+    .test("noNumber", "First name cannot start with a number", (value) => {
+      return !/^(0|[1-9])/.test(value);
+    }),
+  lastName: Yup.string()
+    .required("last name is required")
+    .min(2, "last name must be at least 2 characters")
+    .max(10, "last name must be at most 10 characters") // changed from 2 to 10
+    .test("noNumber", "Last name cannot start with a number", (value) => {
+      return !/^(0|[1-9])/.test(value);
+    }),
+  address: Yup.string()
+    .required("Address is Required")
+    .min(8, "Address must be at least 8 characters")
+    .max(20, "Address must be at most 20 characters"),
+
+  phoneNumber: Yup.string()
+    .required("Phone Number is Required, example: 963955544433")
+    .matches(/^\d{12}$/, "Phone Number must be 12 digits starting with 963"),
+});
 
 export default function UpdateProfileForm({
   handleEditableState,
@@ -38,35 +59,13 @@ export default function UpdateProfileForm({
     initialValues: {
       firstName: first_name,
       lastName: second_name,
-      phoneNumber: telephone || "empty",
-      address: address || "empty",
+      email: email,
+      phoneNumber: telephone,
+      address: address,
     },
-    //don't forget to validata
 
-    validate: () => {
-      // return {
-      //   first_name: updatePrifileSchema.firstName,
-      //   lastName: updatePrifileSchema.lastName,
-      //   phoneNumber: updatePrifileSchema.phoneNumber,
-      //   address: updatePrifileSchema.address,
-      // };
-      // zodResolver(updatePrifileSchema);
-    },
-    // validate: (values) => {
-    //   const errors = {};
-    //   if (!values.email) {
-    //     errors.email = "Email is required";
-    //   } else if (!/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(values.email)) {
-    //     errors.email = "Invalid email address";
-    //   }
-    //   if (!values.password) {
-    //     errors.password = "password is required";
-    //   } else if (values.password.length < 8 || values.password.length > 20) {
-    //     errors.password = "Password must be between {8-20} characters";
-    //   }
-    //   return errors;
-    // },
-    onSubmit: async (values) => {
+    validationSchema: userSchema,
+    onSubmit: (values) => {
       try {
         const data = {
           firstName: values.firstName,
@@ -75,14 +74,62 @@ export default function UpdateProfileForm({
           address: values.address,
         };
 
-        handleEditableState();
-        dispatch(updateUserDetails(data));
         mutate(data);
+        dispatch(updateUserDetails(data));
+        handleEditableState();
       } catch (error) {
         console.error("update profile failed", error);
       }
     },
   });
+  const UpdateProfileFormFields = [
+    {
+      props: {
+        id: "firstname",
+        label: "First Name",
+        variant: "standard",
+        type: "text",
+      },
+      fieldProps: "firstName",
+    },
+    {
+      props: {
+        id: "lastname",
+        label: "Last name",
+        variant: "standard",
+        type: "text",
+      },
+      fieldProps: "lastName",
+    },
+    {
+      props: {
+        id: "email",
+        label: "Email",
+        variant: "standard",
+        type: "email",
+        isDisabled: true,
+      },
+      fieldProps: "email",
+    },
+    {
+      props: {
+        id: "phone number",
+        label: "Phone Number",
+        variant: "standard",
+        type: "text",
+      },
+      fieldProps: "phoneNumber",
+    },
+    {
+      props: {
+        id: "address",
+        label: "Address",
+        variant: "standard",
+        type: "text",
+      },
+      fieldProps: "address",
+    },
+  ];
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -90,63 +137,22 @@ export default function UpdateProfileForm({
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        // alignItems: "flex-end",
       }}
     >
-      <TextField
-        id="first_name"
-        label="first name:"
-        variant="standard"
-        fullWidth
-        required
-        sx={{ marginBottom: 2 }}
-        {...formik.getFieldProps("firstName")}
-        error={formik.touched.firstName && !!formik.errors.firstName}
-        helperText={formik.touched.firstName && formik.errors.firstName}
-      />
-      <TextField
-        label="last name:"
-        variant="standard"
-        fullWidth
-        required
-        sx={{ marginBottom: 2 }}
-        {...formik.getFieldProps("lastName")}
-        error={formik.touched.lastName && !!formik.errors.lastName}
-        helperText={formik.touched.lastName && formik.errors.lastName}
-      />
-      <TextField
-        label="email:"
-        defaultValue={email}
-        variant="standard"
-        disabled
-        fullWidth
-        sx={{ marginBottom: 2 }}
-      />
-      <TextField
-        label="phone number:"
-        variant="standard"
-        fullWidth
-        required
-        sx={{ marginBottom: 2 }}
-        {...formik.getFieldProps("phoneNumber")}
-        error={formik.touched.phoneNumber && !!formik.errors.phoneNumber}
-        helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
-      />
-      <TextField
-        label="address:"
-        placeholder="adress:"
-        variant="standard"
-        fullWidth
-        required
-        sx={{ marginBottom: 2 }}
-        {...formik.getFieldProps("address")}
-        error={formik.touched.address && !!formik.errors.address}
-        helperText={formik.touched.address && formik.errors.address}
-      />
+      {UpdateProfileFormFields.map((field) => (
+        <Fragment key={field.props.id}>
+          <Input
+            {...field.props}
+            fieldProps={field.fieldProps}
+            formik={formik}
+            InputProps={{ ...field.inputProps }}
+          />
+        </Fragment>
+      ))}
+
       <Button type="submit" variant="contained">
         save changes
       </Button>
     </form>
   );
-  // return null;
 }

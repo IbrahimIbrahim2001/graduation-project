@@ -9,9 +9,9 @@ export default function StoreRegisterPage() {
     <Box
       sx={{
         width: { sm: "90vw", md: "70vw", lg: "55vw" },
-        height: { xs: "98vh", md: "95vh" },
+        height: { xs: "auto", md: "95vh" },
         paddingX: { xs: 2, sm: 5 },
-        paddingTop: { xs: 2, md: 5 },
+        paddingY: { xs: 2, md: 5 },
         position: { md: "relative" },
         left: { md: "50%" },
         transform: { md: "translateX(-50%)" },

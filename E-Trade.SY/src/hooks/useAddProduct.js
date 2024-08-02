@@ -4,14 +4,17 @@ import request from "../utils/axios-utils";
 
 
 async function AddNewProduct(productData) {
-    const { name, image, price, quantity, storeId, optionalImages = [] } = productData;
-    console.log(productData);
+    const { name, image, price, quantity, storeId, optionalImages = [], Size = "", Color = "", Kind = "" } = productData;
+
 
     const formData = new FormData();
     formData.append('productName', name);
     formData.append('image', image);
     formData.append('productCount', quantity);
     formData.append('productPrice', price);
+    formData.append('Color', Color);
+    formData.append('Size', Size);
+    formData.append('Kind', Kind);
     optionalImages.forEach((image) => formData.append('OptionImage', image));
 
     try {

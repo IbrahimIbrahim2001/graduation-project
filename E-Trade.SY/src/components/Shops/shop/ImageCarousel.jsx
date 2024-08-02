@@ -16,15 +16,16 @@ export default function ImageCarousel({ images }) {
         marginBottom: 4,
       }}
     >
-      <Carousel animation="slide" duration={2000} interval={4000} height={400}>
+      <Carousel animation="slide" duration={1000} interval={6000} height={400}>
         {images?.map((image, i) => (
           <Box key={i} mx={2}>
             <CardMedia
               image={`${BASEURL}/images/products/${image}`}
               sx={{
                 height: 400,
-                width: "100%",
+                width: "inherit",
                 borderRadius: "12px",
+                // backgroundSize: "contain",
               }}
             />
           </Box>

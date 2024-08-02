@@ -11,16 +11,39 @@ import Typography from "@mui/material/Typography";
 //context
 import { useThemeContext } from "../../context/ThemeModeProvider";
 
+//router
 import { NavLink } from "react-router-dom";
 
 //react hooks
 import { useEffect, useState } from "react";
 import SearchBar from "../main/SearchBar";
-import { NavItems } from "../UI/SellerBottomNavbar/sellerBottomNavElements";
+import { NavItems } from "../UI/SellerNavigation/sellerNavElements";
+
+//components
+// import BalanceComponent from "../UI/BalanceComponent";
 
 export default function SellerNavbar() {
   const [showShadow, setShowShadow] = useState(false);
   const { darkMode, toggleTheme } = useThemeContext();
+
+  // const BalanceComponentStyles = useMemo(() => {
+  //   return {
+  //     position: "relative",
+  //     right: "16vw",
+  //     top: 0,
+  //     borderRadius: "12px",
+  //     // backgroundColor: darkMode ? "" :  "#f2f2f2",
+  //     boxShadow: darkMode
+  //       ? "0 0 5px 0 #2200ff"
+  //       : "0 8px 25px 0 rgba(31, 38, 135, 0.37)",
+  //     color: darkMode ? "#f2f2f2" : "#121212",
+  //     flexDirection: "row-reverse",
+  //     justifyContent: "space-between",
+  //     paddingx: 2,
+  //     minWidth: "100px",
+  //     maxWidth: "200px",
+  //   };
+  // }, [darkMode]);
 
   const navItems = NavItems();
 
@@ -59,7 +82,6 @@ export default function SellerNavbar() {
             <IconButton
               size="large"
               edge="start"
-              color="inherit"
               aria-label="menu"
               sx={{ sm: { mr: 2 } }}
             >
@@ -74,6 +96,7 @@ export default function SellerNavbar() {
           >
             E-Mart
           </Typography>
+          {/* <BalanceComponent {...BalanceComponentStyles} /> */}
           {navItems.map((link, index) => (
             <Tooltip key={index} title={link.title} arrow>
               <NavLink to={link.to} replace={true} className="navbar-link">

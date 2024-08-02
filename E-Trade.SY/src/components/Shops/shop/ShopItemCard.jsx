@@ -73,8 +73,15 @@ export default function ShopItemCard({ shopItem, handleOpen }) {
           </Box>
         </CardContent>
       </CardActionArea>
-      <ShopRatingProduct shopItemRating={shopItem.avg} {...ratingStyles} />
-      <ShopAddTocartBtn shopItemId={shopItem.id} {...addToCartBtnStyles} />
+      <ShopRatingProduct
+        shopItemRating={shopItem.AvgOfRating}
+        {...ratingStyles}
+      />
+      <ShopAddTocartBtn
+        shopItemPrice={shopItem.price}
+        shopItemId={shopItem.id}
+        {...addToCartBtnStyles}
+      />
     </Card>
   );
 }

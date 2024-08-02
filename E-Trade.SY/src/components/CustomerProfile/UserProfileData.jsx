@@ -1,17 +1,14 @@
 //mui
 import { Button, TextField } from "@mui/material";
-import { Navigate } from "react-router-dom";
 
-//disabled inputs, in other words read only inputs
+// import { Navigate } from "react-router-dom";
 export default function UserProfileData({ ...userDetails }) {
   const { first_name, second_name, email, address, telephone } = userDetails;
-
-  if (!userDetails) <Navigate to="../login" />;
 
   return (
     <>
       <TextField
-        label="first name:"
+        label="First Name:"
         defaultValue={first_name}
         variant="standard"
         disabled
@@ -19,7 +16,7 @@ export default function UserProfileData({ ...userDetails }) {
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="last name:"
+        label="Last Name:"
         defaultValue={second_name}
         variant="standard"
         disabled
@@ -27,7 +24,7 @@ export default function UserProfileData({ ...userDetails }) {
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="email:"
+        label="Email:"
         defaultValue={email}
         variant="standard"
         disabled
@@ -35,7 +32,7 @@ export default function UserProfileData({ ...userDetails }) {
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="phone number:"
+        label="Phone Number:"
         defaultValue={telephone || "empty"}
         variant="standard"
         disabled
@@ -43,7 +40,7 @@ export default function UserProfileData({ ...userDetails }) {
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="address:"
+        label="Address:"
         defaultValue={address || "empty"}
         placeholder="adress:"
         variant="standard"

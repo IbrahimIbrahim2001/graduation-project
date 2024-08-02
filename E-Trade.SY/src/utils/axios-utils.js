@@ -2,6 +2,8 @@ import axios from "axios";
 
 //had to be imported to be used in ImageCarousel.jsx && ShopItemCard && SellerShopProductCard for images till we find a hosting and a better way
 export const BASEURL = 'http://localhost:3000';
+// export const BASEURL = "http://192.168.1.104:3000";
+// export const BASEURL = "http://192.168.1.103:3000";
 
 const client = axios.create({
     baseURL: BASEURL

@@ -8,8 +8,12 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 500,
-
+  width: 550,
+  maxHeight: 700,
+  overflowY: "scroll",
+  "::-webkit-scrollbar": {
+    display: "none",
+  },
   display: "flex",
   flexDirection: "column",
   bgcolor: "background.paper",

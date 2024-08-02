@@ -7,9 +7,9 @@ import { useSelector } from "react-redux";
 import ShopItem from "../components/Shops/shop/ShopItem";
 
 export default function SearchResultsPage() {
-  const searchResults = useSelector((state) => state.search.SearchResult);
-  console.log(searchResults);
-  if (!searchResults)
+  const searchResults = useSelector((state) => state.search?.SearchResult);
+
+  if (!Array.isArray(searchResults))
     return (
       <Box minHeight={"100vh"}>
         <Toolbar />
@@ -17,7 +17,7 @@ export default function SearchResultsPage() {
       </Box>
     );
   return (
-    <>
+    <Box sx={{ minHeight: "100vh" }}>
       <Toolbar />
       <CssBaseline />
       <Grid
@@ -30,11 +30,10 @@ export default function SearchResultsPage() {
           marginBottom: { xs: 7, sm: 0 },
         }}
       >
-        {searchResults &&
-          searchResults.map((shopItem) => (
-            <ShopItem key={shopItem.id} shopItem={shopItem} />
-          ))}
+        {searchResults.map((shopItem) => (
+          <ShopItem key={shopItem.id} shopItem={shopItem} />
+        ))}
       </Grid>
-    </>
+    </Box>
   );
 }

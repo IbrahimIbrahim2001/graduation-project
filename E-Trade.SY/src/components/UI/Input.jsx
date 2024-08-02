@@ -5,20 +5,23 @@ import { withStyles } from "@material-ui/core/styles";
 export default function Input({
   id,
   label,
+  placeholder,
   variant,
   type,
-  extra, //optinal
-  formik, // optional
+  extra, //optional => for the option field in storeregister
+  formik,
   fieldProps,
-  // defaultValue = "",
-  isDisabled = false, //optional
-  InputProps = "", //optional
-  children, //optional
+  isDisabled = false, //optional => for the email only
+  InputProps = "", //optional => for the password
+  children, //optional => for the storeType
 }) {
   return (
     <StyledTextField
       id={id}
       label={label}
+      hiddenLabel={placeholder ? true : false}
+      aria-label=""
+      placeholder={placeholder}
       variant={variant}
       type={type}
       fullWidth
@@ -26,7 +29,7 @@ export default function Input({
       noValidate
       required
       select={extra}
-      disable={isDisabled.toString()}
+      disabled={isDisabled}
       sx={{ marginBottom: 2 }}
       InputProps={InputProps}
       {...formik.getFieldProps(fieldProps)}

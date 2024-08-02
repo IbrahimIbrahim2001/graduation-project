@@ -2,7 +2,7 @@
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import AddCircleOutline from "@mui/icons-material/AddCircleOutline";
 import StorefrontIcon from "@mui/icons-material/Storefront";
-AddCircleOutline;
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 
 //router
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ import { useAddProductContext } from "../../../context/AddProductProvider";
 const SELLLERSHOP = "My shop";
 const ADDPRODUCT = "Add product";
 const SELLERPROFILE = "seller-profile";
+const NOTIFICATION = "notification";
 
 //for xs screens
 export default function SellerBottomNavElements() {
@@ -54,7 +55,7 @@ export const NavItems = () => {
     {
       title: ADDPRODUCT,
       to: "my-products",
-      icon: <AddBoxIcon sx={{ color: "#2200FF", fontSize: "26px" }} />,
+      icon: <AddBoxIcon sx={{ fontSize: "26px" }} />,
 
       onClick: () => setOpenModal(true),
     },
@@ -62,6 +63,11 @@ export const NavItems = () => {
       title: SELLERPROFILE,
       to: SELLERPROFILE,
       icon: <StorefrontIcon />,
+    },
+    {
+      title: NOTIFICATION,
+      to: NOTIFICATION,
+      icon: <NotificationsNoneIcon />,
     },
   ];
   return navItems;

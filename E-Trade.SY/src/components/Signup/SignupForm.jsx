@@ -50,6 +50,14 @@ const userSchema = Yup.object().shape({
         return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[!?.@#$*%]*.{8,20}$/.test(value);
       }
     ),
+  address: Yup.string()
+    .required("Address is Required")
+    .min(8, "Address must be at least 8 characters")
+    .max(20, "Address must be at most 20 characters"),
+
+  phoneNumber: Yup.string()
+    .required("Phone Number is Required, example: 963955544433")
+    .matches(/^\d{12}$/, "Phone Number must be 12 digits starting with 963"),
 });
 export const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(true);
@@ -72,6 +80,8 @@ export const SignupForm = () => {
       lastName: "",
       email: "",
       password: "",
+      address: "",
+      phoneNumber: "963",
     },
     validationSchema: userSchema,
     onSubmit: async (values) => {
@@ -81,6 +91,8 @@ export const SignupForm = () => {
           lastName: values.lastName,
           email: values.email,
           password: values.password,
+          address: values.address,
+          phoneNumber: values.phoneNumber,
         };
         mutate(data);
       } catch (error) {
@@ -139,24 +151,24 @@ export const SignupForm = () => {
         ),
       },
     },
-    // {
-    //   props: {
-    //     id: "address",
-    //     label: "Address",
-    //     variant: "outlined",
-    //     type: "text",
-    //   },
-    //   fieldProps: "address",
-    // },
-    // {
-    //   props: {
-    //     id: "phone number",
-    //     label: "Phone Number",
-    //     variant: "outlined",
-    //     type: "number",
-    //   },
-    //   fieldProps: "number",
-    // },
+    {
+      props: {
+        id: "address",
+        label: "Address",
+        variant: "outlined",
+        type: "text",
+      },
+      fieldProps: "address",
+    },
+    {
+      props: {
+        id: "phone number",
+        label: "Phone Number",
+        variant: "outlined",
+        type: "text",
+      },
+      fieldProps: "phoneNumber",
+    },
   ];
 
   return (

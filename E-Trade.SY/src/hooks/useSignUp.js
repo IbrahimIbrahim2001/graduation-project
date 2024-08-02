@@ -7,12 +7,12 @@ import { useDispatch } from 'react-redux';
 import { login } from '../features/authSlice/authSlice';
 
 import { useNavigate } from 'react-router-dom';
-// import axios from 'axios';
 
 import request from '../utils/axios-utils';
 
 
-async function signUp({ firstName, lastName, email, password }) {
+async function signUp({ firstName, lastName, email, password, address,
+    phoneNumber }) {
     try {
         const response = await request({
             url: '/Register', method: 'post',
@@ -21,6 +21,8 @@ async function signUp({ firstName, lastName, email, password }) {
                 lastName,
                 email,
                 password,
+                address,
+                phoneNumber
             }
         });
 

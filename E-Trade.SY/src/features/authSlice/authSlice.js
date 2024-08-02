@@ -3,8 +3,8 @@ import Cookies from 'js-cookie';
 
 
 const initialState = {
-    user: null,
-    token: null,
+    user: [],
+    token: undefined,
 }
 const authSlice = createSlice({
     name: "user",
@@ -15,8 +15,8 @@ const authSlice = createSlice({
             state.token = action.payload.token;
         },
         logout: (state) => {
-            Cookies.remove('token', { path: '' });
-            Cookies.remove('userId', { path: '/' });
+            Cookies.remove('token');
+            Cookies.remove('userId');
             state.user = null;
             state.token = null;
             localStorage.clear();
@@ -31,11 +31,19 @@ const authSlice = createSlice({
                 first_name
             };
             state.user.customer = updatedUser;
-            console.log(state.user.customer);
+        },
+        updateStoreDetails: (state, action) => {
+            const someData = action.payload;
+            const updatedSeller = {
+                ...state.user.seller,
+                ...someData,
+                //other fields
+            };
+            state.user.seller = updatedSeller;
         }
     }
 })
 
 
-export const { login, logout, updateUserDetails } = authSlice.actions;
+export const { login, logout, updateUserDetails, updateStoreDetails } = authSlice.actions;
 export default authSlice.reducer;

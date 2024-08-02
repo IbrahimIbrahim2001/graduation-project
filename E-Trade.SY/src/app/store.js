@@ -22,14 +22,15 @@ const persistConfig = {
     storage,
 };
 
+const persistedSearchReducer = persistReducer(persistConfig, searchSlice);
+const persistedCartReducer = persistReducer(persistConfig, cartSlice);
 const persistedAuthReducer = persistReducer(persistConfig, authSlice);
-const persistedSearchReducer = persistReducer(persistConfig, searchSlice)
 
 export const store = configureStore({
     reducer: {
-        auth: persistedAuthReducer,
-        cart: cartSlice,
+        cart: persistedCartReducer,
         search: persistedSearchReducer,
+        auth: persistedAuthReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

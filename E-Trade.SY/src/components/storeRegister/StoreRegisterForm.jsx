@@ -13,8 +13,6 @@ import Input from "../UI/Input";
 //context
 import { useThemeContext } from "../../context/ThemeModeProvider";
 
-//router
-
 //fromik
 import { useFormik } from "formik";
 
@@ -25,6 +23,41 @@ import { useCreateStore } from "../../hooks/useCreateStore";
 import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import CreateStoreErrorSnackbar from "./CreateStoreErrorSnackbar";
+
+//Yup
+import * as Yup from "yup";
+
+const storeSchema = Yup.object().shape({
+  storeName: Yup.string()
+    .required("Store Name is required")
+    .min(1, "Store Name must be at least 2 characters")
+    .max(10, "Store Name must be at most 10 characters"),
+  storeType: Yup.string().required("store category is required"),
+  sellerEmail: Yup.string()
+    .email("Invalid email")
+    .required("Email is Required")
+    .strict()
+    .lowercase("invalid email"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters")
+    .max(20, "Password must be at most 20 characters")
+    .test(
+      "passwordPolicy: ",
+      "Password must contain at least one uppercase letter, one lowercase letter, one digit",
+      (value) => {
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[!?.@#$*%]*.{8,20}$/.test(value);
+      }
+    ),
+  sellerName: Yup.string()
+    .required("Seller Name is Required")
+    .min(1, "Seller Name must be at least 8 characters")
+    .max(20, "Seller Name must be at most 20 characters"),
+
+  sellerPhone: Yup.string()
+    .required("Phone Number is Required, example: 963955544433")
+    .matches(/^\d{12}$/, "Phone Number must be 12 digits starting with 963"),
+});
 
 const storeTypes = [
   {
@@ -66,48 +99,7 @@ export default function StoreRegisterForm() {
       sellerName: "",
       sellerPhone: "",
     },
-    validate: (values) => {
-      const errors = {};
-      if (!values.storeName) {
-        errors.storeName = "Store name is required";
-      } else if (values.storeName.length < 2 || values.storeName > 20) {
-        errors.storeName = "First name must be between {2-20} characters";
-      }
-      if (!values.storeType) {
-        errors.storeType = "Store type is required";
-      } else if (values.storeType.length < 2 || values.storeType.length > 20) {
-        errors.storeType = "Store type must be between {2-20} characters";
-      }
-      if (!values.sellerEmail) {
-        errors.sellerEmail = "Email is required";
-      } else if (
-        !/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(values.sellerEmail)
-      ) {
-        errors.sellerEmail = "Invalid email address";
-      }
-      if (!values.password) {
-        errors.password = "Password is required";
-      } else if (values.password.length < 8 || values.password.length > 20) {
-        errors.password = "Password must be between {8-20} characters";
-        // !/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}/.test(values.password)
-      }
-      if (!values.sellerName) {
-        errors.sellerName = "Seller name is required";
-      } else if (
-        values.sellerName.length < 2 ||
-        values.sellerName.length > 20
-      ) {
-        errors.sellerName = "seller name must be between {2-20} characters";
-      }
-
-      if (!values.sellerPhone) {
-        errors.sellerPhone = "seller phone is required";
-      } else if (!/^((963))\d{9}$/.test(values.sellerPhone)) {
-        errors.sellerPhone =
-          "seller phone must start with (963) and have a length of 11 characters";
-      }
-      return errors;
-    },
+    validationSchema: storeSchema,
     onSubmit: (values) => {
       try {
         const data = {

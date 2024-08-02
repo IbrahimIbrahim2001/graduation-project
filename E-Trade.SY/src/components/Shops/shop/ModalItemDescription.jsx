@@ -34,7 +34,10 @@ export default function ModalItemDescription({ shopItem, shopName }) {
         }}
       >
         <span>rating: </span>
-        <ShopRatingProduct shopItemRating={shopItem.avg} {...ratingStyles} />
+        <ShopRatingProduct
+          shopItemRating={shopItem.AvgOfRating}
+          {...ratingStyles}
+        />
       </Box>
     </Box>
   );

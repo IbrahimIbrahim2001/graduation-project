@@ -1,11 +1,7 @@
 //mui
 import { Brightness4, Brightness7 } from "@mui/icons-material";
-// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-// import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-// import StorefrontIcon from "@mui/icons-material/Storefront";
 import AppBar from "@mui/material/AppBar";
-// import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
@@ -21,11 +17,14 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
-import { navItems } from "../UI/CustomerBottomNavbar/CustomerBottomNavElements";
+// import BalanceComponent from "../UI/BalanceComponent";
+import { CustomerNavbarElements } from "../UI/CustomerNavigation/CustomerNavElements";
 
 export default function MainNavbar() {
   const [showShadow, setShowShadow] = useState(false);
   const { darkMode, toggleTheme } = useThemeContext();
+
+  const navigationItems = CustomerNavbarElements();
 
   const checkScroll = () => {
     if (window.scrollY > 0) {
@@ -34,6 +33,25 @@ export default function MainNavbar() {
       setShowShadow(false);
     }
   };
+
+  // const BalanceComponentStyles = useMemo(() => {
+  //   return {
+  //     position: "relative",
+  //     right: "16vw",
+  //     top: 0,
+  //     borderRadius: "12px",
+  //     // backgroundColor: darkMode ? "" :  "#f2f2f2",
+  //     boxShadow: darkMode
+  //       ? "0 0 5px 0 #2200ff"
+  //       : "0 8px 25px 0 rgba(31, 38, 135, 0.37)",
+  //     color: darkMode ? "#f2f2f2" : "#121212",
+  //     flexDirection: "row-reverse",
+  //     justifyContent: "space-between",
+  //     paddingx: 2,
+  //     minWidth: "100px",
+  //     maxWidth: "200px",
+  //   };
+  // }, [darkMode]);
 
   useEffect(() => {
     window.addEventListener("scroll", checkScroll);
@@ -54,7 +72,7 @@ export default function MainNavbar() {
         backgroundImage: "none",
       }}
     >
-      <Toolbar>
+      <Toolbar sx={{ display: "flex" }}>
         <IconButton
           size="large"
           edge="start"
@@ -72,7 +90,8 @@ export default function MainNavbar() {
         >
           E-Mart
         </Typography>
-        {navItems.map((link, index) => (
+        {/* <BalanceComponent balance={500000} {...BalanceComponentStyles} /> */}
+        {navigationItems.map((link, index) => (
           <Tooltip key={index} title={link.title} arrow>
             <NavLink to={link.to} replace={true} className="navbar-link">
               <IconButton>{link.icon}</IconButton>

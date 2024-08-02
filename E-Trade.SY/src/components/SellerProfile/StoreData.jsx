@@ -11,7 +11,7 @@ export default function StoreData({ ...StoreDetails }) {
   return (
     <>
       <TextField
-        label="first name:"
+        label="Store Name:"
         defaultValue={StoreName}
         variant="standard"
         disabled
@@ -19,7 +19,7 @@ export default function StoreData({ ...StoreDetails }) {
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="last name:"
+        label="Store Type:"
         defaultValue={StoreKind}
         variant="standard"
         disabled
@@ -27,7 +27,7 @@ export default function StoreData({ ...StoreDetails }) {
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="email:"
+        label="Email:"
         defaultValue={email}
         variant="standard"
         disabled
@@ -35,17 +35,17 @@ export default function StoreData({ ...StoreDetails }) {
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="phone number:"
-        defaultValue={SellerPhone || "empty"}
+        label="Phone Number:"
+        defaultValue={SellerPhone}
         variant="standard"
         disabled
         fullWidth
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        label="address:"
-        defaultValue={SellerName || "empty"}
-        placeholder="adress:"
+        label="Seller Name:"
+        defaultValue={SellerName}
+        placeholder="SellerName:"
         variant="standard"
         disabled
         fullWidth

@@ -3,7 +3,7 @@ import { Box, Button, Modal, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 //component
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
 import QrReaderComponent from "./QrReader.component";
 
 //react hooks
@@ -63,9 +63,11 @@ export default function CameraToolBar({ darkMode }) {
           }}
           variant="outlined"
           color="info"
+          startIcon={<QrCodeScannerIcon />}
         >
-          <CameraAltIcon />
-          open camera
+          <Typography align="right" noWrap>
+            Open Camera
+          </Typography>
         </Button>
       </Box>
       {/* Modal */}

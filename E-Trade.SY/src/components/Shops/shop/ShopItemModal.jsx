@@ -24,13 +24,11 @@ export default function ShopItemModal({
   openModal,
   setOpenModal,
 }) {
-  const images = [
-    shopItem?.photo_data,
-    ...shopItem.images.reduce(
-      (acc, curr) => [...acc, ...Object.values(curr)],
-      []
-    ),
-  ];
+  const images = [];
+  const imageArray = shopItem.images || [];
+  images.push(shopItem?.photo_data);
+  images.push(...imageArray.flatMap((curr) => Object.values(curr)));
+
   const handelClose = () => {
     setOpenModal(false);
   };

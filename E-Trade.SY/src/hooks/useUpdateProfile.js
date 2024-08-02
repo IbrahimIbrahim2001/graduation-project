@@ -11,9 +11,14 @@ const updateProfileDetails = async (data) => {
 }
 
 export function useUpdateProfileDetails() {
-
     return useMutation({
         mutationKey: 'update-profile-data',
         mutationFn: updateProfileDetails,
     })
 }
+
+
+// export const getProfileData = async () => {
+//     const response = await request({ url: '/getProfile', method: 'get' });
+//     return response.data;
+// }
