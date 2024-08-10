@@ -19,8 +19,6 @@ export default function Input({
     <StyledTextField
       id={id}
       label={label}
-      hiddenLabel={placeholder ? true : false}
-      aria-label=""
       placeholder={placeholder}
       variant={variant}
       type={type}

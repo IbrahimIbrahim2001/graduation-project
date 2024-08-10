@@ -14,7 +14,7 @@ export function useUpdateProduct(StoreId) {
             mutationKey: "update product",
             mutationFn: updateProduct,
             onSuccess: async () => {
-                await queryClient.invalidateQueries({ queryKey: [`"shop",${StoreId}`] })
+                await queryClient.invalidateQueries({ queryKey: ["shop", StoreId] })
             }
         })
     )

@@ -9,8 +9,8 @@ import ShopRatingProduct from "../Shops/shop/ShopRatingProduct";
 import SellerProductEdit from "./SellerProductEdit";
 import SellerShopQuantity from "./SellerShopQuantity";
 //utils
-import { BASEURL } from "../../utils/axios-utils";
 import { useState } from "react";
+import { BASEURL } from "../../utils/axios-utils";
 import EditProductModal from "./EditProductModal";
 
 const ratingStyles = {
@@ -63,6 +63,7 @@ export default function SellerShopProductCard({ shopItem }) {
           shopItemRating={shopItem.AvgOfRating}
           {...ratingStyles}
         />
+
         <SellerProductEdit onClick={() => setOpenEditModal(true)} />
         <SellerShopQuantity quantity={shopItem.count} />
       </Card>

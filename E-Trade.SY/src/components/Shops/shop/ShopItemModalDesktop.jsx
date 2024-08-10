@@ -4,6 +4,7 @@ import { Modal } from "@mui/material";
 //component
 import { StyledBox } from "./ShopItemModal";
 import ShopAddToCartBtn from "./ShopAddToCartBtn";
+import AprioriList from "../AprioriList";
 
 //additional styles for StyledBox
 const style = {
@@ -12,7 +13,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: { sm: 500, md: 700, lg: 800 },
-  height: 500,
+  maxHeight: 500,
   borderRadius: "12px",
   boxShadow: "0 8px 12px 0 rgba(31, 38, 135, 0.37)",
   p: 4,
@@ -46,6 +47,7 @@ export default function ShopItemModalDesktop({
           shopItemId={shopItem.id}
           {...addToCartBtnStyles}
         />
+        <AprioriList shopItemId={shopItem.id} />
       </StyledBox>
     </Modal>
   );

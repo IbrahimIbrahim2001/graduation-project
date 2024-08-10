@@ -22,7 +22,11 @@ export default function ModalElements({ images, shopItem, shopName }) {
         }}
       >
         <ModalItemDescription shopItem={shopItem} shopName={shopName} />
-        <ShopItemQrCodeGenerator shopItemId={shopItem.id} />
+        <ShopItemQrCodeGenerator
+          shopItemId={shopItem.id}
+          shopItemPrice={shopItem.price}
+          shopItemName={shopItem.name}
+        />
       </Box>
     </>
   );

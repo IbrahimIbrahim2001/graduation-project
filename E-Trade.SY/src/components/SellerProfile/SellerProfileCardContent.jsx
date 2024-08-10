@@ -32,11 +32,11 @@ export default function SellerProfileCardContent() {
     >
       <SellerProfileCardHeader
         isEditable={isEditable}
-        onClick={() => handleEditableState()}
+        onClick={handleEditableState}
       />
       <CardMainContent
         isEditable={isEditable}
-        handleEditableState={() => handleEditableState()}
+        handleEditableState={handleEditableState}
       />
     </Card>
   );

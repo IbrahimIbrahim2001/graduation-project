@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import ConfirmPayment from "./ConfirmPayment";
 
-export default function BuyAllButton() {
+export default function BuyAllButton({ handleErrorMessage }) {
   const badgeContent = useSelector((state) => state.cart.badgeContent);
   const [openModal, setOpenModal] = useState(false);
 
@@ -32,6 +32,7 @@ export default function BuyAllButton() {
       )}
       <ConfirmPayment
         openModal={openModal}
+        handleErrorMessage={handleErrorMessage}
         handleClose={() => setOpenModal(false)}
       />
     </>

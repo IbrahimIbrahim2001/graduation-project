@@ -39,7 +39,7 @@ const addToCartBtnStyles = {
   fontWieght: "bold",
 };
 
-export default function ShopItemCard({ shopItem, handleOpen }) {
+export default function ShopItemCard({ shopItem, handleOpen = () => {} }) {
   const { darkMode } = useThemeContext();
 
   return (

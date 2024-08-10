@@ -17,9 +17,9 @@ export default function ShopAddToCartBtn({
   ...styles
 }) {
   const dispatch = useDispatch();
-  const onSuccessAddToCart = () => {
-    dispatch(setBadgeontent(true));
-    dispatch(setBill({ signal: true, price: shopItemPrice }));
+  const onSuccessAddToCart = (signal) => {
+    dispatch(setBadgeontent(signal));
+    dispatch(setBill({ signal: signal, price: shopItemPrice }));
   };
   const { mutate } = useMutateCart(onSuccessAddToCart);
 
@@ -44,5 +44,4 @@ export default function ShopAddToCartBtn({
       <AddShoppingCartIcon fontSize="small" sx={{ color: "#fff" }} />
     </Box>
   );
-  // return null;
 }

@@ -55,7 +55,7 @@ const EditProductFormFields = [
   },
 ];
 
-export default function EditProductForm({ shopItem }) {
+export default function EditProductForm({ shopItem, onClose }) {
   const { mutate, status } = useUpdateProduct(shopItem.StoreId);
   const formik = useFormik({
     initialValues: {
@@ -73,6 +73,7 @@ export default function EditProductForm({ shopItem }) {
         Price: values.Price,
       };
       mutate(data);
+      onClose();
     },
   });
   return (

@@ -6,6 +6,7 @@ import { useFetchShopItems } from "../../hooks/useFetchShopItems";
 
 // ui components
 import ShopItemsSkeleton from "./SellerProductSkeleton";
+import Loader from "../UI/Loader";
 
 //components
 import AddNewProduct from "./AddNewProduct";
@@ -20,7 +21,12 @@ export const SellerProducts = () => {
   );
   localStorage.setItem("shopId", shopId);
 
-  const { isLoading, isError, data: shop } = useFetchShopItems(shopId);
+  const {
+    isLoading,
+    isError,
+    isRefetching,
+    data: shop,
+  } = useFetchShopItems(shopId);
 
   const matchesXS = useMediaQuery("(max-width:599px)");
   const matchesSM = useMediaQuery("(min-width:600px) and (max-width:899px)");
@@ -40,6 +46,10 @@ export const SellerProducts = () => {
 
   if (isLoading) {
     return <ShopItemsSkeleton />;
+  }
+
+  if (isRefetching) {
+    return <Loader />;
   }
   if (isError) {
     return <Box>Error...</Box>;

@@ -59,13 +59,16 @@ export function useMutateCart(onSuccessAddToCart) {
             mutationFn: mutateCart,
             onSuccess: (res) => {
                 if (res !== undefined) {
-                    // this function will send a notification with a msg
-                    onSuccessAddToCart();
                     queryClient.invalidateQueries({ queryKey: ["cart"] });
                 }
             },
             onError: (error) => {
                 console.log(error)
+            },
+            onSettled: (res) => {
+                if (res.message) {
+                    onSuccessAddToCart(true);
+                }
             }
         })
     );
@@ -86,17 +89,19 @@ export function useChangeQuantity(onSuccessAddToCart) {
                     if (data.signal) {
                         updatedCart.order[updatedItemIndex].quantity++;
                     }
+                    onSuccessAddToCart(data.signal);
                     queryClient.setQueryData(["cart"], updatedCart);
                 }
-                onSuccessAddToCart(data.signal);
+
                 return { previousData };
             },
-            // onSuccess: (_res) => {
-            // },
             onError: (_error, _data, context) => {
                 queryClient.setQueryData(['cart'], context.data);
             },
-            onSettled: () => {
+            onSettled: (res) => {
+                if (res !== 'Success') {
+                    onSuccessAddToCart(false);
+                }
                 queryClient.invalidateQueries({ queryKey: ['cart'] });
             },
         })
@@ -116,14 +121,14 @@ export function useDeleteCartItem() {
                 if (previousData) {
                     queryClient.setQueryData(["cart"], previousData.order.filter((ele) => ele.productId !== data));
                 }
-                return { previousData };
+                // return { previousData };
             },
             onError: (_error, _data, context) => {
                 queryClient.setQueryData(['cart'], context.data);
             },
-            onSettled: async () => {
+            onSettled: () => {
                 queryClient.invalidateQueries({ queryKey: ['cart'] })
-                const cart = await queryClient.getQueryData(["cart"]);
+                const cart = queryClient.getQueryData(["cart"]);
                 dispatch(deleteCartItemForBadgeContent(cart));
             },
         })
@@ -133,7 +138,7 @@ export function useDeleteAllCartItems() {
     const queryClient = useQueryClient();
     const dispatch = useDispatch();
     return useMutation({
-        mutationKey: 'deleta all items',
+        mutationKey: 'delete all items',
         mutationFn: deleteAllCartItems,
         onMutate: async () => {
             await queryClient.cancelQueries(["cart"]);
@@ -141,7 +146,6 @@ export function useDeleteAllCartItems() {
             queryClient.setQueryData(["cart"], []);
             dispatch(deleteAllCartItemsForBadgeContent())
             return { previousData };
-
         },
         onSettled: () => {
             queryClient.invalidateQueries(['cart'])

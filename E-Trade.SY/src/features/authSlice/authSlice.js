@@ -33,13 +33,13 @@ const authSlice = createSlice({
             state.user.customer = updatedUser;
         },
         updateStoreDetails: (state, action) => {
-            const someData = action.payload;
-            const updatedSeller = {
+            const { StoreName, sellerPhone: SellerPhone } = action.payload;
+            const updatedStore = {
                 ...state.user.seller,
-                ...someData,
-                //other fields
+                StoreName,
+                SellerPhone,
             };
-            state.user.seller = updatedSeller;
+            state.user.seller = updatedStore;
         }
     }
 })

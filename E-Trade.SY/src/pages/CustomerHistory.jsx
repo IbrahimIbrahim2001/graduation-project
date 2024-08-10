@@ -1,20 +1,23 @@
 import {
-  Avatar,
   Box,
+  Button,
   List,
   ListItem,
-  ListItemAvatar,
   ListItemButton,
   ListItemText,
+  Rating,
   Toolbar,
 } from "@mui/material";
 
-import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
-
+import { useState } from "react";
 import { useThemeContext } from "../context/ThemeModeProvider";
+import { useRateProduct } from "../hooks/useRateProduct";
 
 export default function CustomerHistory() {
   const { darkMode } = useThemeContext();
+  const [value, setValue] = useState(0);
+
+  const { mutate } = useRateProduct();
   return (
     <>
       <Toolbar />
@@ -34,14 +37,35 @@ export default function CustomerHistory() {
               my: 1,
               borderRadius: "12px",
             }}
+            disableTouchRipple
           >
-            <ListItem disablePadding>
-              <ListItemAvatar>
-                <Avatar sx={{ backgroundColor: "#38cc38" }}>
-                  <DoneOutlinedIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Text" secondary="history" />
+            <ListItem
+              disablePadding
+              sx={{
+                display: "flex",
+                justifyContent: { xs: "center", sm: "space-between" },
+                flexDirection: { xs: "column", sm: "row" },
+                alignItems: { xs: "start", sm: "center" },
+              }}
+            >
+              <ListItemText primary={`product: iphone:`} />
+              <ListItemText>
+                <Rating
+                  name="half-rating"
+                  defaultValue={0}
+                  precision={0.5}
+                  value={parseFloat(value)}
+                  onChange={(e) => setValue(e.target.value)}
+                />
+              </ListItemText>
+              <Button
+                type="submit"
+                variant="outlined"
+                color="warning"
+                onClick={() => mutate({ productId: 11, rate: value })}
+              >
+                submit rating
+              </Button>
             </ListItem>
           </ListItemButton>
         </List>

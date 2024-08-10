@@ -52,6 +52,10 @@ const cartSlice = createSlice({
                 state.bill += price;
             else state.bill -= price
         },
+        reset: (state) => {
+            state.bill = 0;
+            state.badgeContent = 0;
+        }
     },
 });
 
@@ -60,7 +64,8 @@ export const {
     deleteCartItemForBadgeContent,
     deleteAllCartItemsForBadgeContent,
     updateBadgeContentOnLogIn,
-    setBill
+    setBill,
+    reset
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

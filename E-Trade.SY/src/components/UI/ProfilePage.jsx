@@ -9,6 +9,7 @@ import { useThemeContext } from "../../context/ThemeModeProvider";
 import LougoutButton from "../../components/CustomerProfile/LougoutButton";
 import ThemeSwitch from "../../components/CustomerProfile/ThemeSwitch";
 import ProfileCard from "./ProfileCard";
+import SecretNumberBox from "./SecretNumberBox";
 
 export default function ProfilePage({
   text,
@@ -62,6 +63,7 @@ export default function ProfilePage({
           }}
         >
           {children}
+          <SecretNumberBox darkMode={darkMode} />
           <LougoutButton darkMode={darkMode} />
           {matchesXS && (
             <Box

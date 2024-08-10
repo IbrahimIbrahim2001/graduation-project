@@ -5,9 +5,11 @@ import CssBaseline from "@mui/material/CssBaseline";
 //components
 import { useSelector } from "react-redux";
 import ShopItem from "../components/Shops/shop/ShopItem";
+import SellerShopProduct from "../components/sellerShop/SellerShopProduct";
 
 export default function SearchResultsPage() {
   const searchResults = useSelector((state) => state.search?.SearchResult);
+  const user = useSelector((state) => state.auth?.user);
 
   if (!Array.isArray(searchResults))
     return (
@@ -30,9 +32,13 @@ export default function SearchResultsPage() {
           marginBottom: { xs: 7, sm: 0 },
         }}
       >
-        {searchResults.map((shopItem) => (
-          <ShopItem key={shopItem.id} shopItem={shopItem} />
-        ))}
+        {user?.customer
+          ? searchResults.map((shopItem) => (
+              <ShopItem key={shopItem.id} shopItem={shopItem} />
+            ))
+          : searchResults.map((shopItem) => (
+              <SellerShopProduct key={shopItem.id} shopItem={shopItem} />
+            ))}
       </Grid>
     </Box>
   );

@@ -7,7 +7,8 @@ import { useFetchCartItems } from "../hooks/useFetchShopCart";
 //context
 import { useThemeContext } from "../context/ThemeModeProvider";
 
-//router
+import { useState } from "react";
+import ErrorPaymentSnackbar from "../components/Cart/ErrorPaymentSnackbar";
 
 //components
 import BackToShopsButton from "../components/Cart/BackToShopsButton";
@@ -18,6 +19,7 @@ import Loader from "../components/UI/Loader";
 
 export default function Cart() {
   const { isLoading, isError, data: items } = useFetchCartItems();
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const { darkMode } = useThemeContext();
 
@@ -44,7 +46,11 @@ export default function Cart() {
           sx={{ width: { xs: "100vw", sm: "fit-content" } }}
         >
           <RemoveAllItemsButton />
-          <BuyAllButton />
+          <BuyAllButton handleErrorMessage={() => setErrorMessage(true)} />
+          <ErrorPaymentSnackbar
+            errorMessage={errorMessage}
+            handleCloseSnackbar={() => setErrorMessage(false)}
+          />
         </Stack>
       </Box>
     </Box>

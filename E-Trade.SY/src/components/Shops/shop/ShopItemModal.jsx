@@ -15,6 +15,7 @@ export const StyledBox = styled("div")(({ theme }) => ({
   overflowX: "clip",
   "::-webkit-scrollbar": {
     display: "none",
+    zIndex: 1,
   },
 }));
 

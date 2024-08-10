@@ -1,11 +1,9 @@
-import CheckIcon from "@mui/icons-material/Check";
-import CloseIcon from "@mui/icons-material/Close";
+import { Modal, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { Box, Button, Modal, Typography } from "@mui/material";
 
 //redux toolkit
-// import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import PayForm from "./PayForm";
 
 //for styled box
 const style = {
@@ -14,12 +12,12 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: { xs: "280px", sm: "300px" },
-  height: "150px",
+  height: "200px",
   borderRadius: "12px",
   px: 2,
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-around",
+  justifyContent: "space-evenly",
 };
 
 const StyledBox = styled("div")(({ theme }) => ({
@@ -28,7 +26,11 @@ const StyledBox = styled("div")(({ theme }) => ({
   color: theme.palette.mode === "light" ? "rgba(17, 25, 40, 1)" : "#fff",
 }));
 
-export default function ConfirmPayment({ openModal, handleClose }) {
+export default function ConfirmPayment({
+  openModal,
+  handleClose,
+  handleErrorMessage,
+}) {
   const bill = useSelector((state) => state.cart.bill);
   return (
     <Modal open={openModal} onClose={handleClose}>
@@ -36,34 +38,11 @@ export default function ConfirmPayment({ openModal, handleClose }) {
         <Typography variant="h6" component="h2">
           Your Bill is: {bill} SYP
         </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Button
-            type="button"
-            variant="outlined"
-            color="success"
-            endIcon={<CheckIcon />}
-            // onClick={handleLogout}
-            sx={{ fontWeight: "bold" }}
-          >
-            confirm
-          </Button>
-          <Button
-            type="button"
-            variant="outlined"
-            color="error"
-            endIcon={<CloseIcon />}
-            onClick={handleClose}
-            sx={{ fontWeight: "bold" }}
-          >
-            decline
-          </Button>
-        </Box>
+        <PayForm
+          bill={bill}
+          handleClose={handleClose}
+          handleErrorMessage={handleErrorMessage}
+        />
       </StyledBox>
     </Modal>
   );

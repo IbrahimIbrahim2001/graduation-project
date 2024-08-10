@@ -3,13 +3,12 @@
 //mui
 import { withStyles } from "@material-ui/core/styles";
 import { Box, SwipeableDrawer } from "@mui/material";
-// import useScrollTrigger from "@mui/material/useScrollTrigger";
+import AprioriList from "../AprioriList";
 
 //component
 import MobileModalPuller from "./MobileModalPuller";
 import ShopAddToCartBtn from "./ShopAddToCartBtn";
 import { StyledBox } from "./ShopItemModal";
-
 const addToCartBtnStyles = {
   mx: 2,
   mb: 2,
@@ -23,7 +22,6 @@ export default function ShopItemModalMobile({
   handleClose,
   children,
 }) {
-  // const trigger = useScrollTrigger({});
   return (
     <StyledSwipeableDrawer
       anchor="bottom"
@@ -48,6 +46,13 @@ export default function ShopItemModalMobile({
           shopItemId={shopItem.id}
           {...addToCartBtnStyles}
         />
+        <Box
+          sx={{
+            p: "6 2 2",
+          }}
+        >
+          <AprioriList shopItemId={shopItem.id} />
+        </Box>
       </StyledBox>
     </StyledSwipeableDrawer>
   );
@@ -57,8 +62,7 @@ const StyledSwipeableDrawer = withStyles({
   root: {
     "& .MuiPaper-root": {
       borderRadius: "12px 12px 0 0 ",
-      backdropFilter: "blur(10px)",
-      overflowY: "scroll",
+      zIndex: 1000,
     },
   },
 })(SwipeableDrawer);

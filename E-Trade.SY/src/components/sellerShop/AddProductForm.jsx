@@ -105,6 +105,7 @@ export default function AddProductForm({
       Kind: "",
       Color: "",
       Size: "",
+      privateNumber: "",
     },
     validationSchema: productSchema,
     onSubmit: async (values) => {
@@ -240,6 +241,22 @@ export default function AddProductForm({
             />
           </>
         )}
+        <Typography mb={1} color={"primary"}>
+          Secret bank Code:*
+        </Typography>
+        <TextField
+          type="number"
+          required
+          placeholder="bank code"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          InputProps={{ inputProps: { min: 0 } }}
+          sx={{ mb: 2 }}
+          error={formik.touched.quantity && !!formik.errors.quantity}
+          helperText={formik.touched.quantity && formik.errors.quantity}
+          {...formik.getFieldProps("privateNumber")}
+        />
 
         <LoadingButton
           loading={status === "pending"}

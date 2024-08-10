@@ -27,6 +27,10 @@ export default function ModalItemDescription({ shopItem, shopName }) {
       <Typography>
         <span>price: </span> {shopItem.price} S.P.
       </Typography>
+      {/* need to review after testing */}
+      {shopItem.kind && <Typography>Kind: {shopItem.kind}</Typography>}
+      {shopItem.color && <Typography>color: {shopItem.color}</Typography>}
+      {shopItem.size && <Typography>size: {shopItem.size}</Typography>}
       <Box
         sx={{
           display: "flex",

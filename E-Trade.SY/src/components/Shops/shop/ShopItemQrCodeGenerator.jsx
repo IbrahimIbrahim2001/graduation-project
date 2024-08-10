@@ -1,6 +1,11 @@
 import QRCode from "react-qr-code";
 
-export default function ShopItemQrCodeGenerator({ shopItemId }) {
+export default function ShopItemQrCodeGenerator({
+  shopItemId,
+  shopItemPrice,
+  shopItemName,
+}) {
+  const qrData = { shopItemId, shopItemName, shopItemPrice };
   return (
     <div
       style={{
@@ -22,7 +27,7 @@ export default function ShopItemQrCodeGenerator({ shopItemId }) {
         }}
         bgColor="#fff"
         fgColor="#2200FF"
-        value={JSON.stringify(shopItemId)}
+        value={JSON.stringify(qrData)}
         viewBox={`0 0 256 256`}
       />
     </div>

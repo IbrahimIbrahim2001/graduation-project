@@ -1,9 +1,5 @@
 //react
-import {
-  Fragment,
-  // useEffect,
-  useState,
-} from "react";
+import { Fragment, useEffect, useState } from "react";
 
 //mui
 import Visibility from "@mui/icons-material/Visibility";
@@ -20,7 +16,7 @@ import { useFormik } from "formik";
 //hooks
 import { useSignIn } from "../../hooks/useSignIn";
 
-// import { logout } from "../../features/authSlice/authSlice";
+import { logout } from "../../features/authSlice/authSlice";
 
 //component UI
 import FormButton from "../UI/FormButton";
@@ -29,6 +25,7 @@ import LoginErrorSnackbar from "./LoginErrorSnackbar";
 
 //Yup
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
 
 const userSchema = Yup.object().shape({
   email: Yup.string()
@@ -52,11 +49,11 @@ const userSchema = Yup.object().shape({
 export const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
-
+  const dispatch = useDispatch();
   // to prevent going back to previous pages, this is additional protection - look for a better way
-  // useEffect(() => {
-  //   dispatch(logout());
-  // }, []);
+  useEffect(() => {
+    dispatch(logout());
+  }, [dispatch]);
 
   const handleClickShowPassword = (event) => {
     event.preventDefault();
@@ -137,7 +134,10 @@ export const LoginForm = () => {
             </Fragment>
           ))}
           <Typography mb={2} textAlign={"end"}>
-            <Link style={{ color: "#7B66FF", textDecoration: "none" }}>
+            <Link
+              to="../forget-password"
+              style={{ color: "#7B66FF", textDecoration: "none" }}
+            >
               Forget password?
             </Link>
           </Typography>

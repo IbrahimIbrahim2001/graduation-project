@@ -7,6 +7,7 @@ import { StyledBox } from "../Shops/shop/ShopItemModal";
 
 //components
 import EditProductForm from "./EditProductForm";
+import DeleteProductFromStore from "./DeleteProductFromStore";
 
 //UI
 import MobileModalPuller from "../Shops/shop/MobileModalPuller";
@@ -63,7 +64,12 @@ export default function EditProductModal({
                 <Close sx={{ fontSize: "28px", color: "#fff" }} />
               </IconButton>
             </Box>
-            <EditProductForm shopItem={shopItem} />
+            <EditProductForm shopItem={shopItem} onClose={onClose} />
+            <DeleteProductFromStore
+              productId={shopItem.id}
+              StoreId={shopItem.StoreId}
+              onClose={onClose}
+            />
           </Box>
         </Modal>
       </Hidden>
@@ -87,7 +93,12 @@ export default function EditProductModal({
           >
             <MobileModalPuller />
             <Box my={6}>
-              <EditProductForm shopItem={shopItem} />
+              <EditProductForm shopItem={shopItem} onClose={onClose} />
+              <DeleteProductFromStore
+                productId={shopItem.id}
+                StoreId={shopItem.StoreId}
+                onClose={onClose}
+              />
             </Box>
           </StyledBox>
         </StyledSwipeableDrawer>

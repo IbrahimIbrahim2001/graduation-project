@@ -6,6 +6,16 @@ import { useSearch } from "../../hooks/useSearch";
 
 import { useFormik } from "formik";
 
+//Yup
+import * as Yup from "yup";
+
+const searchSchema = Yup.object().shape({
+  serachQuery: Yup.string()
+    .required()
+    .min(2, "search query must be at least 8 characters")
+    .max(20, "search query must be at most 20 characters"),
+});
+
 export default function SearchBar() {
   const { mutate } = useSearch();
   const matchesXS = useMediaQuery("(max-width:600px)");
@@ -14,6 +24,7 @@ export default function SearchBar() {
     initialValues: {
       serachQuery: "",
     },
+    validationSchema: searchSchema,
     onSubmit: async (value) => {
       mutate(value.serachQuery);
       formik.setFieldValue("serachQuery", "");
@@ -26,11 +37,13 @@ export default function SearchBar() {
         <StyledTextFieldForXsScreens
           placeholder="search for products"
           {...formik.getFieldProps("serachQuery")}
+          error={formik.touched.serachQuery && !!formik.errors.serachQuery}
         />
       ) : (
         <StyledTextField
           placeholder="search for products"
           {...formik.getFieldProps("serachQuery")}
+          error={formik.touched.serachQuery && !!formik.errors.serachQuery}
         />
       )}
     </form>

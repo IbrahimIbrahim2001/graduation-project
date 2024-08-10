@@ -3,6 +3,7 @@ import { useState } from "react";
 
 //mui
 import { Box, Button, Typography } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 //component
 import LogoutConfirmModal from "./LogoutConfirmModal";
@@ -32,6 +33,7 @@ export default function LougoutButton({ darkMode }) {
           }}
           variant="outlined"
           color="error"
+          startIcon={<LogoutIcon />}
         >
           logout
         </Button>

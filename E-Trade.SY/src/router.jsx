@@ -31,6 +31,8 @@ import SellerNotificationPage from "./pages/SellerNotificationPage";
 //protected routes
 import ProtectedRoutesCustomer from "./auth/ProtectedRoutesCustomer";
 import ProtectedRoutesSeller from "./auth/ProtectedRoutesSeller";
+import ForgetPasswordPage from "./pages/ForgetPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 const routes = createRoutesFromElements(
   <Route>
@@ -69,6 +71,8 @@ const routes = createRoutesFromElements(
         <Route path="notification" element={<SellerNotificationPage />} />
       </Route>
     </Route>
+    <Route path="forget-password" element={<ForgetPasswordPage />} />
+    <Route path="reset-password/:token" element={<ResetPasswordPage />} />
     <Route path="*" element={<Error />} />
   </Route>
 );
