@@ -57,7 +57,7 @@ export default function ResetPasswordPage() {
           px: { xs: 2, sm: 25 },
           py: 5,
           height: "90vh",
-          width: { sm: "365px" },
+
           display: "grid",
           justifyContent: { sm: "center" },
           alignContent: "flex-start",
@@ -85,59 +85,61 @@ export default function ResetPasswordPage() {
             E-Mart
           </Typography>
         </Box>
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{ flexGrow: 1, fontWeight: 500 }}
-          color="#2200FF"
-        >
-          Reset Password:
-        </Typography>
-        <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
-          <FormControl fullWidth sx={{ my: 2 }}>
-            <TextField
-              fullWidth
-              label="new password"
-              variant="outlined"
-              sx={{ mb: 2 }}
-              {...formik.getFieldProps("password")}
-              error={formik.touched.password && !!formik.errors.password}
-              helperText={
-                formik.touched["password"] && formik.errors["password"]
-              }
-            />
-            <TextField
-              fullWidth
-              label="confirm password"
-              variant="outlined"
-              {...formik.getFieldProps("confirmPassword")}
-              error={
-                formik.touched.confirmPassword &&
-                !!formik.errors.confirmPassword
-              }
-              helperText={
-                formik.touched["confirmPassword"] &&
-                formik.errors["confirmPassword"]
-              }
-            />
-          </FormControl>
-          <Button
-            fullWidth
-            sx={{ mb: 2, justifySelf: "flex-end" }}
-            type="submit"
-            variant="outlined"
+        <Box sx={{ width: { sm: "365px" } }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, fontWeight: 500 }}
+            color="#2200FF"
           >
-            reset password
+            Reset Password:
+          </Typography>
+          <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
+            <FormControl fullWidth sx={{ my: 2 }}>
+              <TextField
+                fullWidth
+                label="new password"
+                variant="outlined"
+                sx={{ mb: 2 }}
+                {...formik.getFieldProps("password")}
+                error={formik.touched.password && !!formik.errors.password}
+                helperText={
+                  formik.touched["password"] && formik.errors["password"]
+                }
+              />
+              <TextField
+                fullWidth
+                label="confirm password"
+                variant="outlined"
+                {...formik.getFieldProps("confirmPassword")}
+                error={
+                  formik.touched.confirmPassword &&
+                  !!formik.errors.confirmPassword
+                }
+                helperText={
+                  formik.touched["confirmPassword"] &&
+                  formik.errors["confirmPassword"]
+                }
+              />
+            </FormControl>
+            <Button
+              fullWidth
+              sx={{ mb: 2, justifySelf: "flex-end" }}
+              type="submit"
+              variant="outlined"
+            >
+              reset password
+            </Button>
+          </form>
+          <Button type="button" variant="outlined" color="success" fullWidth>
+            <Link
+              to="../login"
+              style={{ textDecoration: "none", color: "#2e7d32" }}
+            >
+              Back To Login
+            </Link>
           </Button>
-        </form>
-        <Button type="button" variant="outlined" color="success">
-          <Link
-            to="../login"
-            style={{ textDecoration: "none", color: "#2e7d32" }}
-          >
-            Back To Login
-          </Link>
-        </Button>
+        </Box>
       </Box>
     </>
   );

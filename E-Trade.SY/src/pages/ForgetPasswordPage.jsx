@@ -13,6 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useSendEmail } from "../hooks/useSendEmail";
+import { useState } from "react";
 
 const EmailSchema = Yup.object().shape({
   email: Yup.string()
@@ -23,6 +24,7 @@ const EmailSchema = Yup.object().shape({
 });
 
 export default function ForgetPasswordPage() {
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const { mutate } = useSendEmail();
   const navigate = useNavigate();
   const formik = useFormik({
@@ -37,6 +39,7 @@ export default function ForgetPasswordPage() {
         };
 
         mutate(data);
+        setIsButtonDisabled(true);
       } catch (error) {
         console.error("Send Email Failed", error);
       }
@@ -100,6 +103,7 @@ export default function ForgetPasswordPage() {
             sx={{ mb: 2, justifySelf: "flex-end" }}
             type="submit"
             variant="outlined"
+            disabled={isButtonDisabled}
           >
             send
           </Button>

@@ -12,51 +12,9 @@ import { useFormik } from "formik";
 import { useAddProduct } from "../../hooks/useAddProduct";
 
 // Yup
-import { useSelector } from "react-redux";
 import * as Yup from "yup";
 
-const productSchema = Yup.object({
-  image: Yup.mixed()
-    .required("Main image is required")
-    .test("fileSize", "File Size is too large", (value) => {
-      return value && value.size <= 5 * 1024 * 1024; // 5MB limit
-    })
-    .test("fileFormat", "Unsupported Format", (value) => {
-      return (
-        value && ["image/jpeg", "image/png", "image/gif"].includes(value.type)
-      );
-    }),
-  optionalImages: Yup.array()
-    .of(
-      Yup.mixed()
-        .test("fileSize", "File Size is too large", (value) => {
-          return value && value.size <= 5 * 1024 * 1024; // 5MB limit
-        })
-        .test("fileFormat", "Unsupported Format", (value) => {
-          return (
-            value &&
-            ["image/jpeg", "image/png", "image/gif"].includes(value.type)
-          );
-        })
-    )
-    .max(7, "You can upload a maximum of 7 optional images"),
-  name: Yup.string().required("Product name is required"),
-  quantity: Yup.number()
-    .min(1, "Quantity must be at least 1")
-    .required("Quantity is required"),
-  price: Yup.number()
-    .min(0, "Price must be at least 0")
-    .required("Price is required"),
-  Color: Yup.string("please enter a valid Color")
-    .min(2, "Not a Valid Color")
-    .max(8, "Not a Valid Color"),
-  Size: Yup.string("please enter a valid Size")
-    .min(2, "Not a Valid Size")
-    .max(8, "Not a Valid Size"),
-  Kind: Yup.string("please enter a valid Category")
-    .min(2, "Not a Valid Kind")
-    .max(8, "Not a Valid Kind"),
-});
+import { useSelector } from "react-redux";
 
 export default function AddProductForm({
   setOpenModal,
@@ -65,7 +23,10 @@ export default function AddProductForm({
 }) {
   const storeId = localStorage.getItem("shopId");
 
-  const storeType = useSelector((state) => state.auth.user?.seller?.StoreKind);
+  const { StoreKind: storeType } = useSelector(
+    (state) => state.auth.user?.seller
+  );
+  const { privateNumber: pN } = useSelector((state) => state.auth?.user);
 
   // eslint-disable-next-line no-unused-vars
   const [_image, setImage] = useState();
@@ -96,7 +57,54 @@ export default function AddProductForm({
       optionalImages: [...optionalImages, ...e.target.files],
     });
   };
-
+  const productSchema = Yup.object({
+    image: Yup.mixed()
+      .required("Main image is required")
+      .test("fileSize", "File Size is too large", (value) => {
+        return value && value.size <= 5 * 1024 * 1024; // 5MB limit
+      })
+      .test("fileFormat", "Unsupported Format", (value) => {
+        return (
+          value && ["image/jpeg", "image/png", "image/gif"].includes(value.type)
+        );
+      }),
+    optionalImages: Yup.array()
+      .of(
+        Yup.mixed()
+          .test("fileSize", "File Size is too large", (value) => {
+            return value && value.size <= 5 * 1024 * 1024; // 5MB limit
+          })
+          .test("fileFormat", "Unsupported Format", (value) => {
+            return (
+              value &&
+              ["image/jpeg", "image/png", "image/gif"].includes(value.type)
+            );
+          })
+      )
+      .max(7, "You can upload a maximum of 7 optional images"),
+    name: Yup.string().required("Product name is required"),
+    quantity: Yup.number()
+      .min(1, "Quantity must be at least 1")
+      .required("Quantity is required"),
+    price: Yup.number()
+      .min(0, "Price must be at least 0")
+      .required("Price is required"),
+    Color: Yup.string("please enter a valid Color")
+      .min(2, "Not a Valid Color")
+      .max(8, "Not a Valid Color"),
+    Size: Yup.string("please enter a valid Size")
+      .min(2, "Not a Valid Size")
+      .max(8, "Not a Valid Size"),
+    Kind: Yup.string("please enter a valid Category")
+      .min(2, "Not a Valid Kind")
+      .max(8, "Not a Valid Kind"),
+    privateNumber: Yup.number("Not a Valid Number")
+      .positive("Not a Valid Number")
+      .required("insert your secret bank code please")
+      .test("insert your secret bank code please", (value) => {
+        return value === pN ? value : null;
+      }),
+  });
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -253,8 +261,10 @@ export default function AddProductForm({
           }}
           InputProps={{ inputProps: { min: 0 } }}
           sx={{ mb: 2 }}
-          error={formik.touched.quantity && !!formik.errors.quantity}
-          helperText={formik.touched.quantity && formik.errors.quantity}
+          error={formik.touched.privateNumber && !!formik.errors.privateNumber}
+          helperText={
+            formik.touched.privateNumber && formik.errors.privateNumber
+          }
           {...formik.getFieldProps("privateNumber")}
         />
 

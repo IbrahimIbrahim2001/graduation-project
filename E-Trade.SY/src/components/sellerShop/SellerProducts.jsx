@@ -45,7 +45,12 @@ export const SellerProducts = () => {
   }
 
   if (isLoading) {
-    return <ShopItemsSkeleton />;
+    return (
+      <>
+        <Toolbar />
+        <ShopItemsSkeleton />
+      </>
+    );
   }
 
   if (isRefetching) {

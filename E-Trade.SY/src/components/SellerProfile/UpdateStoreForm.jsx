@@ -86,7 +86,7 @@ export default function UpdateStoreForm({
         fullWidth
         sx={{ marginBottom: 2 }}
       />
-      <Button type="submit" variant="contained">
+      <Button type="submit" variant="contained" fullWidth>
         save changes
       </Button>
     </form>

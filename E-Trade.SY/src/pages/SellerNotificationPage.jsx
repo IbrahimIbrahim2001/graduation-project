@@ -21,7 +21,6 @@ import { Fragment } from "react";
 export default function SellerNotificationPage() {
   const { darkMode } = useThemeContext();
   const { data, isLoading } = useFetchSellerNotification();
-
   console.log(data);
 
   if (isLoading) return <Loader />;
@@ -62,6 +61,8 @@ export default function SellerNotificationPage() {
                         </Typography>
                         <Typography>customer address: {ele.address}</Typography>
                         <Typography>customer phone: {ele.phone}</Typography>
+                        <Typography>product Name: {ele.product}</Typography>
+                        <Typography>order quantity: {ele.count}</Typography>
                       </ListItemText>
                     </ListItem>
                   </ListItemButton>

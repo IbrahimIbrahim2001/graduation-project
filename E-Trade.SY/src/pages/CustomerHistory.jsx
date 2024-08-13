@@ -1,23 +1,23 @@
-import {
-  Box,
-  Button,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Rating,
-  Toolbar,
-} from "@mui/material";
+import { Box, List, Toolbar } from "@mui/material";
 
-import { useState } from "react";
+import Loader from "../components/UI/Loader";
+
+import CustomerOrderComponent from "../components/customerHistory/CustomerOrderComponent";
 import { useThemeContext } from "../context/ThemeModeProvider";
-import { useRateProduct } from "../hooks/useRateProduct";
+import { useFetchCustomerHistory } from "../hooks/useFetchCustomerHistory";
 
 export default function CustomerHistory() {
   const { darkMode } = useThemeContext();
-  const [value, setValue] = useState(0);
+  const { data, isLoading, isRefetching } = useFetchCustomerHistory();
 
-  const { mutate } = useRateProduct();
+  const reviewedProductIds = new Set(
+    data && data.length > 0
+      ? data.filter((item) => item.isRating === 2).map((item) => item.productId)
+      : []
+  );
+
+  if (isLoading || isRefetching) return <Loader />;
+
   return (
     <>
       <Toolbar />
@@ -29,45 +29,16 @@ export default function CustomerHistory() {
         }}
       >
         <List disablePadding>
-          <ListItemButton
-            sx={{
-              boxShadow: darkMode
-                ? "0 0 2px 0 #fff"
-                : "0 0px 2px 0 rgba(31, 38, 135, 0.37)",
-              my: 1,
-              borderRadius: "12px",
-            }}
-            disableTouchRipple
-          >
-            <ListItem
-              disablePadding
-              sx={{
-                display: "flex",
-                justifyContent: { xs: "center", sm: "space-between" },
-                flexDirection: { xs: "column", sm: "row" },
-                alignItems: { xs: "start", sm: "center" },
-              }}
-            >
-              <ListItemText primary={`product: iphone:`} />
-              <ListItemText>
-                <Rating
-                  name="half-rating"
-                  defaultValue={0}
-                  precision={0.5}
-                  value={parseFloat(value)}
-                  onChange={(e) => setValue(e.target.value)}
+          {data.length > 0
+            ? data?.map((ele) => (
+                <CustomerOrderComponent
+                  key={ele.productId}
+                  ele={ele}
+                  darkMode={darkMode}
+                  reviewedProductIds={reviewedProductIds}
                 />
-              </ListItemText>
-              <Button
-                type="submit"
-                variant="outlined"
-                color="warning"
-                onClick={() => mutate({ productId: 11, rate: value })}
-              >
-                submit rating
-              </Button>
-            </ListItem>
-          </ListItemButton>
+              ))
+            : "no orders yet"}
         </List>
       </Box>
     </>

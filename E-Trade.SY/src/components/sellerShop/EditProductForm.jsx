@@ -22,6 +22,20 @@ import { useFormik } from "formik";
 //hooks
 import { useUpdateProduct } from "../../hooks/useUpdateProduct";
 
+//Yup
+import * as Yup from "yup";
+
+const updateProductSchema = Yup.object({
+  id: Yup.number().required(),
+  Name: Yup.string().required("Product name is required"),
+  Count: Yup.number()
+    .min(1, "Quantity must be at least 1")
+    .required("Quantity is required"),
+  Price: Yup.number()
+    .min(1, "Price must be at least 1")
+    .required("Price is required"),
+});
+
 const EditProductFormFields = [
   {
     props: {
@@ -64,7 +78,7 @@ export default function EditProductForm({ shopItem, onClose }) {
       Count: shopItem.count,
       Price: shopItem.price,
     },
-    // validationSchema: updateProductSchema,
+    validationSchema: updateProductSchema,
     onSubmit: (values) => {
       const data = {
         productId: shopItem.id,
@@ -88,7 +102,6 @@ export default function EditProductForm({ shopItem, onClose }) {
               {...field.props}
               fieldProps={field.fieldProps}
               formik={formik}
-              InputProps={{ ...field.inputProps }}
             />
           </Fragment>
         ))}

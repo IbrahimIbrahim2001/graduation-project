@@ -18,7 +18,7 @@ export function usePayBill(onSuccess, onError) {
         mutationKey: "Pay Bill",
         mutationFn: payBill,
         onSettled: (res) => {
-            queryClient.invalidateQueries(["cart"])
+            queryClient.invalidateQueries({ queryKey: ["cart"] });
             onSuccess(res);
         },
         onError,

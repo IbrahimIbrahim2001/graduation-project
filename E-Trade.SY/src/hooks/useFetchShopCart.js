@@ -103,7 +103,7 @@ export function useChangeQuantity(onSuccessAddToCart) {
                     onSuccessAddToCart(false);
                 }
                 queryClient.invalidateQueries({ queryKey: ['cart'] });
-            },
+            }
         })
     );
 }
@@ -147,9 +147,15 @@ export function useDeleteAllCartItems() {
             dispatch(deleteAllCartItemsForBadgeContent())
             return { previousData };
         },
+        onError: (context) => {
+            queryClient.setQueryData(["cart"], context.previousData);
+        },
         onSettled: () => {
-            queryClient.invalidateQueries(['cart'])
+            queryClient.invalidateQueries({ queryKey: ["cart"] });
             dispatch(deleteAllCartItemsForBadgeContent())
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries(['cart']);
         }
     })
 }

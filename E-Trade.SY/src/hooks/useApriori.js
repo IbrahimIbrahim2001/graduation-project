@@ -4,8 +4,12 @@ import { useDispatch } from "react-redux";
 import { getAprioriResults } from "../features/aprioriSlice/apriori";
 
 const fetchApriori = async (productId) => {
-    const response = await request({ url: `/Apri/${productId}`, method: "get", });
-    return response.data;
+    try {
+        const response = await request({ url: `/Apri/${productId}`, method: "get", });
+        return response.data;
+    } catch (error) {
+        throw new Error("no apriori results");
+    }
 }
 
 export function useApriori() {
@@ -14,6 +18,7 @@ export function useApriori() {
         mutationKey: 'apriori',
         mutationFn: fetchApriori,
         onSuccess: (data) => {
+            console.log(data);
             dispatch(getAprioriResults(data));
         }
     })
