@@ -11,6 +11,7 @@ const search = async (productName) => {
         url: `/searchProduct/${nameProduct}`,
         method: "get",
     });
+    console.log(response.data);
     return response.data;
 }
 
@@ -21,6 +22,7 @@ export function useSearch() {
         mutationKey: 'search',
         mutationFn: search,
         onSuccess: async (res) => {
+            console.log(res);
             dispatch(getSearchResults(res));
             navigate("./search-results", { replace: true });
         }

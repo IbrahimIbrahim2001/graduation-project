@@ -18,7 +18,6 @@ export function useApriori() {
         mutationKey: 'apriori',
         mutationFn: fetchApriori,
         onSuccess: (data) => {
-            console.log(data);
             dispatch(getAprioriResults(data));
         }
     })

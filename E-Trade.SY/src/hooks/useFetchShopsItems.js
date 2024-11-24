@@ -11,5 +11,6 @@ export function useFetchShopsItems() {
     return useQuery({
         queryKey: ['shops-items'],
         queryFn: fetchShopsItems,
+        staleTime: Infinity
     })
 }
